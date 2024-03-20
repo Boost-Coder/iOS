@@ -13,6 +13,16 @@
 		590E9D422BAB3D0E006CC09E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D412BAB3D0E006CC09E /* Assets.xcassets */; };
 		590E9D452BAB3D0E006CC09E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D432BAB3D0E006CC09E /* LaunchScreen.storyboard */; };
 		590E9D502BAB4018006CC09E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E9D4F2BAB4018006CC09E /* SplashViewController.swift */; };
+		590E9D5B2BAB456B006CC09E /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D522BAB456A006CC09E /* Pretendard-Bold.otf */; };
+		590E9D5C2BAB456B006CC09E /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D532BAB456A006CC09E /* Pretendard-Regular.otf */; };
+		590E9D5D2BAB456B006CC09E /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D542BAB456A006CC09E /* Pretendard-ExtraLight.otf */; };
+		590E9D5E2BAB456B006CC09E /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D552BAB456A006CC09E /* Pretendard-Black.otf */; };
+		590E9D5F2BAB456B006CC09E /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D562BAB456A006CC09E /* Pretendard-Medium.otf */; };
+		590E9D602BAB456B006CC09E /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D572BAB456A006CC09E /* Pretendard-ExtraBold.otf */; };
+		590E9D612BAB456B006CC09E /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D582BAB456A006CC09E /* Pretendard-SemiBold.otf */; };
+		590E9D622BAB456B006CC09E /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D592BAB456B006CC09E /* Pretendard-Thin.otf */; };
+		590E9D632BAB456B006CC09E /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 590E9D5A2BAB456B006CC09E /* Pretendard-Light.otf */; };
+		590E9D662BAB46CC006CC09E /* UIFont+Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E9D652BAB46CC006CC09E /* UIFont+Pretendard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +34,16 @@
 		590E9D442BAB3D0E006CC09E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		590E9D462BAB3D0E006CC09E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		590E9D4F2BAB4018006CC09E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		590E9D522BAB456A006CC09E /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		590E9D532BAB456A006CC09E /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		590E9D542BAB456A006CC09E /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		590E9D552BAB456A006CC09E /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		590E9D562BAB456A006CC09E /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		590E9D572BAB456A006CC09E /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		590E9D582BAB456A006CC09E /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		590E9D592BAB456B006CC09E /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		590E9D5A2BAB456B006CC09E /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		590E9D652BAB46CC006CC09E /* UIFont+Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Pretendard.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +79,7 @@
 				590E9D4C2BAB3F64006CC09E /* Application */,
 				590E9D4E2BAB3F7B006CC09E /* Resource */,
 				590E9D4D2BAB3F6C006CC09E /* Presentation */,
+				590E9D642BAB46B1006CC09E /* extension */,
 				590E9D432BAB3D0E006CC09E /* LaunchScreen.storyboard */,
 			);
 			path = RankIn;
@@ -86,9 +107,34 @@
 		590E9D4E2BAB3F7B006CC09E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				590E9D512BAB455F006CC09E /* Font */,
 				590E9D412BAB3D0E006CC09E /* Assets.xcassets */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		590E9D512BAB455F006CC09E /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				590E9D552BAB456A006CC09E /* Pretendard-Black.otf */,
+				590E9D522BAB456A006CC09E /* Pretendard-Bold.otf */,
+				590E9D572BAB456A006CC09E /* Pretendard-ExtraBold.otf */,
+				590E9D542BAB456A006CC09E /* Pretendard-ExtraLight.otf */,
+				590E9D5A2BAB456B006CC09E /* Pretendard-Light.otf */,
+				590E9D562BAB456A006CC09E /* Pretendard-Medium.otf */,
+				590E9D532BAB456A006CC09E /* Pretendard-Regular.otf */,
+				590E9D582BAB456A006CC09E /* Pretendard-SemiBold.otf */,
+				590E9D592BAB456B006CC09E /* Pretendard-Thin.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		590E9D642BAB46B1006CC09E /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				590E9D652BAB46CC006CC09E /* UIFont+Pretendard.swift */,
+			);
+			path = extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +195,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				590E9D5F2BAB456B006CC09E /* Pretendard-Medium.otf in Resources */,
+				590E9D622BAB456B006CC09E /* Pretendard-Thin.otf in Resources */,
 				590E9D452BAB3D0E006CC09E /* LaunchScreen.storyboard in Resources */,
+				590E9D602BAB456B006CC09E /* Pretendard-ExtraBold.otf in Resources */,
+				590E9D5C2BAB456B006CC09E /* Pretendard-Regular.otf in Resources */,
+				590E9D632BAB456B006CC09E /* Pretendard-Light.otf in Resources */,
+				590E9D5D2BAB456B006CC09E /* Pretendard-ExtraLight.otf in Resources */,
+				590E9D5B2BAB456B006CC09E /* Pretendard-Bold.otf in Resources */,
+				590E9D612BAB456B006CC09E /* Pretendard-SemiBold.otf in Resources */,
+				590E9D5E2BAB456B006CC09E /* Pretendard-Black.otf in Resources */,
 				590E9D422BAB3D0E006CC09E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				590E9D662BAB46CC006CC09E /* UIFont+Pretendard.swift in Sources */,
 				590E9D3D2BAB3D0C006CC09E /* HomeViewController.swift in Sources */,
 				590E9D392BAB3D0C006CC09E /* AppDelegate.swift in Sources */,
 				590E9D3B2BAB3D0C006CC09E /* SceneDelegate.swift in Sources */,
@@ -312,7 +368,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RankIn/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -345,7 +402,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RankIn/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
