@@ -54,14 +54,38 @@
 		590E9D372BAB3D0C006CC09E /* RankIn */ = {
 			isa = PBXGroup;
 			children = (
-				590E9D382BAB3D0C006CC09E /* AppDelegate.swift */,
-				590E9D3A2BAB3D0C006CC09E /* SceneDelegate.swift */,
-				590E9D3C2BAB3D0C006CC09E /* ViewController.swift */,
-				590E9D412BAB3D0E006CC09E /* Assets.xcassets */,
+				590E9D4E2BAB3F7B006CC09E /* Resource */,
+				590E9D4D2BAB3F6C006CC09E /* Presentation */,
+				590E9D4C2BAB3F64006CC09E /* Application */,
 				590E9D432BAB3D0E006CC09E /* LaunchScreen.storyboard */,
-				590E9D462BAB3D0E006CC09E /* Info.plist */,
 			);
 			path = RankIn;
+			sourceTree = "<group>";
+		};
+		590E9D4C2BAB3F64006CC09E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				590E9D382BAB3D0C006CC09E /* AppDelegate.swift */,
+				590E9D3A2BAB3D0C006CC09E /* SceneDelegate.swift */,
+				590E9D462BAB3D0E006CC09E /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		590E9D4D2BAB3F6C006CC09E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				590E9D3C2BAB3D0C006CC09E /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		590E9D4E2BAB3F7B006CC09E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				590E9D412BAB3D0E006CC09E /* Assets.xcassets */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,7 +306,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7CQAR4CYZX;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RankIn/Info.plist;
+				INFOPLIST_FILE = RankIn/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
@@ -315,7 +339,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7CQAR4CYZX;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RankIn/Info.plist;
+				INFOPLIST_FILE = RankIn/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
