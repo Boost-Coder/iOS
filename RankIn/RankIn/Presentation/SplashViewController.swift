@@ -11,6 +11,13 @@ final class SplashViewController: UIViewController {
     
     private let homeViewController: HomeViewController
     
+    private let labelImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage.rankIn)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return imageView
+    }()
+    
     init(homeViewController: HomeViewController) {
         self.homeViewController = homeViewController
         
@@ -25,15 +32,45 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBlue
+        setUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        DispatchQueue.main.async {
-            self.present(self.homeViewController, animated: false)
+        splashAnimate {
+            DispatchQueue.main.async {
+                self.present(self.homeViewController, animated: false)
+            }
         }
     }
+    
+    func splashAnimate(completion: @escaping () -> Void) {
+        // TODO: 스플레시 애니메이션 구현
+        
+        completion()
+    }
 
+}
+
+private extension SplashViewController {
+    
+    func setUI() {
+        view.backgroundColor = .systemGray6
+        
+        setHierarchy()
+        setConstraints()
+    }
+    
+    func setHierarchy() {
+        view.addSubview(labelImageView)
+    }
+    
+    func setConstraints() {
+        NSLayoutConstraint.activate([
+            labelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            labelImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20)
+        ])
+    }
+    
 }
