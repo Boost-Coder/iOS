@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  RankIn
 //
 //  Created by 조성민 on 3/21/24.
@@ -7,11 +7,12 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
         
+        self.modalPresentationStyle = .fullScreen
     }
     
     required init?(coder: NSCoder) {
@@ -21,7 +22,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .systemPink
     }
 
 }
