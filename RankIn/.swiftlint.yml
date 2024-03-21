@@ -1,0 +1,13 @@
+
+excluded:
+  - Pods
+  
+opt_in_rules:
+  # stability
+  - force_cast
+  - force_try
+  - force_unwrapping
+  
+disabled_rules:
+    - trailing_whitespace
+    

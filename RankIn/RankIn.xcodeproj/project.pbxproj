@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D66D3F47B76E6B5ACFBBA64 /* Pods_RankIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F9BD2E8E44EFEBCD8346E7 /* Pods_RankIn.framework */; };
 		590E9D392BAB3D0C006CC09E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E9D382BAB3D0C006CC09E /* AppDelegate.swift */; };
 		590E9D3B2BAB3D0C006CC09E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E9D3A2BAB3D0C006CC09E /* SceneDelegate.swift */; };
 		590E9D3D2BAB3D0C006CC09E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E9D3C2BAB3D0C006CC09E /* HomeViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4552CEE69BCDF31309E62B9E /* Pods-RankIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.release.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.release.xcconfig"; sourceTree = "<group>"; };
 		590E9D352BAB3D0C006CC09E /* RankIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RankIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		590E9D382BAB3D0C006CC09E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		590E9D3A2BAB3D0C006CC09E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +46,9 @@
 		590E9D592BAB456B006CC09E /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		590E9D5A2BAB456B006CC09E /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		590E9D652BAB46CC006CC09E /* UIFont+Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Pretendard.swift"; sourceTree = "<group>"; };
+		590E9D682BAC70A9006CC09E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		5C964F839F59A651A6BCF1C0 /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
+		F4F9BD2E8E44EFEBCD8346E7 /* Pods_RankIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RankIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,17 +56,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D66D3F47B76E6B5ACFBBA64 /* Pods_RankIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53384C9AB78BF545B8413206 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C964F839F59A651A6BCF1C0 /* Pods-RankIn.debug.xcconfig */,
+				4552CEE69BCDF31309E62B9E /* Pods-RankIn.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		590E9D2C2BAB3D0C006CC09E = {
 			isa = PBXGroup;
 			children = (
+				590E9D682BAC70A9006CC09E /* .swiftlint.yml */,
 				590E9D372BAB3D0C006CC09E /* RankIn */,
 				590E9D362BAB3D0C006CC09E /* Products */,
+				53384C9AB78BF545B8413206 /* Pods */,
+				670EFEB42FE24607817F9C73 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +155,14 @@
 			path = extension;
 			sourceTree = "<group>";
 		};
+		670EFEB42FE24607817F9C73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4F9BD2E8E44EFEBCD8346E7 /* Pods_RankIn.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 590E9D492BAB3D0E006CC09E /* Build configuration list for PBXNativeTarget "RankIn" */;
 			buildPhases = (
+				5724861463A6F63942724196 /* [CP] Check Pods Manifest.lock */,
 				590E9D312BAB3D0C006CC09E /* Sources */,
 				590E9D322BAB3D0C006CC09E /* Frameworks */,
 				590E9D332BAB3D0C006CC09E /* Resources */,
+				590E9D672BAC7016006CC09E /* SwiftLint Script */,
 			);
 			buildRules = (
 			);
@@ -210,6 +238,50 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5724861463A6F63942724196 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RankIn-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		590E9D672BAC7016006CC09E /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		590E9D312BAB3D0C006CC09E /* Sources */ = {
@@ -359,12 +431,15 @@
 		};
 		590E9D4A2BAB3D0E006CC09E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C964F839F59A651A6BCF1C0 /* Pods-RankIn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7CQAR4CYZX;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RankIn/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -393,12 +468,15 @@
 		};
 		590E9D4B2BAB3D0E006CC09E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4552CEE69BCDF31309E62B9E /* Pods-RankIn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7CQAR4CYZX;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RankIn/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
