@@ -15,7 +15,6 @@ final class SplashAnimationView: UIView {
     private let animationMaxX: CGFloat
     private let centerY: CGFloat
     private let completion: () -> Void
-    
     private let animationSubject = PublishRelay<Void>()
     private let disposeBag = DisposeBag()
     
@@ -68,13 +67,13 @@ final class SplashAnimationView: UIView {
         let leftLineLayer = CAShapeLayer()
         leftLineLayer.frame = bounds
         leftLineLayer.path = leftPath.cgPath
-        leftLineLayer.strokeColor = UIColor.primary.cgColor
+        leftLineLayer.strokeColor = UIColor.sejongPrimary.cgColor
         leftLineLayer.lineWidth = 3
         self.layer.addSublayer(leftLineLayer)
         let rightLineLayer = CAShapeLayer()
         rightLineLayer.frame = bounds
         rightLineLayer.path = rightPath.cgPath
-        rightLineLayer.strokeColor = UIColor.primary.cgColor
+        rightLineLayer.strokeColor = UIColor.sejongPrimary.cgColor
         rightLineLayer.lineWidth = 3
         self.layer.addSublayer(rightLineLayer)
 
@@ -82,18 +81,19 @@ final class SplashAnimationView: UIView {
         firstAnimation.fromValue = 0
         firstAnimation.toValue = 0.5
         firstAnimation.duration = 0.6
+        firstAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         
         let secondAnimation = CABasicAnimation(keyPath: "strokeEnd")
         secondAnimation.fromValue = 0.5
         secondAnimation.toValue = 0.4
         secondAnimation.beginTime = 0.6
-        secondAnimation.duration = 0.8
+        secondAnimation.duration = 0.5
         secondAnimation.isRemovedOnCompletion = false
         secondAnimation.fillMode = .forwards
+        secondAnimation.timingFunction = CAMediaTimingFunction(name: .easeIn)
         
         let animationGroup = CAAnimationGroup()
-        animationGroup.duration = 1.8
-        animationGroup.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animationGroup.duration = 1.6
         animationGroup.animations = [firstAnimation, secondAnimation]
         
         leftLineLayer.add(animationGroup, forKey: nil)
