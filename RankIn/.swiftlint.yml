@@ -11,3 +11,6 @@ opt_in_rules:
 disabled_rules:
     - trailing_whitespace
     - identifier_name
+
+function_body_length:
+    warning: 80
