@@ -49,8 +49,8 @@ final class SplashViewController: UIViewController {
     
     func splashAnimate(completion: @escaping () -> Void) {
         let animationView = SplashAnimationView(
-            animationMinX: labelImageView.frame.minX - 10,
-            animationMaxX: labelImageView.frame.maxX + 10,
+            animationMinX: labelImageView.frame.minX - 15,
+            animationMaxX: labelImageView.frame.maxX + 15,
             centerY: view.center.y,
             completion: completion
         )
