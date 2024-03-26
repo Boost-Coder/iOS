@@ -38,10 +38,6 @@ final class SplashAnimationView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock { [weak self] in
-            self?.animationSubject.accept(())
-        }
         let y = centerY + 5
         
         let leftPath = UIBezierPath()
@@ -76,16 +72,21 @@ final class SplashAnimationView: UIView {
         rightLineLayer.strokeColor = UIColor.sejongPrimary.cgColor
         rightLineLayer.lineWidth = 3
         self.layer.addSublayer(rightLineLayer)
-
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { [weak self] in
+            self?.animationSubject.accept(())
+        }
         let firstAnimation = CABasicAnimation(keyPath: "strokeEnd")
         firstAnimation.fromValue = 0
-        firstAnimation.toValue = 0.5
+        firstAnimation.toValue = 1
         firstAnimation.duration = 0.6
+        firstAnimation.isRemovedOnCompletion = true
         firstAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         
         let secondAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        secondAnimation.fromValue = 0.5
-        secondAnimation.toValue = 0.4
+        secondAnimation.fromValue = 1
+        secondAnimation.toValue = 0.9
         secondAnimation.beginTime = 0.6
         secondAnimation.duration = 0.5
         secondAnimation.isRemovedOnCompletion = false

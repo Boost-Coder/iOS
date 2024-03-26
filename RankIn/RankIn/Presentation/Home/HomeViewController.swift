@@ -13,6 +13,7 @@ final class HomeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         self.modalPresentationStyle = .fullScreen
+        self.modalTransitionStyle = .crossDissolve
     }
     
     required init?(coder: NSCoder) {
