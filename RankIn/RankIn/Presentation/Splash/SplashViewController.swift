@@ -46,11 +46,11 @@ final class SplashViewController: UIViewController {
     }
     
     func splashAnimate(completion: @escaping () -> Void) {
-        // TODO: 스플레시 애니메이션 구현
         let animationView = SplashAnimationView(
             animationMinX: 10,
             animationMaxX: view.frame.maxX - 10,
-            centerY: view.center.y
+            centerY: view.center.y,
+            completion: completion
         )
         animationView.frame = CGRect(
             x: 0, y: 0, 
@@ -58,7 +58,6 @@ final class SplashViewController: UIViewController {
             height: view.frame.height
         )
         view.addSubview(animationView)
-//        completion()
     }
 
 }

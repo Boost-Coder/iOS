@@ -6,7 +6,9 @@ target 'RankIn' do
   use_frameworks!
   
   pod 'SwiftLint'  
-  
+  pod 'RxSwift'
+  pod 'RxCocoa'
+
   # Pods for RankIn
 
 post_install do |installer|

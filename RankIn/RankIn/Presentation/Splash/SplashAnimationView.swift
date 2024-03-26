@@ -6,23 +6,32 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
 final class SplashAnimationView: UIView {
     
-    let animationMinX: CGFloat
-    let animationMaxX: CGFloat
-    let centerY: CGFloat
+    private let animationMinX: CGFloat
+    private let animationMaxX: CGFloat
+    private let centerY: CGFloat
+    private let completion: () -> Void
+    
+    private let animationSubject = PublishRelay<Void>()
+    private let disposeBag = DisposeBag()
     
     init(
         animationMinX: CGFloat,
         animationMaxX: CGFloat,
-        centerY: CGFloat
+        centerY: CGFloat,
+        completion: @escaping () -> Void
     ) {
         self.animationMinX = animationMinX
         self.animationMaxX = animationMaxX
         self.centerY = centerY
+        self.completion = completion
         
         super.init(frame: .zero)
+        self.bind()
     }
     
     required init?(coder: NSCoder) {
@@ -30,6 +39,10 @@ final class SplashAnimationView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { [weak self] in
+            self?.animationSubject.accept(())
+        }
         let y = centerY + 5
         
         let leftPath = UIBezierPath()
@@ -68,24 +81,35 @@ final class SplashAnimationView: UIView {
         let firstAnimation = CABasicAnimation(keyPath: "strokeEnd")
         firstAnimation.fromValue = 0
         firstAnimation.toValue = 0.5
-        firstAnimation.duration = 0.7
+        firstAnimation.duration = 0.6
         
         let secondAnimation = CABasicAnimation(keyPath: "strokeEnd")
         secondAnimation.fromValue = 0.5
         secondAnimation.toValue = 0.4
-        secondAnimation.beginTime = 0.7
-        secondAnimation.duration = 0.3
+        secondAnimation.beginTime = 0.6
+        secondAnimation.duration = 0.8
+        secondAnimation.isRemovedOnCompletion = false
+        secondAnimation.fillMode = .forwards
         
         let animationGroup = CAAnimationGroup()
-        animationGroup.duration = 1 // 총 애니메이션 시간
+        animationGroup.duration = 1.8
         animationGroup.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        
         animationGroup.animations = [firstAnimation, secondAnimation]
-        animationGroup.isRemovedOnCompletion = false
-        animationGroup.fillMode = .both
         
         leftLineLayer.add(animationGroup, forKey: nil)
         rightLineLayer.add(animationGroup, forKey: nil)
+        
+        CATransaction.commit()
+    }
+    
+    private func bind() {
+        animationSubject
+            .asObservable()
+            .throttle(.seconds(2), latest: false, scheduler: MainScheduler())
+            .subscribe(onNext: { [weak self] in
+                self?.completion()
+            })
+            .disposed(by: disposeBag)
     }
     
 }
