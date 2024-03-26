@@ -39,16 +39,27 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         splashAnimate {
-            DispatchQueue.main.async {
-                self.present(self.homeViewController, animated: false)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.view.subviews.forEach({ $0.removeFromSuperview() })
+                self.present(self.homeViewController, animated: true)
             }
         }
     }
     
     func splashAnimate(completion: @escaping () -> Void) {
-        // TODO: 스플레시 애니메이션 구현
-        
-        completion()
+        let animationView = SplashAnimationView(
+            animationMinX: labelImageView.frame.minX - 15,
+            animationMaxX: labelImageView.frame.maxX + 15,
+            centerY: view.center.y,
+            completion: completion
+        )
+        animationView.frame = CGRect(
+            x: 0, y: 0, 
+            width: view.frame.width,
+            height: view.frame.height
+        )
+        view.addSubview(animationView)
     }
 
 }

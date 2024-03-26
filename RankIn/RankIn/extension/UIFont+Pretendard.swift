@@ -24,7 +24,7 @@ extension UIFont {
     }
     
     func pretendard(type: Pretendard, size: CGFloat) -> UIFont {
-        return UIFont(name: type.rawValue, size: size)!
+        return UIFont(name: type.rawValue, size: size) ?? UIFont()
     }
     
 }
