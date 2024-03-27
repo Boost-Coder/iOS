@@ -28,6 +28,7 @@
 		591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46692BB4434200D3BF14 /* LoginViewController.swift */; };
 		591C466E2BB44A4800D3BF14 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C466D2BB44A4800D3BF14 /* ViewModel.swift */; };
 		591C46702BB470DA00D3BF14 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C466F2BB470DA00D3BF14 /* LoginViewModel.swift */; };
+		591C46742BB4815600D3BF14 /* UIImage+SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46732BB4815600D3BF14 /* UIImage+SystemImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		591C466D2BB44A4800D3BF14 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		591C466F2BB470DA00D3BF14 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		591C46722BB47A5B00D3BF14 /* RankIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RankIn.entitlements; sourceTree = "<group>"; };
+		591C46732BB4815600D3BF14 /* UIImage+SystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+SystemImage.swift"; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				590E9D652BAB46CC006CC09E /* UIFont+Pretendard.swift */,
+				591C46732BB4815600D3BF14 /* UIImage+SystemImage.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			files = (
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
 				590E9D662BAB46CC006CC09E /* UIFont+Pretendard.swift in Sources */,
+				591C46742BB4815600D3BF14 /* UIImage+SystemImage.swift in Sources */,
 				590E9D3D2BAB3D0C006CC09E /* HomeViewController.swift in Sources */,
 				590E9D6E2BAC8703006CC09E /* SplashAnimationView.swift in Sources */,
 				591C466E2BB44A4800D3BF14 /* ViewModel.swift in Sources */,

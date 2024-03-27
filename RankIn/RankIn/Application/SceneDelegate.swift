@@ -18,8 +18,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let loginViewModel = LoginViewModel()
+        
         let homeViewController = HomeViewController()
-        let splashViewController = SplashViewController(homeViewController: homeViewController)
+        let loginViewController = LoginViewController(viewModel: loginViewModel)
+        
+        let splashViewController = SplashViewController(loginViewController: loginViewController)
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = splashViewController
