@@ -15,9 +15,22 @@ final class LoginViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     private lazy var appleLoginButton: UIButton = {
+        var attributedTitle = AttributedString("Apple 로그인")
+        attributedTitle.font = UIFont.pretendard(type: .medium, size: 20)
+        
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseBackgroundColor = .white
+        configuration.baseForegroundColor = .black
+        configuration.image = UIImage.systemImage(systemImage: .appleLogo)
+        configuration.imagePlacement = .leading
+        configuration.attributedTitle = attributedTitle
+        configuration.titleAlignment = .center
+        configuration.imagePadding = 15
+        
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-
+        button.configuration = configuration
+        
         return button
     }()
     
@@ -29,6 +42,8 @@ final class LoginViewController: UIViewController {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        self.modalPresentationStyle = .fullScreen
+        self.modalTransitionStyle = .crossDissolve
     }
     
     required init?(coder: NSCoder) {
@@ -39,6 +54,7 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
+        react()
         bind()
     }
     
@@ -54,23 +70,31 @@ private extension LoginViewController {
     }
     
     func setHierarchy() {
-        
+        view.addSubview(appleLoginButton)
     }
     
     func setConstraints() {
-        
+        NSLayoutConstraint.activate([
+            appleLoginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 42),
+            appleLoginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -42),
+            appleLoginButton.heightAnchor.constraint(equalToConstant: 54),
+            appleLoginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     func bind() {
         let input = ViewModel.Input(
-            appleLoginButtonTapped: appleLoginButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
-        output.appleLoginOutput
-            .bind {
+    }
+    
+    func react() {
+        appleLoginButton.rx
+            .tap
+            .bind(onNext: { _ in
                 self.appleLogin()
-            }
+            })
             .disposed(by: disposeBag)
     }
     
