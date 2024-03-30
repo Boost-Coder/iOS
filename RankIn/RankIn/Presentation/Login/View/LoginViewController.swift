@@ -11,7 +11,7 @@ import RxSwift
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
-
+    
     private let disposeBag = DisposeBag()
     
     private lazy var appleLoginButton: UIButton = {
@@ -105,7 +105,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     func appleLogin() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName, .email]
-
+        
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
@@ -116,8 +116,29 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
     ) {
-        print("애플 로그인 성공")
-        // TODO: 로그인 성공시 데이터 처리
+        switch authorization.credential {
+        // MARK: 애플 로그인 성공
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            
+            if  let authorizationCode = appleIDCredential.authorizationCode,
+                let identityToken = appleIDCredential.identityToken,
+                let authString = String(data: authorizationCode, encoding: .utf8),
+                let tokenString = String(data: identityToken, encoding: .utf8) {
+                // TODO: server로 authString, tokenString을 보내서 jwt 발급받아서 저장해야 한다.
+            }
+        // MARK: iCloud 비밀번호 연동
+        case let passwordCredential as ASPasswordCredential:
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            
+            print("username: \(username)")
+            print("password: \(password)")
+        default:
+            break
+        }
     }
     
     
@@ -125,8 +146,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         controller: ASAuthorizationController,
         didCompleteWithError error: Error
     ) {
-        print("애플 로그인 실패")
         // TODO: 로그인 실패 대응
+        print("애플 로그인 실패")
     }
     
 }
