@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JWTDTO {
+struct JWTDTO: Decodable {
     
     let accessToken: String
     let refreshToken: String

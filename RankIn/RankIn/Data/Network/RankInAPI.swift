@@ -10,6 +10,8 @@ import Alamofire
 
 enum RankInAPI {
     
+    case appleLogin(appleLoginDTO: AppleLoginDTO)
+    
 }
 
 // TODO: 실제 API가 나오면 모두 수정
