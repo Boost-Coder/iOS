@@ -18,7 +18,7 @@ enum RankInAPI {
 extension RankInAPI: Router, URLRequestConvertible {
     
     var baseURL: String? {
-        return nil
+        return "https://3641762d-4387-4794-bb6d-ac90b6ffe195.mock.pstmn.io/api/appleOAuth"
     }
     
     var path: String {
@@ -26,19 +26,30 @@ extension RankInAPI: Router, URLRequestConvertible {
     }
     
     var method: HTTPMethod {
-        return .get
+        return .post
     }
     
-    var headers: [String : String] {
-        return [:]
+    var headers: [String: String] {
+        switch self {
+        default:
+            return [
+                "Content-Type": "application/json"
+            ]
+        }
     }
     
-    var parameters: [String : Any]? {
-        return nil
+    var parameters: [String: Any]? {
+        switch self {
+        case .appleLogin(let appleLoginDTO):
+            return appleLoginDTO.asDictionary()
+        }
     }
     
     var encoding: ParameterEncoding? {
-        return nil
+        switch self {
+        case .appleLogin:
+            return JSONEncoding.default
+        }
     }
     
     func asURLRequest() throws -> URLRequest {

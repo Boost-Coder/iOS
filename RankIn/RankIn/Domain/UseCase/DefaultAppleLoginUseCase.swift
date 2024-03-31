@@ -14,7 +14,6 @@ struct DefaultAppleLoginUseCase: AppleLoginUseCase {
     func execute(
         requiredValue: AppleLoginModel
     ) -> Observable<JWT> {
-        // TODO: 로직 처리 (키 관리)
         return repository.appleLogin(appleLoginModel: requiredValue)
     }
 }

@@ -14,6 +14,9 @@ final class LoginViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
+    // MARK: ViewModel Input
+    private let appleLoginSubject = PublishSubject<AppleLoginModel>()
+    
     private lazy var appleLoginButton: UIButton = {
         var attributedTitle = AttributedString("Apple 로그인")
         attributedTitle.font = UIFont.pretendard(type: .medium, size: 20)
@@ -34,11 +37,9 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
-    typealias ViewModel = LoginViewModel
+    private let viewModel: LoginViewModel
     
-    private let viewModel: ViewModel
-    
-    init(viewModel: ViewModel) {
+    init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -83,7 +84,8 @@ private extension LoginViewController {
     }
     
     func bind() {
-        let input = ViewModel.Input(
+        let input = LoginViewModelInput(
+            appleLoginSuccess: appleLoginSubject
         )
         
         let output = viewModel.transform(input: input)
@@ -117,19 +119,28 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         didCompleteWithAuthorization authorization: ASAuthorization
     ) {
         switch authorization.credential {
-        // MARK: 애플 로그인 성공
+            // MARK: 애플 로그인 성공
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
+            dump(userIdentifier)
+            dump(fullName)
+            dump(email)
             
             if  let authorizationCode = appleIDCredential.authorizationCode,
                 let identityToken = appleIDCredential.identityToken,
-                let authString = String(data: authorizationCode, encoding: .utf8),
-                let tokenString = String(data: identityToken, encoding: .utf8) {
-                // TODO: server로 authString, tokenString을 보내서 jwt 발급받아서 저장해야 한다.
+                let authorizationCodeString = String(data: authorizationCode, encoding: .utf8),
+                let identityTokenString = String(data: identityToken, encoding: .utf8) {
+                appleLoginSubject
+                    .onNext(
+                        AppleLoginModel(
+                            identityToken: identityTokenString,
+                            authorizationCode: authorizationCodeString
+                        )
+                    )
             }
-        // MARK: iCloud 비밀번호 연동
+            // MARK: iCloud 비밀번호 연동
         case let passwordCredential as ASPasswordCredential:
             let username = passwordCredential.user
             let password = passwordCredential.password
@@ -140,7 +151,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             break
         }
     }
-    
     
     func authorizationController(
         controller: ASAuthorizationController,

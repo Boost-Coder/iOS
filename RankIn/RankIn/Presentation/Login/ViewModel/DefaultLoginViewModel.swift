@@ -22,14 +22,33 @@ final class DefaultLoginViewModel: LoginViewModel {
         
         input
             .appleLoginSuccess
-            .bind { appleLoginModel in
-                
-            }
+            .bind(onNext: { appleLoginModel in
+                self.appleLogin(appleLoginModel: appleLoginModel)
+            })
             .disposed(by: disposeBag)
         
         let output = LoginViewModelOutput()
         
         return output
+    }
+    
+}
+
+private extension DefaultLoginViewModel {
+    
+    func appleLogin(appleLoginModel: AppleLoginModel) {
+        dependency
+            .appleLoginUseCase
+            .execute(
+                requiredValue: appleLoginModel
+            )
+            .subscribe { jwt in
+                dump(jwt)
+            } onError: { error in
+                dump(error)
+            }
+            .disposed(by: disposeBag)
+
     }
     
 }
