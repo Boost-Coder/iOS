@@ -28,7 +28,9 @@ final class DefaultLoginRepository: LoginRepository {
             ).responseDecodable(of: JWTDTO.self) { response in
                 switch response.result {
                 case .success(let data):
-                    // TODO: 로직 처리 (키 관리)
+                    KeyChainManager.create(token: .access, content: data.accessToken)
+                    KeyChainManager.create(token: .refresh, content: data.refreshToken)
+                    
                     observer.onNext(JWT(accessToken: data.accessToken, refreshToken: data.refreshToken))
                 case .failure(let error):
                     dump(error)

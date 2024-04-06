@@ -114,12 +114,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         controller.performRequests()
     }
     
+    // MARK: 애플 로그인 성공
     func authorizationController(
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
     ) {
         switch authorization.credential {
-            // MARK: 애플 로그인 성공
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName

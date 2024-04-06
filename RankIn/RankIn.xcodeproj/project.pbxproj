@@ -41,6 +41,8 @@
 		591C46972BB87BA300D3BF14 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46962BB87BA300D3BF14 /* LoginRepository.swift */; };
 		591C46992BB87C6E00D3BF14 /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46982BB87C6E00D3BF14 /* DefaultLoginRepository.swift */; };
 		591C469C2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */; };
+		591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */; };
+		591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A32BBEF60400D3BF14 /* AuthManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +85,8 @@
 		591C46962BB87BA300D3BF14 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		591C46982BB87C6E00D3BF14 /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
 		591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+AsDictionary.swift"; sourceTree = "<group>"; };
+		591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		591C46A32BBEF60400D3BF14 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +245,7 @@
 		591C46752BB8591700D3BF14 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				591C46A02BBDB98B00D3BF14 /* Utils */,
 				591C46932BB87B3D00D3BF14 /* Repository */,
 				591C46762BB859D300D3BF14 /* Network */,
 			);
@@ -255,6 +260,7 @@
 				591C46772BB859E300D3BF14 /* Router.swift */,
 				591C46792BB85E8C00D3BF14 /* RankInAPI.swift */,
 				591C467B2BB85F2800D3BF14 /* NetworkError.swift */,
+				591C46A32BBEF60400D3BF14 /* AuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -334,6 +340,14 @@
 				591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		591C46A02BBDB98B00D3BF14 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		CE384C7C00B8659705E3FD80 /* Frameworks */ = {
@@ -488,6 +502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,
+				591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */,
 				591C46922BB8777400D3BF14 /* LoginViewModel.swift in Sources */,
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
 				591C46832BB86AC500D3BF14 /* AppleLoginDTO.swift in Sources */,
@@ -498,6 +513,7 @@
 				591C46742BB4815600D3BF14 /* UIImage+SystemImage.swift in Sources */,
 				591C46892BB8732C00D3BF14 /* DefaultAppleLoginUseCase.swift in Sources */,
 				591C468B2BB8738200D3BF14 /* AppleLoginUseCase.swift in Sources */,
+				591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */,
 				590E9D3D2BAB3D0C006CC09E /* HomeViewController.swift in Sources */,
 				590E9D6E2BAC8703006CC09E /* SplashAnimationView.swift in Sources */,
 				591C468D2BB8749E00D3BF14 /* JWTDTO.swift in Sources */,

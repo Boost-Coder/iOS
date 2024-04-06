@@ -19,7 +19,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let loginRepository = DefaultLoginRepository(session: AF)
+        let loginRepository = DefaultLoginRepository(
+            session: AF
+        )
         
         let appleLoginUseCase = DefaultAppleLoginUseCase(repository: loginRepository)
         
