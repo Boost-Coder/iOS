@@ -9,7 +9,7 @@ import UIKit
 
 final class SplashViewController: UIViewController {
     
-    private let homeViewController: HomeViewController
+    private let loginViewController: LoginViewController
     
     private let labelImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage.rankIn)
@@ -18,8 +18,8 @@ final class SplashViewController: UIViewController {
         return imageView
     }()
     
-    init(homeViewController: HomeViewController) {
-        self.homeViewController = homeViewController
+    init(loginViewController: LoginViewController) {
+        self.loginViewController = loginViewController
         
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .fullScreen
@@ -42,7 +42,7 @@ final class SplashViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.view.subviews.forEach({ $0.removeFromSuperview() })
-                self.present(self.homeViewController, animated: true)
+                self.present(self.loginViewController, animated: true)
             }
         }
     }
@@ -52,7 +52,8 @@ final class SplashViewController: UIViewController {
             animationMinX: labelImageView.frame.minX - 15,
             animationMaxX: labelImageView.frame.maxX + 15,
             centerY: view.center.y,
-            completion: completion
+            completion: completion,
+            animation: true
         )
         animationView.frame = CGRect(
             x: 0, y: 0, 

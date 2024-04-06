@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,8 +19,25 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let loginRepository = DefaultLoginRepository(
+            session: AF
+        )
+        
+        let appleLoginUseCase = DefaultAppleLoginUseCase(repository: loginRepository)
+        
+        let loginViewModelDependency = LoginViewModelDependency(
+            appleLoginUseCase: appleLoginUseCase
+        )
+        
+        let loginViewModel = DefaultLoginViewModel(dependency: loginViewModelDependency)
+        
         let homeViewController = HomeViewController()
-        let splashViewController = SplashViewController(homeViewController: homeViewController)
+        let loginViewController = LoginViewController(
+            viewModel: loginViewModel,
+            homeViewController: homeViewController
+        )
+        
+        let splashViewController = SplashViewController(loginViewController: loginViewController)
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = splashViewController

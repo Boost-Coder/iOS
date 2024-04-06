@@ -8,6 +8,7 @@ target 'RankIn' do
   pod 'SwiftLint'  
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'Alamofire'
 
   # Pods for RankIn
 
