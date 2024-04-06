@@ -52,7 +52,8 @@ final class SplashViewController: UIViewController {
             animationMinX: labelImageView.frame.minX - 15,
             animationMaxX: labelImageView.frame.maxX + 15,
             centerY: view.center.y,
-            completion: completion
+            completion: completion,
+            animation: true
         )
         animationView.frame = CGRect(
             x: 0, y: 0, 

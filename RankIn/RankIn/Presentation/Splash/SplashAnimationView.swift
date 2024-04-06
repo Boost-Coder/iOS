@@ -17,17 +17,20 @@ final class SplashAnimationView: UIView {
     private let completion: () -> Void
     private let animationSubject = PublishRelay<Void>()
     private let disposeBag = DisposeBag()
+    private let animation: Bool
     
     init(
         animationMinX: CGFloat,
         animationMaxX: CGFloat,
         centerY: CGFloat,
-        completion: @escaping () -> Void
+        completion: @escaping () -> Void,
+        animation: Bool
     ) {
         self.animationMinX = animationMinX
         self.animationMaxX = animationMaxX
         self.centerY = centerY
         self.completion = completion
+        self.animation = animation
         
         super.init(frame: .zero)
         self.bind()
@@ -80,27 +83,36 @@ final class SplashAnimationView: UIView {
         let firstAnimation = CABasicAnimation(keyPath: "strokeEnd")
         firstAnimation.fromValue = 0
         firstAnimation.toValue = 1
-        firstAnimation.duration = 0.9
+        if animation {
+            firstAnimation.duration = 0.9
+        }
         firstAnimation.isRemovedOnCompletion = true
         firstAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         
         let secondAnimation = CABasicAnimation(keyPath: "strokeEnd")
         secondAnimation.fromValue = 1
         secondAnimation.toValue = 0.9
-        secondAnimation.beginTime = 0.9
-        secondAnimation.duration = 0.5
+        
+        if animation {
+            secondAnimation.beginTime = 0.9
+            secondAnimation.duration = 0.5
+        }
         secondAnimation.isRemovedOnCompletion = false
         secondAnimation.fillMode = .forwards
         secondAnimation.timingFunction = CAMediaTimingFunction(name: .easeIn)
         
         let animationGroup = CAAnimationGroup()
-        animationGroup.duration = 1.8
+        
+        if animation {
+            animationGroup.duration = 1.8
+        }
         animationGroup.animations = [firstAnimation, secondAnimation]
         
         leftLineLayer.add(animationGroup, forKey: nil)
         rightLineLayer.add(animationGroup, forKey: nil)
         
         CATransaction.commit()
+            
     }
     
     private func bind() {
@@ -108,6 +120,9 @@ final class SplashAnimationView: UIView {
             .asObservable()
             .throttle(.seconds(3), latest: false, scheduler: MainScheduler())
             .subscribe(onNext: { [weak self] in
+                self?.layer.sublayers?.forEach({ sublayer in
+                    sublayer.removeFromSuperlayer()
+                })
                 self?.completion()
             })
             .disposed(by: disposeBag)

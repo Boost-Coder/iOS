@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxRelay
 
 protocol LoginViewModel {
     
@@ -22,6 +23,8 @@ struct LoginViewModelInput {
 }
 
 struct LoginViewModelOutput {
+    
+    let loginSuccessOutput: PublishRelay<Void>
     
 }
 

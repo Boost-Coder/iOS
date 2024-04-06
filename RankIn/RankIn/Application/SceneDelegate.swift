@@ -32,7 +32,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let loginViewModel = DefaultLoginViewModel(dependency: loginViewModelDependency)
         
         let homeViewController = HomeViewController()
-        let loginViewController = LoginViewController(viewModel: loginViewModel)
+        let loginViewController = LoginViewController(
+            viewModel: loginViewModel,
+            homeViewController: homeViewController
+        )
         
         let splashViewController = SplashViewController(loginViewController: loginViewController)
         

@@ -14,6 +14,9 @@ final class DefaultLoginViewModel: LoginViewModel {
     
     let dependency: LoginViewModelDependency
     
+    // MARK: Output
+    let loginSuccessOutput = PublishRelay<Void>()
+    
     init(dependency: LoginViewModelDependency) {
         self.dependency = dependency
     }
@@ -27,7 +30,7 @@ final class DefaultLoginViewModel: LoginViewModel {
             })
             .disposed(by: disposeBag)
         
-        let output = LoginViewModelOutput()
+        let output = LoginViewModelOutput(loginSuccessOutput: loginSuccessOutput)
         
         return output
     }
@@ -42,13 +45,14 @@ private extension DefaultLoginViewModel {
             .execute(
                 requiredValue: appleLoginModel
             )
-            .subscribe { jwt in
-                dump(jwt)
-            } onError: { error in
+            .subscribe { [weak self] jwt in
+                self?.loginSuccessOutput.accept(())
+            } onError: { [weak self] error in
                 dump(error)
+                // TODO: 실패 핸들링
+                self?.loginSuccessOutput.accept(())
             }
             .disposed(by: disposeBag)
-
     }
     
 }

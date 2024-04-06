@@ -38,9 +38,14 @@ final class LoginViewController: UIViewController {
     }()
     
     private let viewModel: LoginViewModel
+    private let homeViewController: HomeViewController
     
-    init(viewModel: LoginViewModel) {
+    init(
+        viewModel: LoginViewModel,
+        homeViewController: HomeViewController
+    ) {
         self.viewModel = viewModel
+        self.homeViewController = homeViewController
         
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .fullScreen
@@ -89,6 +94,13 @@ private extension LoginViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.loginSuccessOutput
+            .bind { [weak self] in
+                guard let self = self else { return }
+                self.present(homeViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     func react() {
@@ -119,14 +131,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
     ) {
+        print("aaaaa")
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
-            dump(userIdentifier)
-            dump(fullName)
-            dump(email)
             
             if  let authorizationCode = appleIDCredential.authorizationCode,
                 let identityToken = appleIDCredential.identityToken,
