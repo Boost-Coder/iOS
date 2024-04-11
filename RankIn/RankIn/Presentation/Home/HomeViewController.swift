@@ -9,8 +9,6 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     
-//    private
-    
     init() {
         super.init(nibName: nil, bundle: nil)
         

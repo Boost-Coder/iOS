@@ -15,20 +15,49 @@ enum AuthError: Error {
 
 final class AuthManager: RequestInterceptor {
     
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        guard let accessToken = KeyChainManager.read(token: .access),
-              let refreshToken = KeyChainManager.read(token: .refresh) else {
+    func adapt(
+        _ urlRequest: URLRequest,
+        for session: Session,
+        completion: @escaping (Result<URLRequest, Error>) -> Void
+    ) {
+        guard let accessToken = KeyChainManager.read(token: .access) else {
             completion(.failure(AuthError.noToken))
             return
         }
         
         var urlRequest = urlRequest
-        urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        urlRequest.headers.add(.authorization(bearerToken: accessToken))
         completion(.success(urlRequest))
     }
     
-    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+    func retry(
+        _ request: Request,
+        for session: Session,
+        dueTo error: Error,
+        completion: @escaping (RetryResult) -> Void
+    ) {
+        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 else {
+            completion(.doNotRetryWithError(error))
+            return
+        }
         
+        guard let refreshToken = KeyChainManager.read(token: .refresh) else {
+            completion(.doNotRetryWithError(error))
+            return
+        }
+        
+        session
+            .request(RankInAPI.requestAccessToken(refreshToken: refreshToken))
+            .responseDecodable(of: JWTDTO.self) { response in
+                switch response.result {
+                case .success(let data):
+                    KeyChainManager.create(token: .access, content: data.accessToken)
+                    KeyChainManager.create(token: .refresh, content: data.refreshToken)
+                    completion(.retry)
+                case .failure(let error):
+                    completion(.doNotRetryWithError(error))
+                }
+            }
     }
     
     

@@ -24,7 +24,8 @@ final class DefaultLoginRepository: LoginRepository {
                         identityToken: appleLoginModel.identityToken,
                         authorizationCode: appleLoginModel.authorizationCode
                     )
-                )
+                ),
+                interceptor: AuthManager()
             ).responseDecodable(of: JWTDTO.self) { response in
                 switch response.result {
                 case .success(let data):

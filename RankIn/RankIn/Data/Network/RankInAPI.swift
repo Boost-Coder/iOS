@@ -11,6 +11,7 @@ import Alamofire
 enum RankInAPI {
     
     case appleLogin(appleLoginDTO: AppleLoginDTO)
+    case requestAccessToken(refreshToken: String)
     
 }
 
@@ -22,14 +23,16 @@ extension RankInAPI: Router, URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .appleLogin(let appleLoginDTO):
+        case .appleLogin:
             return "auth/apple"
+        case .requestAccessToken:
+            return "auth/refresh"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .appleLogin(let appleLoginDTO):
+        case .appleLogin, .requestAccessToken:
             return .post
         }
     }
@@ -47,12 +50,14 @@ extension RankInAPI: Router, URLRequestConvertible {
         switch self {
         case .appleLogin(let appleLoginDTO):
             return appleLoginDTO.asDictionary()
+        case .requestAccessToken(let refreshToken):
+            return refreshToken.asDictionary()
         }
     }
     
     var encoding: ParameterEncoding? {
         switch self {
-        case .appleLogin:
+        case .appleLogin, .requestAccessToken:
             return JSONEncoding.default
         }
     }
