@@ -31,10 +31,36 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let loginViewModel = DefaultLoginViewModel(dependency: loginViewModelDependency)
         
+        let myPageViewController = MyPageViewController()
+        let myPageNavigationController = UINavigationController(rootViewController: myPageViewController)
+        
         let homeViewController = HomeViewController()
+        let homeNavigationController = UINavigationController(rootViewController: homeViewController)
+        
+        let mainTabBarController = UITabBarController()
+        mainTabBarController.modalPresentationStyle = .fullScreen
+        mainTabBarController.modalTransitionStyle = .crossDissolve
+        mainTabBarController.setViewControllers(
+            [
+                homeNavigationController,
+                myPageNavigationController
+            ],
+            animated: true
+        )
+        
+        if let items = mainTabBarController.tabBar.items {
+            items[0].selectedImage = UIImage.systemImage(systemImage: .chartBar)
+            items[0].image = UIImage.systemImage(systemImage: .chartBar)
+            items[0].title = "Rank"
+            
+            items[1].selectedImage = UIImage.systemImage(systemImage: .person)
+            items[1].image = UIImage.systemImage(systemImage: .person)
+            items[1].title = "MyPage"
+        }
+        
         let loginViewController = LoginViewController(
             viewModel: loginViewModel,
-            homeViewController: homeViewController
+            mainTabBarController: mainTabBarController
         )
         
         let splashViewController = SplashViewController(loginViewController: loginViewController)

@@ -38,14 +38,14 @@ final class LoginViewController: UIViewController {
     }()
     
     private let viewModel: LoginViewModel
-    private let homeViewController: HomeViewController
+    private let mainTabBarController: UITabBarController
     
     init(
         viewModel: LoginViewModel,
-        homeViewController: HomeViewController
+        mainTabBarController: UITabBarController
     ) {
         self.viewModel = viewModel
-        self.homeViewController = homeViewController
+        self.mainTabBarController = mainTabBarController
         
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .fullScreen
@@ -98,7 +98,7 @@ private extension LoginViewController {
         output.loginSuccessOutput
             .bind { [weak self] in
                 guard let self = self else { return }
-                self.present(homeViewController, animated: true)
+                self.present(mainTabBarController, animated: true)
             }
             .disposed(by: disposeBag)
     }
@@ -131,7 +131,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
     ) {
-        print("aaaaa")
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user

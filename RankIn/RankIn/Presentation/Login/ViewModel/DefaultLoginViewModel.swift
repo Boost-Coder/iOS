@@ -50,7 +50,6 @@ private extension DefaultLoginViewModel {
             } onError: { [weak self] error in
                 dump(error)
                 // TODO: 실패 핸들링
-                self?.loginSuccessOutput.accept(())
             }
             .disposed(by: disposeBag)
     }

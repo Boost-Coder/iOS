@@ -43,6 +43,7 @@
 		591C469C2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */; };
 		591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */; };
 		591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A32BBEF60400D3BF14 /* AuthManager.swift */; };
+		591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A92BC136C600D3BF14 /* MyPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,8 @@
 		591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+AsDictionary.swift"; sourceTree = "<group>"; };
 		591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		591C46A32BBEF60400D3BF14 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		591C46A92BC136C600D3BF14 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		596A58B32BC83704006C3108 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +117,7 @@
 		590E9D2C2BAB3D0C006CC09E = {
 			isa = PBXGroup;
 			children = (
+				596A58B32BC83704006C3108 /* Secret.xcconfig */,
 				590E9D682BAC70A9006CC09E /* .swiftlint.yml */,
 				590E9D372BAB3D0C006CC09E /* RankIn */,
 				590E9D362BAB3D0C006CC09E /* Products */,
@@ -158,6 +162,7 @@
 		590E9D4D2BAB3F6C006CC09E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				591C46A72BC136A500D3BF14 /* MyPage */,
 				591C46682BB4431500D3BF14 /* Login */,
 				590E9D6C2BAC86E8006CC09E /* Home */,
 				590E9D692BAC86D7006CC09E /* Splash */,
@@ -350,6 +355,22 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		591C46A72BC136A500D3BF14 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				591C46A82BC136B100D3BF14 /* View */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		591C46A82BC136B100D3BF14 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				591C46A92BC136C600D3BF14 /* MyPageViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CE384C7C00B8659705E3FD80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */,
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,
 				591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */,
 				591C46922BB8777400D3BF14 /* LoginViewModel.swift in Sources */,
@@ -544,6 +566,7 @@
 /* Begin XCBuildConfiguration section */
 		590E9D472BAB3D0E006CC09E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 596A58B32BC83704006C3108 /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

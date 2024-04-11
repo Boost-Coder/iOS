@@ -12,6 +12,8 @@ extension UIImage {
     enum SystemImage {
         
         case appleLogo
+        case chartBar
+        case person
         
     }
     
@@ -19,6 +21,10 @@ extension UIImage {
         switch systemImage {
         case .appleLogo:
             return UIImage(systemName: "apple.logo")!
+        case .chartBar:
+            return UIImage(systemName: "chart.bar")!
+        case .person:
+            return UIImage(systemName: "person")!
         }
     }
     

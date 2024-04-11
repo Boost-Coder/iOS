@@ -14,19 +14,24 @@ enum RankInAPI {
     
 }
 
-// TODO: 실제 API가 나오면 모두 수정
 extension RankInAPI: Router, URLRequestConvertible {
     
     var baseURL: String? {
-        return "https://3641762d-4387-4794-bb6d-ac90b6ffe195.mock.pstmn.io/api/appleOAuth"
+        return getURL()
     }
     
     var path: String {
-        return ""
+        switch self {
+        case .appleLogin(let appleLoginDTO):
+            return "auth/apple"
+        }
     }
     
     var method: HTTPMethod {
-        return .post
+        switch self {
+        case .appleLogin(let appleLoginDTO):
+            return .post
+        }
     }
     
     var headers: [String: String] {
@@ -71,6 +76,15 @@ extension RankInAPI: Router, URLRequestConvertible {
         }
         
         return request
+    }
+    
+}
+
+private extension RankInAPI {
+    
+    func getURL() -> String? {
+        guard let url = Bundle.main.object(forInfoDictionaryKey: "DEV_SERVER_URL") as? String else { return nil }
+        return url
     }
     
 }
