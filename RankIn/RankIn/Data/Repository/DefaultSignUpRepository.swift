@@ -19,7 +19,7 @@ final class DefaultSignUpRepository: SignUpRepository {
     func sejongLogin(loginInfo: SejongLoginInfo) -> Observable<Bool> {
         return Observable<Bool>.create { observer -> Disposable in
             self.session.request(RankInAPI.sejongLogin(SejongLoginInfoDTO: SejongLoginInfoDTO(
-                id: loginInfo.id, pw: loginInfo.password
+                id: loginInfo.id, pw: loginInfo.pw
             )), interceptor: AuthManager())
             .responseDecodable(of: SejongLoginResultDTO.self) { response in
                 switch response.result {
