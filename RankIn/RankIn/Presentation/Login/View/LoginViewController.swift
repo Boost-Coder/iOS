@@ -96,9 +96,13 @@ private extension LoginViewController {
         let output = viewModel.transform(input: input)
         
         output.loginSuccessOutput
-            .bind { [weak self] in
+            .bind { [weak self] isMember in
                 guard let self = self else { return }
-                self.present(mainTabBarController, animated: true)
+                if isMember {
+                    self.present(mainTabBarController, animated: true)
+                } else {
+                    // TODO: 회원가입으로 이동
+                }
             }
             .disposed(by: disposeBag)
     }

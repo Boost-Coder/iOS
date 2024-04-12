@@ -13,6 +13,6 @@ protocol AppleLoginUseCase {
     
     func execute(
         requiredValue: AppleLoginModel
-    ) -> Observable<JWT>
+    ) -> Observable<Bool>
     
 }

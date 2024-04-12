@@ -44,6 +44,7 @@
 		591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */; };
 		591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A32BBEF60400D3BF14 /* AuthManager.swift */; };
 		591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A92BC136C600D3BF14 /* MyPageViewController.swift */; };
+		596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58B42BC9A210006C3108 /* LoginResultDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		591C46A32BBEF60400D3BF14 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		591C46A92BC136C600D3BF14 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		596A58B32BC83704006C3108 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		596A58B42BC9A210006C3108 /* LoginResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResultDTO.swift; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,6 +296,7 @@
 			children = (
 				591C46822BB86AC500D3BF14 /* AppleLoginDTO.swift */,
 				591C468C2BB8749E00D3BF14 /* JWTDTO.swift */,
+				596A58B42BC9A210006C3108 /* LoginResultDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,
 				591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */,
 				591C46922BB8777400D3BF14 /* LoginViewModel.swift in Sources */,
+				596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */,
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
 				591C46832BB86AC500D3BF14 /* AppleLoginDTO.swift in Sources */,
 				591C46852BB8701A00D3BF14 /* AppleLoginModel.swift in Sources */,

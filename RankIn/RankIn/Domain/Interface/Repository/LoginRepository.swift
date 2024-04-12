@@ -14,6 +14,6 @@ protocol LoginRepository {
     
     func appleLogin(
         appleLoginModel: AppleLoginModel
-    ) -> Observable<JWT>
+    ) -> Observable<Bool>
     
 }

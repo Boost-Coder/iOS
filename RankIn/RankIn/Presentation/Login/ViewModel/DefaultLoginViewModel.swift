@@ -15,7 +15,7 @@ final class DefaultLoginViewModel: LoginViewModel {
     let dependency: LoginViewModelDependency
     
     // MARK: Output
-    let loginSuccessOutput = PublishRelay<Void>()
+    let loginSuccessOutput = PublishRelay<Bool>()
     
     init(dependency: LoginViewModelDependency) {
         self.dependency = dependency
@@ -45,8 +45,8 @@ private extension DefaultLoginViewModel {
             .execute(
                 requiredValue: appleLoginModel
             )
-            .subscribe { [weak self] jwt in
-                self?.loginSuccessOutput.accept(())
+            .subscribe { [weak self] isMember in
+                self?.loginSuccessOutput.accept(isMember)
             } onError: { [weak self] error in
                 dump(error)
                 // TODO: 실패 핸들링
