@@ -13,6 +13,7 @@ enum RankInAPI {
     case appleLogin(appleLoginDTO: AppleLoginDTO)
     case requestAccessToken(refreshToken: String)
     case sejongLogin(SejongLoginInfoDTO: SejongLoginInfoDTO)
+    case setNickname(userID: String, nickname: String)
     
 }
 
@@ -30,6 +31,8 @@ extension RankInAPI: Router, URLRequestConvertible {
             return "auth/refresh"
         case .sejongLogin:
             return "auth/sejong"
+        case .setNickname(let userID, _):
+            return "users/\(userID)"
         }
     }
     
@@ -37,6 +40,8 @@ extension RankInAPI: Router, URLRequestConvertible {
         switch self {
         case .appleLogin, .requestAccessToken, .sejongLogin:
             return .post
+        case .setNickname:
+            return .put
         }
     }
     
@@ -57,12 +62,14 @@ extension RankInAPI: Router, URLRequestConvertible {
             return refreshToken.asDictionary()
         case .sejongLogin(let sejongLoginInfoDTO):
             return sejongLoginInfoDTO.asDictionary()
+        case .setNickname(_, let nickname):
+            return nickname.asDictionary()
         }
     }
     
     var encoding: ParameterEncoding? {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin:
+        case .appleLogin, .requestAccessToken, .sejongLogin, .setNickname:
             return JSONEncoding.default
         }
     }
