@@ -22,20 +22,42 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let loginRepository = DefaultLoginRepository(
             session: AF
         )
+        let signUpRepository = DefaultSignUpRepository(session: AF)
         
         let appleLoginUseCase = DefaultAppleLoginUseCase(repository: loginRepository)
+        let sejongLoginUseCase = DefaultSejongLoginUseCase(repository: signUpRepository)
         
         let loginViewModelDependency = LoginViewModelDependency(
             appleLoginUseCase: appleLoginUseCase
         )
+        let sejongLoginViewModelDependency = SejongLoginViewModelDependency(sejongLoginUseCase: sejongLoginUseCase)
         
         let loginViewModel = DefaultLoginViewModel(dependency: loginViewModelDependency)
+        let sejongLoginViewModel = DefaultSejongLoginViewModel(dependency: sejongLoginViewModelDependency)
         
         let myPageViewController = MyPageViewController()
         let myPageNavigationController = UINavigationController(rootViewController: myPageViewController)
         
         let homeViewController = HomeViewController()
         let homeNavigationController = UINavigationController(rootViewController: homeViewController)
+        
+        let nicknameViewController = NicknameViewController(
+            nicknameViewModel: DefaultNicknameViewModel(
+                dependency: NicknameViewModelDependency(
+                    setNicknameUseCase: DefaultSetNicknameUseCase(
+                        repository: signUpRepository
+                    )
+                )
+            )
+        )
+        let sejongLoginViewController = SejongLoginViewController(
+            sejongLoginViewModel: sejongLoginViewModel, 
+            nicknameViewController: nicknameViewController
+        )
+        
+        let signUpNavigationController = UINavigationController(rootViewController: sejongLoginViewController)
+        signUpNavigationController.modalPresentationStyle = .fullScreen
+        signUpNavigationController.modalTransitionStyle = .crossDissolve
         
         let mainTabBarController = UITabBarController()
         mainTabBarController.modalPresentationStyle = .fullScreen
@@ -60,7 +82,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let loginViewController = LoginViewController(
             viewModel: loginViewModel,
-            mainTabBarController: mainTabBarController
+            mainTabBarController: mainTabBarController,
+            signUpNavigationController: signUpNavigationController
         )
         
         let splashViewController = SplashViewController(loginViewController: loginViewController)
