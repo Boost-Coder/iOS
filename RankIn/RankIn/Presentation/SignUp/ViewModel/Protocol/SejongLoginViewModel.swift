@@ -24,6 +24,9 @@ struct SejongLoginViewModelInput {
 
 struct SejongLoginViewModelOutput {
     
+    let loginFailed: PublishRelay<Void>
+    let loginSuccessed: PublishRelay<Void>
+    
 }
 
 struct SejongLoginViewModelDependency {

@@ -69,9 +69,14 @@ final class SejongLoginViewController: UIViewController {
     }()
     
     private let viewModel: SejongLoginViewModel
+    private let nicknameViewController: NicknameViewController
     
-    init(sejongLoginViewModel: SejongLoginViewModel) {
+    init(
+        sejongLoginViewModel: SejongLoginViewModel,
+        nicknameViewController: NicknameViewController
+    ) {
         self.viewModel = sejongLoginViewModel
+        self.nicknameViewController = nicknameViewController
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -110,7 +115,7 @@ private extension SejongLoginViewController {
             id.widthAnchor.constraint(equalToConstant: 285),
             id.heightAnchor.constraint(equalToConstant: 44),
             id.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            id.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 288)
+            id.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 258)
         ])
         
         NSLayoutConstraint.activate([
@@ -132,6 +137,21 @@ private extension SejongLoginViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.loginFailed
+            .bind { _ in
+                // TODO: login 실패 처리
+                print("loginFailed")
+            }
+            .disposed(by: disposeBag)
+        
+        output.loginSuccessed
+            .bind { _ in
+                // TODO: login 성공 처리
+                self.navigationController?.pushViewController(self.nicknameViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     func react() {

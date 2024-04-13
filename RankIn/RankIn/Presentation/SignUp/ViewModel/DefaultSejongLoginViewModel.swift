@@ -14,6 +14,13 @@ final class DefaultSejongLoginViewModel: SejongLoginViewModel {
     
     let dependency: SejongLoginViewModelDependency
     
+    private let loginFailed = PublishRelay<Void>()
+    private let loginSuccessed = PublishRelay<Void>()
+    
+    init(dependency: SejongLoginViewModelDependency) {
+        self.dependency = dependency
+    }
+    
     func transform(input: SejongLoginViewModelInput) -> SejongLoginViewModelOutput {
         
         input.loginButtonTapped
@@ -22,11 +29,10 @@ final class DefaultSejongLoginViewModel: SejongLoginViewModel {
             }
             .disposed(by: disposeBag)
         
-        return SejongLoginViewModelOutput()
-    }
-    
-    init(dependency: SejongLoginViewModelDependency) {
-        self.dependency = dependency
+        return SejongLoginViewModelOutput(
+            loginFailed: loginFailed,
+            loginSuccessed: loginSuccessed
+        )
     }
     
 }
@@ -40,9 +46,9 @@ private extension DefaultSejongLoginViewModel {
             .subscribe { isAuthorized in
                 // TODO: 로그인 성공 및 실패 처리
                 if isAuthorized {
-                    print("로그인 성공")
+                    self.loginSuccessed.accept(())
                 } else {
-                    print("로그인 실패")
+                    self.loginFailed.accept(())
                 }
             } onError: { error in
                 dump(error)
