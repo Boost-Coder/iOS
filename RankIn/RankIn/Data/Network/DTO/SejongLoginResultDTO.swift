@@ -9,7 +9,6 @@ import Foundation
 
 struct SejongLoginResultDTO: Decodable {
     
-    // TODO: isAuthorized로 수정
-    let isSejong: Bool
+    let isAuthorized: Bool
     
 }
