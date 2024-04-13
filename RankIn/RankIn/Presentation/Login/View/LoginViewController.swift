@@ -39,13 +39,16 @@ final class LoginViewController: UIViewController {
     
     private let viewModel: LoginViewModel
     private let mainTabBarController: UITabBarController
+    private let signUpNavigationController: UINavigationController
     
     init(
         viewModel: LoginViewModel,
-        mainTabBarController: UITabBarController
+        mainTabBarController: UITabBarController,
+        signUpNavigationController: UINavigationController
     ) {
         self.viewModel = viewModel
         self.mainTabBarController = mainTabBarController
+        self.signUpNavigationController = signUpNavigationController
         
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .fullScreen
@@ -101,7 +104,7 @@ private extension LoginViewController {
                 if isMember {
                     self.present(mainTabBarController, animated: true)
                 } else {
-                    // TODO: 회원가입으로 이동
+                    self.present(signUpNavigationController, animated: true)
                 }
             }
             .disposed(by: disposeBag)
