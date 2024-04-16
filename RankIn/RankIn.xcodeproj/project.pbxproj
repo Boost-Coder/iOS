@@ -60,6 +60,8 @@
 		596A58D52BCAD66B006C3108 /* SetNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D42BCAD66B006C3108 /* SetNicknameUseCase.swift */; };
 		596A58D72BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D62BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift */; };
 		596A58D92BCADAC3006C3108 /* DefaultNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */; };
+		59A2BADE2BCECD80003CFCAA /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */; };
+		59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +124,8 @@
 		596A58D42BCAD66B006C3108 /* SetNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNicknameUseCase.swift; sourceTree = "<group>"; };
 		596A58D62BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSetNicknameUseCase.swift; sourceTree = "<group>"; };
 		596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNicknameViewModel.swift; sourceTree = "<group>"; };
+		59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
+		59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toast.swift"; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -233,6 +237,7 @@
 			children = (
 				590E9D652BAB46CC006CC09E /* UIFont+Pretendard.swift */,
 				591C46732BB4815600D3BF14 /* UIImage+SystemImage.swift */,
+				59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 		591C46762BB859D300D3BF14 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				59A2BADC2BCECD6B003CFCAA /* Error */,
 				591C469A2BB9AE9E00D3BF14 /* Extension */,
 				591C46812BB86AA200D3BF14 /* DTO */,
 				591C46772BB859E300D3BF14 /* Router.swift */,
@@ -451,6 +457,14 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		59A2BADC2BCECD6B003CFCAA /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		CE384C7C00B8659705E3FD80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -602,6 +616,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */,
 				591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */,
 				596A58C92BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift in Sources */,
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,
@@ -628,6 +643,7 @@
 				596A58CF2BC9BDD3006C3108 /* SejongLoginResultDTO.swift in Sources */,
 				591C46742BB4815600D3BF14 /* UIImage+SystemImage.swift in Sources */,
 				591C46892BB8732C00D3BF14 /* DefaultAppleLoginUseCase.swift in Sources */,
+				59A2BADE2BCECD80003CFCAA /* RepositoryError.swift in Sources */,
 				591C468B2BB8738200D3BF14 /* AppleLoginUseCase.swift in Sources */,
 				591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */,
 				590E9D3D2BAB3D0C006CC09E /* HomeViewController.swift in Sources */,

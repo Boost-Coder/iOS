@@ -6,19 +6,28 @@
 //
 
 import RxSwift
+import RxRelay
 
 final class DefaultNicknameViewModel: NicknameViewModel {
     
     private let disposeBag = DisposeBag()
+    
+    private let nicknameSuccess = PublishRelay<Void>()
+    private let nicknameFailure = PublishRelay<Void>()
+    
     let dependency: NicknameViewModelDependency
     	
     func transform(input: NicknameViewModelInput) -> NicknameViewModelOutput {
         input.nextButtonTapped
             .bind { nickname in
+                self.setNickname(nickname: nickname)
             }
             .disposed(by: disposeBag)
         
-        return NicknameViewModelOutput()
+        return NicknameViewModelOutput(
+            nicknameSuccess: nicknameSuccess,
+            nicknameFailure: nicknameFailure
+        )
     }
     
     init(dependency: NicknameViewModelDependency) {
@@ -33,16 +42,16 @@ private extension DefaultNicknameViewModel {
         dependency.setNicknameUseCase
             .execute(nickname: nickname)
             .subscribe(
-                onNext: { isSuccessed in
-                    // TODO: 성공 여부 처리
-                    if isSuccessed {
-                        print("닉네임 설정 성공")
+                onNext: { [weak self] isSuccess in
+                    // TODO: 닉네임 설정 성공
+                    if isSuccess {
+                        self?.nicknameSuccess.accept(())
                     } else {
-                        print("닉네임 설정 실패")
+                        self?.nicknameFailure.accept(())
                     }
                 },
                 onError: { error in
-                    // TODO: error 처리
+                    // TODO: 에러 처리
                     dump(error)
                 })
             .disposed(by: disposeBag)

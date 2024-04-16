@@ -10,5 +10,6 @@ import RxSwift
 protocol SignUpRepository {
     
     func sejongLogin(loginInfo: SejongLoginInfo) -> Observable<Bool>
+    func setNickname(nickname: String) -> Observable<Bool>
     
 }

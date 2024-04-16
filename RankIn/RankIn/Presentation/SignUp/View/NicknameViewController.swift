@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 
 final class NicknameViewController: UIViewController {
-
+    
     private let disposeBag = DisposeBag()
     
     // MARK: Input
@@ -30,7 +30,7 @@ final class NicknameViewController: UIViewController {
             string: "닉네임",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         )
-
+        
         return textField
     }()
     
@@ -65,12 +65,12 @@ final class NicknameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUI()
         bind()
         react()
     }
-
+    
 }
 
 private extension NicknameViewController {
@@ -102,20 +102,37 @@ private extension NicknameViewController {
     }
     
     func bind() {
-//        let input = SejongLoginViewModelInput(
-//            loginButtonTapped: loginButtonTapped
-//        )
-//        
-//        let output = viewModel.transform(input: input)
+        let input = NicknameViewModelInput(nextButtonTapped: nextButtonTapped)
+        
+        let output = viewModel.transform(input: input)
+        
+        output.nicknameSuccess
+            .subscribe { _ in
+                // TODO: 다음 VC 띄우기
+            } onError: { error in
+                dump(error)
+            }
+            .disposed(by: disposeBag)
+        
+        output.nicknameFailure
+            .subscribe { _ in
+                self.presentToast(toastCase: .duplicatedNickname)
+            } onError: { error in
+                dump(error)
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     func react() {
         nextButton.rx
             .tap
             .bind(onNext: { _ in
-                self.nextButtonTapped.accept(
-                    self.nickname.text ?? ""
-                )
+                guard let nicknameText = self.nickname.text else {
+                    self.presentToast(toastCase: .noInput)
+                    return
+                }
+                self.nextButtonTapped.accept(nicknameText)
             })
             .disposed(by: disposeBag)
     }

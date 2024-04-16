@@ -24,6 +24,9 @@ struct NicknameViewModelInput {
 
 struct NicknameViewModelOutput {
     
+    let nicknameSuccess: PublishRelay<Void>
+    let nicknameFailure: PublishRelay<Void>
+    
 }
 
 struct NicknameViewModelDependency {
