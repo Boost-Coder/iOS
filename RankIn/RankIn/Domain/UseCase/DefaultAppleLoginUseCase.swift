@@ -13,7 +13,7 @@ struct DefaultAppleLoginUseCase: AppleLoginUseCase {
     
     func execute(
         requiredValue: AppleLoginModel
-    ) -> Observable<JWT> {
+    ) -> Observable<Bool> {
         return repository.appleLogin(appleLoginModel: requiredValue)
     }
 }

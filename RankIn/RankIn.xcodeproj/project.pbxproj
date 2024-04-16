@@ -43,6 +43,30 @@
 		591C469C2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */; };
 		591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */; };
 		591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A32BBEF60400D3BF14 /* AuthManager.swift */; };
+		591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A92BC136C600D3BF14 /* MyPageViewController.swift */; };
+		596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58B42BC9A210006C3108 /* LoginResultDTO.swift */; };
+		596A58B92BC9A3A2006C3108 /* SejongLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58B82BC9A3A2006C3108 /* SejongLoginViewController.swift */; };
+		596A58BC2BC9B2BF006C3108 /* SejongLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58BB2BC9B2BF006C3108 /* SejongLoginViewModel.swift */; };
+		596A58BF2BC9B37C006C3108 /* DefaultSejongLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58BE2BC9B37C006C3108 /* DefaultSejongLoginViewModel.swift */; };
+		596A58C12BC9B5C7006C3108 /* SejongLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58C02BC9B5C7006C3108 /* SejongLoginUseCase.swift */; };
+		596A58C32BC9B60C006C3108 /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58C22BC9B60C006C3108 /* SignUpRepository.swift */; };
+		596A58C72BC9B700006C3108 /* SejongLoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58C62BC9B700006C3108 /* SejongLoginInfo.swift */; };
+		596A58C92BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58C82BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift */; };
+		596A58CB2BC9BC5A006C3108 /* DefaultSignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58CA2BC9BC5A006C3108 /* DefaultSignUpRepository.swift */; };
+		596A58CD2BC9BCC8006C3108 /* SejongLoginInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58CC2BC9BCC8006C3108 /* SejongLoginInfoDTO.swift */; };
+		596A58CF2BC9BDD3006C3108 /* SejongLoginResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58CE2BC9BDD3006C3108 /* SejongLoginResultDTO.swift */; };
+		596A58D12BCAD51D006C3108 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D02BCAD51D006C3108 /* NicknameViewController.swift */; };
+		596A58D32BCAD616006C3108 /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D22BCAD615006C3108 /* NicknameViewModel.swift */; };
+		596A58D52BCAD66B006C3108 /* SetNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D42BCAD66B006C3108 /* SetNicknameUseCase.swift */; };
+		596A58D72BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D62BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift */; };
+		596A58D92BCADAC3006C3108 /* DefaultNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */; };
+		59A2BADE2BCECD80003CFCAA /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */; };
+		59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */; };
+		59A2BAE42BCED616003CFCAA /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAE32BCED616003CFCAA /* GradeViewController.swift */; };
+		59A2BAE62BCED70B003CFCAA /* GradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAE52BCED70B003CFCAA /* GradeViewModel.swift */; };
+		59A2BAE82BCED764003CFCAA /* SetGradeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAE72BCED764003CFCAA /* SetGradeUseCase.swift */; };
+		59A2BAEA2BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAE92BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift */; };
+		59A2BAEC2BCED8DA003CFCAA /* DefaultGradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAEB2BCED8DA003CFCAA /* DefaultGradeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +111,31 @@
 		591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+AsDictionary.swift"; sourceTree = "<group>"; };
 		591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		591C46A32BBEF60400D3BF14 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		591C46A92BC136C600D3BF14 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		596A58B32BC83704006C3108 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		596A58B42BC9A210006C3108 /* LoginResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResultDTO.swift; sourceTree = "<group>"; };
+		596A58B82BC9A3A2006C3108 /* SejongLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SejongLoginViewController.swift; sourceTree = "<group>"; };
+		596A58BB2BC9B2BF006C3108 /* SejongLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SejongLoginViewModel.swift; sourceTree = "<group>"; };
+		596A58BE2BC9B37C006C3108 /* DefaultSejongLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSejongLoginViewModel.swift; sourceTree = "<group>"; };
+		596A58C02BC9B5C7006C3108 /* SejongLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SejongLoginUseCase.swift; path = ../../../../../../Downloads/SejongLoginUseCase.swift; sourceTree = "<group>"; };
+		596A58C22BC9B60C006C3108 /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
+		596A58C62BC9B700006C3108 /* SejongLoginInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SejongLoginInfo.swift; sourceTree = "<group>"; };
+		596A58C82BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSejongLoginUseCase.swift; sourceTree = "<group>"; };
+		596A58CA2BC9BC5A006C3108 /* DefaultSignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignUpRepository.swift; sourceTree = "<group>"; };
+		596A58CC2BC9BCC8006C3108 /* SejongLoginInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SejongLoginInfoDTO.swift; sourceTree = "<group>"; };
+		596A58CE2BC9BDD3006C3108 /* SejongLoginResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SejongLoginResultDTO.swift; sourceTree = "<group>"; };
+		596A58D02BCAD51D006C3108 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		596A58D22BCAD615006C3108 /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
+		596A58D42BCAD66B006C3108 /* SetNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNicknameUseCase.swift; sourceTree = "<group>"; };
+		596A58D62BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSetNicknameUseCase.swift; sourceTree = "<group>"; };
+		596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNicknameViewModel.swift; sourceTree = "<group>"; };
+		59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
+		59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toast.swift"; sourceTree = "<group>"; };
+		59A2BAE32BCED616003CFCAA /* GradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
+		59A2BAE52BCED70B003CFCAA /* GradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeViewModel.swift; sourceTree = "<group>"; };
+		59A2BAE72BCED764003CFCAA /* SetGradeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGradeUseCase.swift; sourceTree = "<group>"; };
+		59A2BAE92BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSetGradeUseCase.swift; sourceTree = "<group>"; };
+		59A2BAEB2BCED8DA003CFCAA /* DefaultGradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGradeViewModel.swift; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +163,7 @@
 		590E9D2C2BAB3D0C006CC09E = {
 			isa = PBXGroup;
 			children = (
+				596A58B32BC83704006C3108 /* Secret.xcconfig */,
 				590E9D682BAC70A9006CC09E /* .swiftlint.yml */,
 				590E9D372BAB3D0C006CC09E /* RankIn */,
 				590E9D362BAB3D0C006CC09E /* Products */,
@@ -158,6 +208,8 @@
 		590E9D4D2BAB3F6C006CC09E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				596A58B62BC9A38C006C3108 /* SignUp */,
+				591C46A72BC136A500D3BF14 /* MyPage */,
 				591C46682BB4431500D3BF14 /* Login */,
 				590E9D6C2BAC86E8006CC09E /* Home */,
 				590E9D692BAC86D7006CC09E /* Splash */,
@@ -195,6 +247,7 @@
 			children = (
 				590E9D652BAB46CC006CC09E /* UIFont+Pretendard.swift */,
 				591C46732BB4815600D3BF14 /* UIImage+SystemImage.swift */,
+				59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -255,6 +308,7 @@
 		591C46762BB859D300D3BF14 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				59A2BADC2BCECD6B003CFCAA /* Error */,
 				591C469A2BB9AE9E00D3BF14 /* Extension */,
 				591C46812BB86AA200D3BF14 /* DTO */,
 				591C46772BB859E300D3BF14 /* Router.swift */,
@@ -280,6 +334,7 @@
 			children = (
 				591C46842BB8701A00D3BF14 /* AppleLoginModel.swift */,
 				591C468E2BB8750F00D3BF14 /* JWT.swift */,
+				596A58C62BC9B700006C3108 /* SejongLoginInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -289,6 +344,9 @@
 			children = (
 				591C46822BB86AC500D3BF14 /* AppleLoginDTO.swift */,
 				591C468C2BB8749E00D3BF14 /* JWTDTO.swift */,
+				596A58B42BC9A210006C3108 /* LoginResultDTO.swift */,
+				596A58CC2BC9BCC8006C3108 /* SejongLoginInfoDTO.swift */,
+				596A58CE2BC9BDD3006C3108 /* SejongLoginResultDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -297,6 +355,9 @@
 			isa = PBXGroup;
 			children = (
 				591C46882BB8732C00D3BF14 /* DefaultAppleLoginUseCase.swift */,
+				596A58C82BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift */,
+				596A58D62BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift */,
+				59A2BAE92BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -306,6 +367,9 @@
 			children = (
 				591C46952BB87B6F00D3BF14 /* Repository */,
 				591C468A2BB8738200D3BF14 /* AppleLoginUseCase.swift */,
+				596A58C02BC9B5C7006C3108 /* SejongLoginUseCase.swift */,
+				596A58D42BCAD66B006C3108 /* SetNicknameUseCase.swift */,
+				59A2BAE72BCED764003CFCAA /* SetGradeUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -322,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				591C46982BB87C6E00D3BF14 /* DefaultLoginRepository.swift */,
+				596A58CA2BC9BC5A006C3108 /* DefaultSignUpRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -330,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				591C46962BB87BA300D3BF14 /* LoginRepository.swift */,
+				596A58C22BC9B60C006C3108 /* SignUpRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -348,6 +414,70 @@
 				591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		591C46A72BC136A500D3BF14 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				591C46A82BC136B100D3BF14 /* View */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		591C46A82BC136B100D3BF14 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				591C46A92BC136C600D3BF14 /* MyPageViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		596A58B62BC9A38C006C3108 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				596A58B72BC9A395006C3108 /* View */,
+				596A58BA2BC9B2B7006C3108 /* ViewModel */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		596A58B72BC9A395006C3108 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				596A58B82BC9A3A2006C3108 /* SejongLoginViewController.swift */,
+				596A58D02BCAD51D006C3108 /* NicknameViewController.swift */,
+				59A2BAE32BCED616003CFCAA /* GradeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		596A58BA2BC9B2B7006C3108 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				596A58BD2BC9B368006C3108 /* Protocol */,
+				596A58BE2BC9B37C006C3108 /* DefaultSejongLoginViewModel.swift */,
+				596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */,
+				59A2BAEB2BCED8DA003CFCAA /* DefaultGradeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		596A58BD2BC9B368006C3108 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				596A58BB2BC9B2BF006C3108 /* SejongLoginViewModel.swift */,
+				596A58D22BCAD615006C3108 /* NicknameViewModel.swift */,
+				59A2BAE52BCED70B003CFCAA /* GradeViewModel.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		59A2BADC2BCECD6B003CFCAA /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		CE384C7C00B8659705E3FD80 /* Frameworks */ = {
@@ -501,23 +631,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59A2BAEA2BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift in Sources */,
+				59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */,
+				591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */,
+				596A58C92BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift in Sources */,
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,
 				591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */,
+				596A58D52BCAD66B006C3108 /* SetNicknameUseCase.swift in Sources */,
 				591C46922BB8777400D3BF14 /* LoginViewModel.swift in Sources */,
+				596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */,
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
+				596A58CB2BC9BC5A006C3108 /* DefaultSignUpRepository.swift in Sources */,
+				59A2BAE82BCED764003CFCAA /* SetGradeUseCase.swift in Sources */,
+				596A58C32BC9B60C006C3108 /* SignUpRepository.swift in Sources */,
+				596A58C72BC9B700006C3108 /* SejongLoginInfo.swift in Sources */,
+				596A58D12BCAD51D006C3108 /* NicknameViewController.swift in Sources */,
+				596A58B92BC9A3A2006C3108 /* SejongLoginViewController.swift in Sources */,
 				591C46832BB86AC500D3BF14 /* AppleLoginDTO.swift in Sources */,
 				591C46852BB8701A00D3BF14 /* AppleLoginModel.swift in Sources */,
 				591C469C2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift in Sources */,
 				591C46972BB87BA300D3BF14 /* LoginRepository.swift in Sources */,
+				596A58D32BCAD616006C3108 /* NicknameViewModel.swift in Sources */,
+				596A58D72BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift in Sources */,
+				596A58C12BC9B5C7006C3108 /* SejongLoginUseCase.swift in Sources */,
+				59A2BAE62BCED70B003CFCAA /* GradeViewModel.swift in Sources */,
+				596A58CD2BC9BCC8006C3108 /* SejongLoginInfoDTO.swift in Sources */,
+				59A2BAE42BCED616003CFCAA /* GradeViewController.swift in Sources */,
+				59A2BAEC2BCED8DA003CFCAA /* DefaultGradeViewModel.swift in Sources */,
 				590E9D662BAB46CC006CC09E /* UIFont+Pretendard.swift in Sources */,
+				596A58BF2BC9B37C006C3108 /* DefaultSejongLoginViewModel.swift in Sources */,
+				596A58CF2BC9BDD3006C3108 /* SejongLoginResultDTO.swift in Sources */,
 				591C46742BB4815600D3BF14 /* UIImage+SystemImage.swift in Sources */,
 				591C46892BB8732C00D3BF14 /* DefaultAppleLoginUseCase.swift in Sources */,
+				59A2BADE2BCECD80003CFCAA /* RepositoryError.swift in Sources */,
 				591C468B2BB8738200D3BF14 /* AppleLoginUseCase.swift in Sources */,
 				591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */,
 				590E9D3D2BAB3D0C006CC09E /* HomeViewController.swift in Sources */,
 				590E9D6E2BAC8703006CC09E /* SplashAnimationView.swift in Sources */,
+				596A58D92BCADAC3006C3108 /* DefaultNicknameViewModel.swift in Sources */,
 				591C468D2BB8749E00D3BF14 /* JWTDTO.swift in Sources */,
 				590E9D392BAB3D0C006CC09E /* AppDelegate.swift in Sources */,
+				596A58BC2BC9B2BF006C3108 /* SejongLoginViewModel.swift in Sources */,
 				590E9D3B2BAB3D0C006CC09E /* SceneDelegate.swift in Sources */,
 				590E9D502BAB4018006CC09E /* SplashViewController.swift in Sources */,
 				591C46992BB87C6E00D3BF14 /* DefaultLoginRepository.swift in Sources */,
@@ -544,6 +698,7 @@
 /* Begin XCBuildConfiguration section */
 		590E9D472BAB3D0E006CC09E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 596A58B32BC83704006C3108 /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

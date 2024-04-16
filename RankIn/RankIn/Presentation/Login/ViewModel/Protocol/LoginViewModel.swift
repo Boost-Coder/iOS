@@ -24,7 +24,7 @@ struct LoginViewModelInput {
 
 struct LoginViewModelOutput {
     
-    let loginSuccessOutput: PublishRelay<Void>
+    let loginSuccessOutput: PublishRelay<Bool>
     
 }
 

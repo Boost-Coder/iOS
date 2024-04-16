@@ -11,22 +11,39 @@ import Alamofire
 enum RankInAPI {
     
     case appleLogin(appleLoginDTO: AppleLoginDTO)
+    case requestAccessToken(refreshToken: String)
+    case sejongLogin(SejongLoginInfoDTO: SejongLoginInfoDTO)
+    case setNickname(userID: String, nickname: String)
+    case setGrade(userID: String, grade: String)
     
 }
 
-// TODO: 실제 API가 나오면 모두 수정
 extension RankInAPI: Router, URLRequestConvertible {
     
     var baseURL: String? {
-        return "https://3641762d-4387-4794-bb6d-ac90b6ffe195.mock.pstmn.io/api/appleOAuth"
+        return getURL()
     }
     
     var path: String {
-        return ""
+        switch self {
+        case .appleLogin:
+            return "auth/apple"
+        case .requestAccessToken:
+            return "auth/refresh"
+        case .sejongLogin:
+            return "auth/sejong"
+        case .setNickname(let userID, _), .setGrade(let userID, _):
+            return "users/\(userID)"
+        }
     }
     
     var method: HTTPMethod {
-        return .post
+        switch self {
+        case .appleLogin, .requestAccessToken, .sejongLogin:
+            return .post
+        case .setNickname, .setGrade:
+            return .put
+        }
     }
     
     var headers: [String: String] {
@@ -42,12 +59,20 @@ extension RankInAPI: Router, URLRequestConvertible {
         switch self {
         case .appleLogin(let appleLoginDTO):
             return appleLoginDTO.asDictionary()
+        case .requestAccessToken(let refreshToken):
+            return refreshToken.asDictionary()
+        case .sejongLogin(let sejongLoginInfoDTO):
+            return sejongLoginInfoDTO.asDictionary()
+        case .setNickname(_, let nickname):
+            return nickname.asDictionary()
+        case .setGrade(_, let grade):
+            return grade.asDictionary()
         }
     }
     
     var encoding: ParameterEncoding? {
         switch self {
-        case .appleLogin:
+        case .appleLogin, .requestAccessToken, .sejongLogin, .setNickname, .setGrade:
             return JSONEncoding.default
         }
     }
@@ -71,6 +96,15 @@ extension RankInAPI: Router, URLRequestConvertible {
         }
         
         return request
+    }
+    
+}
+
+private extension RankInAPI {
+    
+    func getURL() -> String? {
+        guard let url = Bundle.main.object(forInfoDictionaryKey: "DEV_SERVER_URL") as? String else { return nil }
+        return url
     }
     
 }

@@ -9,19 +9,20 @@ import Foundation
 
 final class KeyChainManager {
     
-    enum Token: String {
+    enum StoreElement: String {
         
-        case access
-        case refresh
+        case accessToken
+        case refreshToken
+        case userID
         
     }
     
     static let serviceName = "RankIn"
     
-    static func create(token: Token, content: String) {
+    static func create(storeElement: StoreElement, content: String) {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: token.rawValue,
+            kSecAttrAccount: storeElement.rawValue,
             kSecValueData: content.data(using: .utf8, allowLossyConversion: false) as Any
         ]
         SecItemDelete(query)
@@ -30,10 +31,10 @@ final class KeyChainManager {
         assert(status == noErr, "failed to save Token")
     }
     
-    static func read(token: Token) -> String? {
+    static func read(storeElement: StoreElement) -> String? {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: token.rawValue,
+            kSecAttrAccount: storeElement.rawValue,
             kSecReturnData: kCFBooleanTrue as Any,
             kSecMatchLimit: kSecMatchLimitOne
         ]
@@ -50,10 +51,10 @@ final class KeyChainManager {
         }
     }
     
-    static func delete(token: Token) {
+    static func delete(storeElement: StoreElement) {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: token.rawValue
+            kSecAttrAccount: storeElement.rawValue
         ]
         let status = SecItemDelete(query)
         assert(status == noErr, "failed to delete the value, status code = \(status)")

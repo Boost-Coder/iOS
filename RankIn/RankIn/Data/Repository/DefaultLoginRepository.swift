@@ -16,8 +16,8 @@ final class DefaultLoginRepository: LoginRepository {
         self.session = session
     }
     
-    func appleLogin(appleLoginModel: AppleLoginModel) -> Observable<JWT> {
-        return Observable<JWT>.create { observer -> Disposable in
+    func appleLogin(appleLoginModel: AppleLoginModel) -> Observable<Bool> {
+        return Observable<Bool>.create { observer -> Disposable in
             self.session.request(
                 RankInAPI.appleLogin(
                     appleLoginDTO: AppleLoginDTO(
@@ -25,13 +25,14 @@ final class DefaultLoginRepository: LoginRepository {
                         authorizationCode: appleLoginModel.authorizationCode
                     )
                 )
-            ).responseDecodable(of: JWTDTO.self) { response in
+            ).responseDecodable(of: LoginResultDTO.self) { response in
                 switch response.result {
                 case .success(let data):
-                    KeyChainManager.create(token: .access, content: data.accessToken)
-                    KeyChainManager.create(token: .refresh, content: data.refreshToken)
+                    KeyChainManager.create(storeElement: .accessToken, content: data.accessToken)
+                    KeyChainManager.create(storeElement: .refreshToken, content: data.refreshToken)
+                    KeyChainManager.create(storeElement: .userID, content: String(data.userID))
                     
-                    observer.onNext(JWT(accessToken: data.accessToken, refreshToken: data.refreshToken))
+                    observer.onNext(data.isMember)
                 case .failure(let error):
                     dump(error)
                     observer.onError(error)
