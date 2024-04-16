@@ -9,6 +9,7 @@ target 'RankIn' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'Alamofire'
+  pod 'Toast-Swift'
 
   # Pods for RankIn
 

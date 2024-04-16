@@ -7,12 +7,14 @@ PODS:
     - RxSwift (= 6.6.0)
   - RxSwift (6.6.0)
   - SwiftLint (0.54.0)
+  - Toast-Swift (5.1.1)
 
 DEPENDENCIES:
   - Alamofire
   - RxCocoa
   - RxSwift
   - SwiftLint
+  - Toast-Swift
 
 SPEC REPOS:
   trunk:
@@ -21,6 +23,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SwiftLint
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: 02b772c9910e8eba1a079227c32fbd9e46c90a24
@@ -28,7 +31,8 @@ SPEC CHECKSUMS:
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   SwiftLint: c1de071d9d08c8aba837545f6254315bc900e211
+  Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
 
-PODFILE CHECKSUM: 46649a8f9d378e9bade5b456885f7c3cf9481252
+PODFILE CHECKSUM: 20268ecdae87ef51567e17324d317c3ee622c0c4
 
 COCOAPODS: 1.15.2
