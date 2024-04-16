@@ -28,8 +28,9 @@ final class DefaultLoginRepository: LoginRepository {
             ).responseDecodable(of: LoginResultDTO.self) { response in
                 switch response.result {
                 case .success(let data):
-                    KeyChainManager.create(token: .access, content: data.accessToken)
-                    KeyChainManager.create(token: .refresh, content: data.refreshToken)
+                    KeyChainManager.create(storeElement: .accessToken, content: data.accessToken)
+                    KeyChainManager.create(storeElement: .refreshToken, content: data.refreshToken)
+                    KeyChainManager.create(storeElement: .userID, content: String(data.userID))
                     
                     observer.onNext(data.isMember)
                 case .failure(let error):

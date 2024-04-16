@@ -12,5 +12,6 @@ struct LoginResultDTO: Decodable {
     let accessToken: String
     let refreshToken: String
     let isMember: Bool
+    let userID: Int
     
 }

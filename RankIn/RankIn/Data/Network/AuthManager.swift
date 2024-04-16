@@ -20,7 +20,7 @@ final class AuthManager: RequestInterceptor {
         for session: Session,
         completion: @escaping (Result<URLRequest, Error>) -> Void
     ) {
-        guard let accessToken = KeyChainManager.read(token: .access) else {
+        guard let accessToken = KeyChainManager.read(storeElement: .accessToken) else {
             completion(.failure(AuthError.noToken))
             return
         }
@@ -41,7 +41,7 @@ final class AuthManager: RequestInterceptor {
             return
         }
         
-        guard let refreshToken = KeyChainManager.read(token: .refresh) else {
+        guard let refreshToken = KeyChainManager.read(storeElement: .refreshToken) else {
             completion(.doNotRetryWithError(error))
             return
         }
@@ -51,8 +51,8 @@ final class AuthManager: RequestInterceptor {
             .responseDecodable(of: JWTDTO.self) { response in
                 switch response.result {
                 case .success(let data):
-                    KeyChainManager.create(token: .access, content: data.accessToken)
-                    KeyChainManager.create(token: .refresh, content: data.refreshToken)
+                    KeyChainManager.create(storeElement: .accessToken, content: data.accessToken)
+                    KeyChainManager.create(storeElement: .refreshToken, content: data.refreshToken)
                     completion(.retry)
                 case .failure(let error):
                     completion(.doNotRetryWithError(error))
