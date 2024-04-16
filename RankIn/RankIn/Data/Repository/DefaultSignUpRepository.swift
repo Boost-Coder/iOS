@@ -60,7 +60,31 @@ final class DefaultSignUpRepository: SignUpRepository {
             }
             
             return Disposables.create()
+        }
+    }
+    
+    func setGrade(grade: String) -> Observable<Void> {
+        return Observable<Void>.create { observer -> Disposable in
+            if let userID = KeyChainManager.read(storeElement: .userID) {
+                self.session.request(
+                    RankInAPI.setGrade(
+                        userID: userID, grade: grade
+                    ),
+                    interceptor: AuthManager()
+                )
+                .responseData(completionHandler: { response in
+                    switch response.result {
+                    case .success:
+                        observer.onNext(())
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            } else {
+                observer.onError(RepositoryError.noUserID)
+            }
             
+            return Disposables.create()
         }
     }
     
