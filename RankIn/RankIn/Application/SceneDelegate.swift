@@ -26,15 +26,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appleLoginUseCase = DefaultAppleLoginUseCase(repository: loginRepository)
         let sejongLoginUseCase = DefaultSejongLoginUseCase(repository: signUpRepository)
+        let setGradeUseCase = DefaultSetGradeUseCase(repository: signUpRepository)
         
         let loginViewModelDependency = LoginViewModelDependency(
             appleLoginUseCase: appleLoginUseCase
         )
         let sejongLoginViewModelDependency = SejongLoginViewModelDependency(sejongLoginUseCase: sejongLoginUseCase)
-        
+        let gradeViewModelDependency = GradeViewModelDependency(setGradeUseCase: setGradeUseCase)
+
         let loginViewModel = DefaultLoginViewModel(dependency: loginViewModelDependency)
         let sejongLoginViewModel = DefaultSejongLoginViewModel(dependency: sejongLoginViewModelDependency)
+        let gradeViewModel = DefaultGradeViewModel(dependency: gradeViewModelDependency)
         
+        let gradeViewController = GradeViewController(gradeViewModel: gradeViewModel)
         let myPageViewController = MyPageViewController()
         let myPageNavigationController = UINavigationController(rootViewController: myPageViewController)
         
@@ -48,7 +52,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         repository: signUpRepository
                     )
                 )
-            )
+            ),
+            gradeViewController: gradeViewController
         )
         let sejongLoginViewController = SejongLoginViewController(
             sejongLoginViewModel: sejongLoginViewModel, 

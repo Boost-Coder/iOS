@@ -50,11 +50,14 @@ final class NicknameViewController: UIViewController {
     }()
     
     private let viewModel: NicknameViewModel
+    private let gradeViewController: GradeViewController
     
     init(
-        nicknameViewModel: NicknameViewModel
+        nicknameViewModel: NicknameViewModel,
+        gradeViewController: GradeViewController
     ) {
         self.viewModel = nicknameViewModel
+        self.gradeViewController = gradeViewController
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -108,7 +111,7 @@ private extension NicknameViewController {
         
         output.nicknameSuccess
             .subscribe { _ in
-                // TODO: 다음 VC 띄우기
+                self.navigationController?.pushViewController(self.gradeViewController, animated: true)
             } onError: { error in
                 dump(error)
             }
