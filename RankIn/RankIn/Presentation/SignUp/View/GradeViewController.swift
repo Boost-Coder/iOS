@@ -1,22 +1,22 @@
 //
-//  NicknameViewController.swift
+//  GradeViewController.swift
 //  RankIn
 //
-//  Created by 조성민 on 4/13/24.
+//  Created by 조성민 on 4/17/24.
 //
 
 import UIKit
 import RxSwift
 import RxRelay
 
-final class NicknameViewController: UIViewController {
+final class GradeViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
     // MARK: Input
     private let nextButtonTapped = PublishRelay<String>()
     
-    private let nickname: UITextField = {
+    private let grade: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: textField.bounds.height))
@@ -27,7 +27,7 @@ final class NicknameViewController: UIViewController {
         textField.backgroundColor = .white
         textField.textColor = .black
         textField.attributedPlaceholder = NSAttributedString(
-            string: "닉네임",
+            string: "학점",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         )
         
@@ -49,12 +49,12 @@ final class NicknameViewController: UIViewController {
         return button
     }()
     
-    private let viewModel: NicknameViewModel
+    private let viewModel: GradeViewModel
     
     init(
-        nicknameViewModel: NicknameViewModel
+        gradeViewModel: GradeViewModel
     ) {
-        self.viewModel = nicknameViewModel
+        self.viewModel = gradeViewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,7 +73,7 @@ final class NicknameViewController: UIViewController {
     
 }
 
-private extension NicknameViewController {
+private extension GradeViewController {
     
     func setUI() {
         view.backgroundColor = .systemGray6
@@ -83,30 +83,30 @@ private extension NicknameViewController {
     }
     
     func setHierarchy() {
-        view.addSubview(nickname)
+        view.addSubview(grade)
         view.addSubview(nextButton)
     }
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            nickname.widthAnchor.constraint(equalToConstant: 285),
-            nickname.heightAnchor.constraint(equalToConstant: 44),
-            nickname.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            nickname.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 258)
+            grade.widthAnchor.constraint(equalToConstant: 285),
+            grade.heightAnchor.constraint(equalToConstant: 44),
+            grade.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            grade.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 258)
         ])
         
         NSLayoutConstraint.activate([
-            nextButton.trailingAnchor.constraint(equalTo: nickname.trailingAnchor),
-            nextButton.topAnchor.constraint(equalTo: nickname.bottomAnchor, constant: 17.5)
+            nextButton.trailingAnchor.constraint(equalTo: grade.trailingAnchor),
+            nextButton.topAnchor.constraint(equalTo: grade.bottomAnchor, constant: 17.5)
         ])
     }
     
     func bind() {
-        let input = NicknameViewModelInput(nextButtonTapped: nextButtonTapped)
+        let input = GradeViewModelInput(nextButtonTapped: nextButtonTapped)
         
         let output = viewModel.transform(input: input)
         
-        output.nicknameSuccess
+        output.gradeSuccess
             .subscribe { _ in
                 // TODO: 다음 VC 띄우기
             } onError: { error in
@@ -114,9 +114,9 @@ private extension NicknameViewController {
             }
             .disposed(by: disposeBag)
         
-        output.nicknameFailure
+        output.gradeFailure
             .subscribe { _ in
-                self.presentToast(toastCase: .duplicatedNickname)
+                self.presentToast(toastCase: .invalidGradeInput)
             } onError: { error in
                 dump(error)
             }
@@ -128,11 +128,11 @@ private extension NicknameViewController {
         nextButton.rx
             .tap
             .bind(onNext: { _ in
-                guard let nicknameText = self.nickname.text else {
-                    self.presentToast(toastCase: .noNicknameInput)
+                guard let gradeText = self.grade.text else {
+                    self.presentToast(toastCase: .noGradeInput)
                     return
                 }
-                self.nextButtonTapped.accept(nicknameText)
+                self.nextButtonTapped.accept(gradeText)
             })
             .disposed(by: disposeBag)
     }

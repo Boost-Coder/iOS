@@ -43,7 +43,6 @@ private extension DefaultNicknameViewModel {
             .execute(nickname: nickname)
             .subscribe(
                 onNext: { [weak self] isSuccess in
-                    // TODO: 닉네임 설정 성공
                     if isSuccess {
                         self?.nicknameSuccess.accept(())
                     } else {
