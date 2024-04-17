@@ -11,10 +11,10 @@ import Alamofire
 enum RankInAPI {
     
     case appleLogin(appleLoginDTO: AppleLoginDTO)
-    case requestAccessToken(refreshToken: String)
+    case requestAccessToken(refreshTokenDTO: RefreshTokenDTO)
     case sejongLogin(SejongLoginInfoDTO: SejongLoginInfoDTO)
-    case setNickname(userID: String, nickname: String)
-    case setGrade(userID: String, grade: String)
+    case setNickname(userID: String, nicknameDTO: NicknameDTO)
+    case setGrade(gradeDTO: GradeDTO)
     
 }
 
@@ -32,16 +32,18 @@ extension RankInAPI: Router, URLRequestConvertible {
             return "auth/refresh"
         case .sejongLogin:
             return "auth/sejong"
-        case .setNickname(let userID, _), .setGrade(let userID, _):
+        case .setNickname(let userID, _):
             return "users/\(userID)"
+        case .setGrade:
+            return "stat/grade"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin:
+        case .appleLogin, .requestAccessToken, .sejongLogin, .setGrade:
             return .post
-        case .setNickname, .setGrade:
+        case .setNickname:
             return .put
         }
     }
@@ -63,10 +65,10 @@ extension RankInAPI: Router, URLRequestConvertible {
             return refreshToken.asDictionary()
         case .sejongLogin(let sejongLoginInfoDTO):
             return sejongLoginInfoDTO.asDictionary()
-        case .setNickname(_, let nickname):
-            return nickname.asDictionary()
-        case .setGrade(_, let grade):
-            return grade.asDictionary()
+        case .setNickname(_, let nicknameDTO):
+            return nicknameDTO.asDictionary()
+        case .setGrade(let gradeDTO):
+            return gradeDTO.asDictionary()
         }
     }
     
