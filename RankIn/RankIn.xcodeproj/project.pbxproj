@@ -67,6 +67,9 @@
 		59A2BAE82BCED764003CFCAA /* SetGradeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAE72BCED764003CFCAA /* SetGradeUseCase.swift */; };
 		59A2BAEA2BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAE92BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift */; };
 		59A2BAEC2BCED8DA003CFCAA /* DefaultGradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAEB2BCED8DA003CFCAA /* DefaultGradeViewModel.swift */; };
+		59A2BAEE2BD011C5003CFCAA /* RefreshTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAED2BD011C5003CFCAA /* RefreshTokenDTO.swift */; };
+		59A2BAF02BD011F3003CFCAA /* NicknameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAEF2BD011F3003CFCAA /* NicknameDTO.swift */; };
+		59A2BAF22BD01234003CFCAA /* GradeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAF12BD01234003CFCAA /* GradeDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +139,9 @@
 		59A2BAE72BCED764003CFCAA /* SetGradeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGradeUseCase.swift; sourceTree = "<group>"; };
 		59A2BAE92BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSetGradeUseCase.swift; sourceTree = "<group>"; };
 		59A2BAEB2BCED8DA003CFCAA /* DefaultGradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGradeViewModel.swift; sourceTree = "<group>"; };
+		59A2BAED2BD011C5003CFCAA /* RefreshTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenDTO.swift; sourceTree = "<group>"; };
+		59A2BAEF2BD011F3003CFCAA /* NicknameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameDTO.swift; sourceTree = "<group>"; };
+		59A2BAF12BD01234003CFCAA /* GradeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeDTO.swift; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -347,6 +353,9 @@
 				596A58B42BC9A210006C3108 /* LoginResultDTO.swift */,
 				596A58CC2BC9BCC8006C3108 /* SejongLoginInfoDTO.swift */,
 				596A58CE2BC9BDD3006C3108 /* SejongLoginResultDTO.swift */,
+				59A2BAED2BD011C5003CFCAA /* RefreshTokenDTO.swift */,
+				59A2BAEF2BD011F3003CFCAA /* NicknameDTO.swift */,
+				59A2BAF12BD01234003CFCAA /* GradeDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -634,6 +643,7 @@
 				59A2BAEA2BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift in Sources */,
 				59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */,
 				591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */,
+				59A2BAF02BD011F3003CFCAA /* NicknameDTO.swift in Sources */,
 				596A58C92BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift in Sources */,
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,
 				591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */,
@@ -642,6 +652,7 @@
 				596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */,
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
 				596A58CB2BC9BC5A006C3108 /* DefaultSignUpRepository.swift in Sources */,
+				59A2BAEE2BD011C5003CFCAA /* RefreshTokenDTO.swift in Sources */,
 				59A2BAE82BCED764003CFCAA /* SetGradeUseCase.swift in Sources */,
 				596A58C32BC9B60C006C3108 /* SignUpRepository.swift in Sources */,
 				596A58C72BC9B700006C3108 /* SejongLoginInfo.swift in Sources */,
@@ -672,6 +683,7 @@
 				591C468D2BB8749E00D3BF14 /* JWTDTO.swift in Sources */,
 				590E9D392BAB3D0C006CC09E /* AppDelegate.swift in Sources */,
 				596A58BC2BC9B2BF006C3108 /* SejongLoginViewModel.swift in Sources */,
+				59A2BAF22BD01234003CFCAA /* GradeDTO.swift in Sources */,
 				590E9D3B2BAB3D0C006CC09E /* SceneDelegate.swift in Sources */,
 				590E9D502BAB4018006CC09E /* SplashViewController.swift in Sources */,
 				591C46992BB87C6E00D3BF14 /* DefaultLoginRepository.swift in Sources */,

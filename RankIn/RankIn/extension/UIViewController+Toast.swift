@@ -24,6 +24,7 @@ extension UIViewController {
         case noNicknameInput
         case noGradeInput
         case invalidGradeInput
+        case sejongLoginFailed
         
     }
     
@@ -37,6 +38,8 @@ extension UIViewController {
             self.view.makeToast("학점을 입력해주세요")
         case .invalidGradeInput:
             self.view.makeToast("소수점 두자리 까지의 형식으로 학점을 입력하세요\n예시 : 3.94")
+        case .sejongLoginFailed:
+            self.view.makeToast("로그인에 실패했습니다\n아이디와 비밀번호를 확인해주세요")
         }
     }
     

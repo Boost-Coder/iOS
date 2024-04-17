@@ -136,11 +136,12 @@ private extension NicknameViewController {
         nextButton.rx
             .tap
             .bind(onNext: { _ in
-                guard let nicknameText = self.nickname.text else {
+                if let nicknameText = self.nickname.text,
+                   !nicknameText.isEmpty {            self.nextButtonTapped.accept(nicknameText)
+                } else {
                     self.presentToast(toastCase: .noNicknameInput)
                     return
                 }
-                self.nextButtonTapped.accept(nicknameText)
             })
             .disposed(by: disposeBag)
     }
