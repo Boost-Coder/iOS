@@ -42,8 +42,9 @@ private extension DefaultGradeViewModel {
     
     func setGrade(grade: String) {
         // TODO: grade 유효성 검사
-        if false {
+        guard let grade = Double(grade) else {
             gradeFailure.accept(())
+            return
         }
         dependency.setGradeUseCase
             .execute(grade: grade)

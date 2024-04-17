@@ -11,6 +11,6 @@ protocol SetGradeUseCase {
     
     var repository: SignUpRepository { get }
     
-    func execute(grade: String) -> Observable<Void>
+    func execute(grade: Double) -> Observable<Void>
     
 }
