@@ -35,7 +35,15 @@ final class DefaultLoginRepository: LoginRepository {
                     observer.onNext(data.isMember)
                 case .failure(let error):
                     dump(error)
-                    observer.onError(error)
+                    if let underlyingError = error.underlyingError as? NSError,
+                       underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                        observer.onError(ErrorToastCase.internetError)
+                    } else if let underlyingError = error.underlyingError as? NSError,
+                              underlyingError.code == 13 {
+                        observer.onError(ErrorToastCase.serverError)
+                    } else {
+                        observer.onError(ErrorToastCase.clientError)
+                    }
                 }
             }
             

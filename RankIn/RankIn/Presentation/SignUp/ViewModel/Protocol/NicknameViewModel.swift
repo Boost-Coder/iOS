@@ -26,6 +26,7 @@ struct NicknameViewModelOutput {
     
     let nicknameSuccess: PublishRelay<Void>
     let nicknameFailure: PublishRelay<Void>
+    let errorPublisher: PublishRelay<ErrorToastCase>
     
 }
 

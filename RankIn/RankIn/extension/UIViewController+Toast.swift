@@ -8,6 +8,14 @@
 import UIKit
 import Toast_Swift
 
+enum ErrorToastCase: Error {
+    
+    case clientError
+    case serverError
+    case internetError
+    
+}
+
 extension UIViewController {
     
     enum ToastCase {
@@ -29,6 +37,17 @@ extension UIViewController {
             self.view.makeToast("학점을 입력해주세요")
         case .invalidGradeInput:
             self.view.makeToast("소수점 두자리 까지의 형식으로 학점을 입력하세요\n예시 : 3.94")
+        }
+    }
+    
+    func presentErrorToast(error: ErrorToastCase) {
+        switch error {
+        case .clientError:
+            self.view.makeToast("알 수 없는 오류가 발생했습니다")
+        case .serverError:
+            self.view.makeToast("서버 오류가 발생했습니다")
+        case .internetError:
+            self.view.makeToast("인터넷 연결을 확인하세요")
         }
     }
     

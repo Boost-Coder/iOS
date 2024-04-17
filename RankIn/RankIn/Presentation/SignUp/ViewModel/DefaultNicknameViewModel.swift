@@ -14,6 +14,7 @@ final class DefaultNicknameViewModel: NicknameViewModel {
     
     private let nicknameSuccess = PublishRelay<Void>()
     private let nicknameFailure = PublishRelay<Void>()
+    private let errorPublisher = PublishRelay<ErrorToastCase>()
     
     let dependency: NicknameViewModelDependency
     	
@@ -26,7 +27,8 @@ final class DefaultNicknameViewModel: NicknameViewModel {
         
         return NicknameViewModelOutput(
             nicknameSuccess: nicknameSuccess,
-            nicknameFailure: nicknameFailure
+            nicknameFailure: nicknameFailure,
+            errorPublisher: errorPublisher
         )
     }
     
@@ -50,8 +52,12 @@ private extension DefaultNicknameViewModel {
                     }
                 },
                 onError: { error in
-                    // TODO: 에러 처리
-                    dump(error)
+                    guard let error = error as? ErrorToastCase else {
+                        dump(error)
+                        self.errorPublisher.accept(.clientError)
+                        return
+                    }
+                    self.errorPublisher.accept(error)
                 })
             .disposed(by: disposeBag)
     }

@@ -25,6 +25,7 @@ struct LoginViewModelInput {
 struct LoginViewModelOutput {
     
     let loginSuccessOutput: PublishRelay<Bool>
+    let errorPublisher: PublishRelay<ErrorToastCase>
     
 }
 

@@ -26,6 +26,7 @@ struct SejongLoginViewModelOutput {
     
     let loginFailed: PublishRelay<Void>
     let loginSuccessed: PublishRelay<Void>
+    let errorPublisher: PublishRelay<ErrorToastCase>
     
 }
 

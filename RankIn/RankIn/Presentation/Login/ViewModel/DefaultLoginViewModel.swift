@@ -16,6 +16,7 @@ final class DefaultLoginViewModel: LoginViewModel {
     
     // MARK: Output
     let loginSuccessOutput = PublishRelay<Bool>()
+    let errorPublisher = PublishRelay<ErrorToastCase>()
     
     init(dependency: LoginViewModelDependency) {
         self.dependency = dependency
@@ -30,7 +31,10 @@ final class DefaultLoginViewModel: LoginViewModel {
             })
             .disposed(by: disposeBag)
         
-        let output = LoginViewModelOutput(loginSuccessOutput: loginSuccessOutput)
+        let output = LoginViewModelOutput(
+            loginSuccessOutput: loginSuccessOutput,
+            errorPublisher: errorPublisher
+        )
         
         return output
     }
@@ -48,8 +52,12 @@ private extension DefaultLoginViewModel {
             .subscribe { [weak self] isMember in
                 self?.loginSuccessOutput.accept(isMember)
             } onError: { [weak self] error in
-                dump(error)
-                // TODO: 실패 핸들링
+                guard let error = error as? ErrorToastCase else {
+                    dump(error)
+                    self?.errorPublisher.accept(.clientError)
+                    return
+                }
+                self?.errorPublisher.accept(error)
             }
             .disposed(by: disposeBag)
     }

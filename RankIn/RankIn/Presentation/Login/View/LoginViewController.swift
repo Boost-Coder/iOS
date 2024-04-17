@@ -108,6 +108,12 @@ private extension LoginViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        output.errorPublisher
+            .bind { error in
+                self.presentErrorToast(error: error)
+            }
+            .disposed(by: disposeBag)
     }
     
     func react() {
