@@ -22,6 +22,16 @@ final class DefaultSignUpRepository: SignUpRepository {
                 id: loginInfo.id, pw: loginInfo.pw
             )), interceptor: AuthManager())
             .responseDecodable(of: SejongLoginResultDTO.self) { response in
+                
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if
+                    let data = response.data,
+                    let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                
                 switch response.result {
                 case .success(let data):
                     observer.onNext(data.isAuthorized)
@@ -39,11 +49,21 @@ final class DefaultSignUpRepository: SignUpRepository {
             if let userID = KeyChainManager.read(storeElement: .userID) {
                 self.session.request(
                     RankInAPI.setNickname(
-                        userID: userID, nickname: nickname
+                        userID: userID, nicknameDTO: NicknameDTO(nickname: nickname)
                     ),
                     interceptor: AuthManager()
                 )
-                .responseData(completionHandler: { response in
+                .response(completionHandler: { response in
+                    
+                    print("* REQUEST URL: \(String(describing: response.request))")
+                    
+                    // reponse data 출력하기
+                    if
+                        let data = response.data,
+                        let utf8Text = String(data: data, encoding: .utf8) {
+                        print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                    }
+                    
                     switch response.result {
                     case .success:
                         observer.onNext(true)
@@ -63,16 +83,25 @@ final class DefaultSignUpRepository: SignUpRepository {
         }
     }
     
-    func setGrade(grade: String) -> Observable<Void> {
+    func setGrade(grade: Double) -> Observable<Void> {
         return Observable<Void>.create { observer -> Disposable in
-            if let userID = KeyChainManager.read(storeElement: .userID) {
                 self.session.request(
                     RankInAPI.setGrade(
-                        userID: userID, grade: grade
+                        gradeDTO: GradeDTO(grade: grade)
                     ),
                     interceptor: AuthManager()
                 )
-                .responseData(completionHandler: { response in
+                .response(completionHandler: { response in
+                    
+                    print("* REQUEST URL: \(String(describing: response.request))")
+                    
+                    // reponse data 출력하기
+                    if
+                        let data = response.data,
+                        let utf8Text = String(data: data, encoding: .utf8) {
+                        print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                    }
+                    
                     switch response.result {
                     case .success:
                         observer.onNext(())
@@ -88,9 +117,6 @@ final class DefaultSignUpRepository: SignUpRepository {
                         }
                     }
                 })
-            } else {
-                observer.onError(RepositoryError.noUserID)
-            }
             
             return Disposables.create()
         }

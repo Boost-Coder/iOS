@@ -26,6 +26,16 @@ final class DefaultLoginRepository: LoginRepository {
                     )
                 )
             ).responseDecodable(of: LoginResultDTO.self) { response in
+                
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if
+                    let data = response.data,
+                    let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                
                 switch response.result {
                 case .success(let data):
                     KeyChainManager.create(storeElement: .accessToken, content: data.accessToken)
@@ -34,7 +44,6 @@ final class DefaultLoginRepository: LoginRepository {
                     
                     observer.onNext(data.isMember)
                 case .failure(let error):
-                    dump(error)
                     if let underlyingError = error.underlyingError as? NSError,
                        underlyingError.code == URLError.notConnectedToInternet.rawValue {
                         observer.onError(ErrorToastCase.internetError)
