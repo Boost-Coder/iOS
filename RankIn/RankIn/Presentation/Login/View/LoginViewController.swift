@@ -150,10 +150,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
             
-            if  let authorizationCode = appleIDCredential.authorizationCode,
-                let identityToken = appleIDCredential.identityToken,
-                let authorizationCodeString = String(data: authorizationCode, encoding: .utf8),
-                let identityTokenString = String(data: identityToken, encoding: .utf8) {
+            if let authorizationCode = appleIDCredential.authorizationCode,
+               let identityToken = appleIDCredential.identityToken,
+               let authorizationCodeString = String(data: authorizationCode, encoding: .utf8),
+               let identityTokenString = String(data: identityToken, encoding: .utf8) {
                 appleLoginSubject
                     .onNext(
                         AppleLoginModel(

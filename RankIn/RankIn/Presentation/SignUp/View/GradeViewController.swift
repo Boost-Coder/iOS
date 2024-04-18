@@ -35,12 +35,27 @@ final class GradeViewController: UIViewController {
     }()
     
     private let nextButton: UIButton = {
-        var attributeTitle = AttributedString("다음")
+        var attributeTitle = AttributedString("등록")
         attributeTitle.font = UIFont.pretendard(type: .semiBold, size: 17)
         
         var configuration = UIButton.Configuration.filled()
         configuration.attributedTitle = attributeTitle
         configuration.baseBackgroundColor = .systemGray
+        
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration = configuration
+        
+        return button
+    }()
+    
+    private let skipButton: UIButton = {
+        var attributeTitle = AttributedString("건너뛰기")
+        attributeTitle.font = UIFont.pretendard(type: .regular, size: 15)
+        
+        var configuration = UIButton.Configuration.plain()
+        configuration.attributedTitle = attributeTitle
+        configuration.baseForegroundColor = .systemGray2
         
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +100,7 @@ private extension GradeViewController {
     func setHierarchy() {
         view.addSubview(grade)
         view.addSubview(nextButton)
+        view.addSubview(skipButton)
     }
     
     func setConstraints() {
@@ -98,6 +114,11 @@ private extension GradeViewController {
         NSLayoutConstraint.activate([
             nextButton.trailingAnchor.constraint(equalTo: grade.trailingAnchor),
             nextButton.topAnchor.constraint(equalTo: grade.bottomAnchor, constant: 17.5)
+        ])
+        
+        NSLayoutConstraint.activate([
+            skipButton.centerXAnchor.constraint(equalTo: grade.centerXAnchor),
+            skipButton.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 5)
         ])
     }
     
@@ -139,6 +160,13 @@ private extension GradeViewController {
                 }
                 self.nextButtonTapped.accept(gradeText)
             })
+            .disposed(by: disposeBag)
+        
+        skipButton.rx
+            .tap
+            .bind { _ in
+                // TODO: 다음 VC 띄우기
+            }
             .disposed(by: disposeBag)
     }
     
