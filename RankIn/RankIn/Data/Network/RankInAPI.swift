@@ -15,33 +15,41 @@ enum RankInAPI {
     case sejongLogin(SejongLoginInfoDTO: SejongLoginInfoDTO)
     case setNickname(userID: String, nicknameDTO: NicknameDTO)
     case setGrade(gradeDTO: GradeDTO)
+    case gitHubAuthorization(clientIdentifierDTO: ClientIdentifierDTO)
     
 }
 
 extension RankInAPI: Router, URLRequestConvertible {
     
     var baseURL: String? {
-        return getURL()
+        switch self {
+        case .gitHubAuthorization:
+            return "https://github.com"
+        default:
+            return getURL()
+        }
     }
     
     var path: String {
         switch self {
         case .appleLogin:
-            return "auth/apple"
+            return "/auth/apple"
         case .requestAccessToken:
-            return "auth/refresh"
+            return "/auth/refresh"
         case .sejongLogin:
-            return "auth/sejong"
+            return "/auth/sejong"
         case .setNickname(let userID, _):
-            return "users/\(userID)"
+            return "/users/\(userID)"
         case .setGrade:
-            return "stat/grade"
+            return "/stat/grade"
+        case .gitHubAuthorization:
+            return "/login/oauth/access_token"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin, .setGrade:
+        case .appleLogin, .requestAccessToken, .sejongLogin, .setGrade, .gitHubAuthorization:
             return .post
         case .setNickname:
             return .put
@@ -69,12 +77,14 @@ extension RankInAPI: Router, URLRequestConvertible {
             return nicknameDTO.asDictionary()
         case .setGrade(let gradeDTO):
             return gradeDTO.asDictionary()
+        case .gitHubAuthorization(let clientIdentifierDTO):
+            return clientIdentifierDTO.asDictionary()
         }
     }
     
     var encoding: ParameterEncoding? {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin, .setNickname, .setGrade:
+        case .appleLogin, .requestAccessToken, .sejongLogin, .setNickname, .setGrade, .gitHubAuthorization:
             return JSONEncoding.default
         }
     }
