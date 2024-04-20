@@ -18,7 +18,7 @@ final class LoginViewController: UIViewController {
     private let appleLoginSubject = PublishSubject<AppleLoginModel>()
     
     private lazy var appleLoginButton: UIButton = {
-        var attributedTitle = AttributedString("Apple 로그인")
+        var attributedTitle = AttributedString("Apple로 로그인")
         attributedTitle.font = UIFont.pretendard(type: .medium, size: 20)
         
         var configuration = UIButton.Configuration.filled()
