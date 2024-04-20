@@ -75,7 +75,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                         }
                     }
                 })
-            } else {  
+            } else {
                 observer.onError(RepositoryError.noUserID)
             }
             
@@ -85,13 +85,56 @@ final class DefaultSignUpRepository: SignUpRepository {
     
     func setGrade(grade: Double) -> Observable<Void> {
         return Observable<Void>.create { observer -> Disposable in
+            self.session.request(
+                RankInAPI.setGrade(
+                    gradeDTO: GradeDTO(grade: grade)
+                ),
+                interceptor: AuthManager()
+            )
+            .response(completionHandler: { response in
+                
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if
+                    let data = response.data,
+                    let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                
+                switch response.result {
+                case .success:
+                    observer.onNext(())
+                case .failure(let error):
+                    if let underlyingError = error.underlyingError as? NSError,
+                       underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                        observer.onError(ErrorToastCase.internetError)
+                    } else if let underlyingError = error.underlyingError as? NSError,
+                              underlyingError.code == 13 {
+                        observer.onError(ErrorToastCase.serverError)
+                    } else {
+                        observer.onError(ErrorToastCase.clientError)
+                    }
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func gitHubAuthorization(code: String) -> Observable<Bool> {
+        return Observable<Bool>.create { observer -> Disposable in
+            
+            if let clientID = Bundle.main.object(forInfoDictionaryKey: "GITHUB_CLIENT_ID") as? String,
+               let clientSecret = Bundle.main.object(forInfoDictionaryKey: "GITHUB_CLIENT_SECRET") as? String {
                 self.session.request(
-                    RankInAPI.setGrade(
-                        gradeDTO: GradeDTO(grade: grade)
-                    ),
-                    interceptor: AuthManager()
+                    RankInAPI.gitHubAuthorization(clientIdentifierDTO: ClientIdentifierDTO(
+                        clientID: clientID,
+                        clientSecret: clientSecret,
+                        code: code
+                    ))
                 )
-                .response(completionHandler: { response in
+                .responseDecodable(of: GitHubAccessTokenDTO.self, completionHandler: { response in
                     
                     print("* REQUEST URL: \(String(describing: response.request))")
                     
@@ -103,8 +146,9 @@ final class DefaultSignUpRepository: SignUpRepository {
                     }
                     
                     switch response.result {
-                    case .success:
-                        observer.onNext(())
+                    case .success(let data):
+                        KeyChainManager.create(storeElement: .gitHubAccessToken, content: data.accessToken)
+                        observer.onNext(true)
                     case .failure(let error):
                         if let underlyingError = error.underlyingError as? NSError,
                            underlyingError.code == URLError.notConnectedToInternet.rawValue {
@@ -117,6 +161,9 @@ final class DefaultSignUpRepository: SignUpRepository {
                         }
                     }
                 })
+            } else {
+                observer.onError(RepositoryError.noGitHubClientInformation)
+            }
             
             return Disposables.create()
         }
