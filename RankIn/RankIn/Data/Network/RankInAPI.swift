@@ -52,7 +52,12 @@ extension RankInAPI: Router, URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin, .setGrade, .gitHubAuthorization, .registerGitHubAuthorization:
+        case .appleLogin, 
+                .requestAccessToken,
+                .sejongLogin,
+                .setGrade,
+                .gitHubAuthorization,
+                .registerGitHubAuthorization:
             return .post
         case .setNickname:
             return .put
@@ -89,7 +94,13 @@ extension RankInAPI: Router, URLRequestConvertible {
     
     var encoding: ParameterEncoding? {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin, .setNickname, .setGrade, .gitHubAuthorization, .registerGitHubAuthorization:
+        case .appleLogin,
+                .requestAccessToken,
+                .sejongLogin,
+                .setNickname,
+                .setGrade,
+                .gitHubAuthorization,
+                .registerGitHubAuthorization:
             return JSONEncoding.default
         }
     }

@@ -108,7 +108,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             items[1].title = "MyPage"
         }
         
-        
         let nicknameViewController = NicknameViewController(
             nicknameViewModel: DefaultNicknameViewModel(
                 dependency: NicknameViewModelDependency(
@@ -144,7 +143,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             windowScene: windowScene
         )
         window.rootViewController = splashViewController
-//        window.rootViewController = gitHubViewController
         window.makeKeyAndVisible()
         
         self.window = window
