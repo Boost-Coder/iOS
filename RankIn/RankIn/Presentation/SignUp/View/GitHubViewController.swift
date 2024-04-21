@@ -129,7 +129,9 @@ private extension GitHubViewController {
         
         output.gitHubAuthorizationRegisterSuccess
             .bind { _ in
-                // TODO: 다음 VC present
+                self.navigationController?.pushViewController(
+                    self.mainTabBarController, animated: true
+                )
             }
             .disposed(by: disposeBag)
     }
@@ -138,12 +140,17 @@ private extension GitHubViewController {
         gitHubButton.rx
             .tap
             .bind { _ in
-                // TODO: guard 탈출 대응
                 guard let clientID = Bundle.main.object(
                     forInfoDictionaryKey: "GITHUB_CLIENT_ID"
-                ) as? String else { return }
+                ) as? String else {
+                    self.presentToast(toastCase: .gitHubAuthorizationFailed)
+                    return
+                }
                 let urlString = "https://github.com/login/oauth/authorize?client_id=\(clientID)"
-                guard let url = URL(string: urlString) else { return }
+                guard let url = URL(string: urlString) else {
+                    self.presentToast(toastCase: .gitHubAuthorizationFailed)
+                    return
+                }
                 UIApplication.shared.open(url)
             }
             .disposed(by: disposeBag)
@@ -151,7 +158,9 @@ private extension GitHubViewController {
         skipButton.rx
             .tap
             .bind { _ in
-                // TODO: 다음 VC 띄우기
+                self.navigationController?.pushViewController(
+                    self.mainTabBarController, animated: true
+                )
             }
             .disposed(by: disposeBag)
     }

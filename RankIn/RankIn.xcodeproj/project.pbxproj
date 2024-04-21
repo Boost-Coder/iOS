@@ -80,7 +80,6 @@
 		59A2BB062BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BB052BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift */; };
 		59A2BB082BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BB072BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift */; };
 		59A2BB0A2BD51E20003CFCAA /* GitHubAuthorizationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BB092BD51E20003CFCAA /* GitHubAuthorizationDTO.swift */; };
-		59A2BB0C2BD5271E003CFCAA /* ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BB0B2BD5271E003CFCAA /* ResponseDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,7 +162,6 @@
 		59A2BB052BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthorizationRegisterUseCase.swift; sourceTree = "<group>"; };
 		59A2BB072BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGitHubAuthorizationRegisterUseCase.swift; sourceTree = "<group>"; };
 		59A2BB092BD51E20003CFCAA /* GitHubAuthorizationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthorizationDTO.swift; sourceTree = "<group>"; };
-		59A2BB0B2BD5271E003CFCAA /* ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDTO.swift; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -381,7 +379,6 @@
 				59A2BAFB2BD15F1D003CFCAA /* ClientIdentifierDTO.swift */,
 				59A2BB032BD43951003CFCAA /* GitHubAccessTokenDTO.swift */,
 				59A2BB092BD51E20003CFCAA /* GitHubAuthorizationDTO.swift */,
-				59A2BB0B2BD5271E003CFCAA /* ResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -677,7 +674,6 @@
 				59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */,
 				591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */,
 				59A2BAF62BD15878003CFCAA /* GitHubViewModel.swift in Sources */,
-				59A2BB0C2BD5271E003CFCAA /* ResponseDTO.swift in Sources */,
 				59A2BAF02BD011F3003CFCAA /* NicknameDTO.swift in Sources */,
 				596A58C92BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift in Sources */,
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,

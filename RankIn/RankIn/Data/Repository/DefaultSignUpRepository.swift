@@ -53,7 +53,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                     ),
                     interceptor: AuthManager()
                 )
-                .responseDecodable(of: ResponseDTO.self, completionHandler: { response in
+                .response(completionHandler: { response in
                     
                     print("* REQUEST URL: \(String(describing: response.request))")
                     
@@ -64,12 +64,8 @@ final class DefaultSignUpRepository: SignUpRepository {
                     }
                     
                     switch response.result {
-                    case .success(let result):
-                        if result.statusCode == 200 {
-                            observer.onNext(true)
-                        } else {
-                            observer.onNext(false)
-                        }
+                    case .success:
+                        observer.onNext(true)
                     case .failure(let error):
                         if error.responseCode == 409 {
                             observer.onNext(false)
@@ -94,24 +90,19 @@ final class DefaultSignUpRepository: SignUpRepository {
                 ),
                 interceptor: AuthManager()
             )
-            .responseDecodable(of: ResponseDTO.self, completionHandler: { response in
+            .response(completionHandler: { response in
                 
                 print("* REQUEST URL: \(String(describing: response.request))")
                 
                 // reponse data 출력하기
                 if let data = response.data,
-                    let utf8Text = String(data: data, encoding: .utf8) {
+                   let utf8Text = String(data: data, encoding: .utf8) {
                     print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                 }
                 
                 switch response.result {
-                case .success(let result):
-                    if result.statusCode == 200 {
-                        observer.onNext(())
-                    } else {
-                        print("오류오류")
-                        // TODO: statusCode 처리
-                    }
+                case .success:
+                    observer.onNext(())
                 case .failure(let error):
                     if let underlyingError = error.underlyingError as? NSError,
                        underlyingError.code == URLError.notConnectedToInternet.rawValue {
@@ -196,7 +187,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                 ),
                 interceptor: AuthManager()
             )
-            .responseDecodable(of: ResponseDTO.self) { response in
+            .response { response in
                 
                 print("* REQUEST URL: \(String(describing: response.request))")
                 
@@ -207,13 +198,8 @@ final class DefaultSignUpRepository: SignUpRepository {
                 }
                 
                 switch response.result {
-                case .success(let result):
-                    if result.statusCode == 200 {
-                        observer.onNext(true)
-                    } else {
-                        // TODO: statusCode 처리
-                        observer.onNext(false)
-                    }
+                case .success:
+                    observer.onNext(true)
                 case .failure(let error):
                     if let underlyingError = error.underlyingError as? NSError,
                        underlyingError.code == URLError.notConnectedToInternet.rawValue {
