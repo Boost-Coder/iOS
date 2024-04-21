@@ -16,6 +16,7 @@ enum RankInAPI {
     case setNickname(userID: String, nicknameDTO: NicknameDTO)
     case setGrade(gradeDTO: GradeDTO)
     case gitHubAuthorization(clientIdentifierDTO: ClientIdentifierDTO)
+    case registerGitHubAuthorization(gitHubAuthorizationDTO: GitHubAuthorizationDTO)
     
 }
 
@@ -44,12 +45,14 @@ extension RankInAPI: Router, URLRequestConvertible {
             return "/stat/grade"
         case .gitHubAuthorization:
             return "/login/oauth/access_token"
+        case .registerGitHubAuthorization:
+            return "/stat/github"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin, .setGrade, .gitHubAuthorization:
+        case .appleLogin, .requestAccessToken, .sejongLogin, .setGrade, .gitHubAuthorization, .registerGitHubAuthorization:
             return .post
         case .setNickname:
             return .put
@@ -79,12 +82,14 @@ extension RankInAPI: Router, URLRequestConvertible {
             return gradeDTO.asDictionary()
         case .gitHubAuthorization(let clientIdentifierDTO):
             return clientIdentifierDTO.asDictionary()
+        case .registerGitHubAuthorization(let gitHubAuthorizationDTO):
+            return gitHubAuthorizationDTO.asDictionary()
         }
     }
     
     var encoding: ParameterEncoding? {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin, .setNickname, .setGrade, .gitHubAuthorization:
+        case .appleLogin, .requestAccessToken, .sejongLogin, .setNickname, .setGrade, .gitHubAuthorization, .registerGitHubAuthorization:
             return JSONEncoding.default
         }
     }
