@@ -37,7 +37,7 @@ final class AuthManager: RequestInterceptor {
         completion: @escaping (RetryResult) -> Void
     ) {
         guard let response = request.task?.response as? HTTPURLResponse, 
-                response.statusCode == 403 else { // TODO: 오류 코드 재확인 필요
+                response.statusCode == 401 else {
             completion(.doNotRetryWithError(error))
             return
         }
