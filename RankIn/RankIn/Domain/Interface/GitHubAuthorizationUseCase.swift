@@ -11,6 +11,6 @@ protocol GitHubAuthorizationUseCase {
     
     var repository: SignUpRepository { get }
     
-    func execute() -> Observable<Bool>
+    func execute(code: String) -> Observable<String>
     
 }
