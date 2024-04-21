@@ -13,4 +13,4 @@ disabled_rules:
     - identifier_name
 
 function_body_length:
-    warning: 80
+    warning: 150
