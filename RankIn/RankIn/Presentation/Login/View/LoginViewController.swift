@@ -18,7 +18,7 @@ final class LoginViewController: UIViewController {
     private let appleLoginSubject = PublishSubject<AppleLoginModel>()
     
     private lazy var appleLoginButton: UIButton = {
-        var attributedTitle = AttributedString("Apple 로그인")
+        var attributedTitle = AttributedString("Apple로 로그인")
         attributedTitle.font = UIFont.pretendard(type: .medium, size: 20)
         
         var configuration = UIButton.Configuration.filled()
@@ -108,6 +108,12 @@ private extension LoginViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        output.errorPublisher
+            .bind { error in
+                self.presentErrorToast(error: error)
+            }
+            .disposed(by: disposeBag)
     }
     
     func react() {
@@ -144,10 +150,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
             
-            if  let authorizationCode = appleIDCredential.authorizationCode,
-                let identityToken = appleIDCredential.identityToken,
-                let authorizationCodeString = String(data: authorizationCode, encoding: .utf8),
-                let identityTokenString = String(data: identityToken, encoding: .utf8) {
+            if let authorizationCode = appleIDCredential.authorizationCode,
+               let identityToken = appleIDCredential.identityToken,
+               let authorizationCodeString = String(data: authorizationCode, encoding: .utf8),
+               let identityTokenString = String(data: identityToken, encoding: .utf8) {
                 appleLoginSubject
                     .onNext(
                         AppleLoginModel(

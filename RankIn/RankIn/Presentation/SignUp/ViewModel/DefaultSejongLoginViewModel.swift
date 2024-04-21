@@ -16,6 +16,7 @@ final class DefaultSejongLoginViewModel: SejongLoginViewModel {
     
     private let loginFailed = PublishRelay<Void>()
     private let loginSuccessed = PublishRelay<Void>()
+    private let errorPublisher = PublishRelay<ErrorToastCase>()
     
     init(dependency: SejongLoginViewModelDependency) {
         self.dependency = dependency
@@ -31,7 +32,8 @@ final class DefaultSejongLoginViewModel: SejongLoginViewModel {
         
         return SejongLoginViewModelOutput(
             loginFailed: loginFailed,
-            loginSuccessed: loginSuccessed
+            loginSuccessed: loginSuccessed,
+            errorPublisher: errorPublisher
         )
     }
     
@@ -44,15 +46,18 @@ private extension DefaultSejongLoginViewModel {
             .sejongLoginUseCase
             .execute(loginInfo: loginInfo)
             .subscribe { isAuthorized in
-                // TODO: 로그인 성공 및 실패 처리
                 if isAuthorized {
                     self.loginSuccessed.accept(())
                 } else {
                     self.loginFailed.accept(())
                 }
             } onError: { error in
-                dump(error)
-                // TODO: error 처리
+                guard let error = error as? ErrorToastCase else {
+                    dump(error)
+                    self.errorPublisher.accept(.clientError)
+                    return
+                }
+                self.errorPublisher.accept(error)
             }
             .disposed(by: disposeBag)
     }

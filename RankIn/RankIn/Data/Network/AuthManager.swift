@@ -36,7 +36,8 @@ final class AuthManager: RequestInterceptor {
         dueTo error: Error,
         completion: @escaping (RetryResult) -> Void
     ) {
-        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 403 else { // TODO: 오류 코드 재확인 필요
+        guard let response = request.task?.response as? HTTPURLResponse, 
+                response.statusCode == 401 else {
             completion(.doNotRetryWithError(error))
             return
         }
@@ -47,7 +48,7 @@ final class AuthManager: RequestInterceptor {
         }
         
         session
-            .request(RankInAPI.requestAccessToken(refreshToken: refreshToken))
+            .request(RankInAPI.requestAccessToken(refreshTokenDTO: RefreshTokenDTO(refreshToken: refreshToken)))
             .responseDecodable(of: JWTDTO.self) { response in
                 switch response.result {
                 case .success(let data):

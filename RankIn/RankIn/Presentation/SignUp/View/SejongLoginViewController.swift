@@ -140,18 +140,21 @@ private extension SejongLoginViewController {
         
         output.loginFailed
             .bind { _ in
-                // TODO: login 실패 처리
-                print("loginFailed")
+                self.presentToast(toastCase: .sejongLoginFailed)
             }
             .disposed(by: disposeBag)
         
         output.loginSuccessed
             .bind { _ in
-                // TODO: login 성공 처리
                 self.navigationController?.pushViewController(self.nicknameViewController, animated: true)
             }
             .disposed(by: disposeBag)
         
+        output.errorPublisher
+            .bind { error in
+                self.presentErrorToast(error: error)
+            }
+            .disposed(by: disposeBag)
     }
     
     func react() {

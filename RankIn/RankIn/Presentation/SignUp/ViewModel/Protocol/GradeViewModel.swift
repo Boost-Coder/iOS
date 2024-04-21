@@ -26,6 +26,7 @@ struct GradeViewModelOutput {
     
     let gradeSuccess: PublishRelay<Void>
     let gradeFailure: PublishRelay<Void>
+    let errorPublisher: PublishRelay<ErrorToastCase>
     
 }
 

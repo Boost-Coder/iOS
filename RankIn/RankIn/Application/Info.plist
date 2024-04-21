@@ -2,13 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.boost-coder.rankin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>rankin</string>
+			</array>
+		</dict>
+	</array>
+	<key>DEV_SERVER_URL</key>
+	<string>$(DEV_SERVER_URL)</string>
+	<key>GITHUB_CLIENT_ID</key>
+	<string>$(GITHUB_CLIENT_ID)</string>
+	<key>GITHUB_CLIENT_SECRET</key>
+	<string>$(GITHUB_CLIENT_SECRET)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>DEV_SERVER_URL</key>
-	<string>$(DEV_SERVER_URL)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Black.otf</string>

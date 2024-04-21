@@ -14,6 +14,7 @@ final class DefaultGradeViewModel: GradeViewModel {
     
     private let gradeSuccess = PublishRelay<Void>()
     private let gradeFailure = PublishRelay<Void>()
+    private let errorPublisher = PublishRelay<ErrorToastCase>()
     
     let dependency: GradeViewModelDependency
     
@@ -26,7 +27,8 @@ final class DefaultGradeViewModel: GradeViewModel {
         
         return GradeViewModelOutput(
             gradeSuccess: gradeSuccess,
-            gradeFailure: gradeFailure
+            gradeFailure: gradeFailure,
+            errorPublisher: errorPublisher
         )
     }
     
@@ -40,16 +42,21 @@ private extension DefaultGradeViewModel {
     
     func setGrade(grade: String) {
         // TODO: grade 유효성 검사
-        if false {
+        guard let grade = Double(grade) else {
             gradeFailure.accept(())
+            return
         }
         dependency.setGradeUseCase
             .execute(grade: grade)
             .subscribe { [weak self] _ in
                 self?.gradeSuccess.accept(())
             } onError: { error in
-                // TODO: Error 처리
-                dump(error)
+                guard let error = error as? ErrorToastCase else {
+                    dump(error)
+                    self.errorPublisher.accept(.clientError)
+                    return
+                }
+                self.errorPublisher.accept(error)
             }
             .disposed(by: disposeBag)
     }

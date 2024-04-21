@@ -22,6 +22,16 @@ final class DefaultSignUpRepository: SignUpRepository {
                 id: loginInfo.id, pw: loginInfo.pw
             )), interceptor: AuthManager())
             .responseDecodable(of: SejongLoginResultDTO.self) { response in
+                
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if
+                    let data = response.data,
+                    let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                
                 switch response.result {
                 case .success(let data):
                     observer.onNext(data.isAuthorized)
@@ -39,11 +49,20 @@ final class DefaultSignUpRepository: SignUpRepository {
             if let userID = KeyChainManager.read(storeElement: .userID) {
                 self.session.request(
                     RankInAPI.setNickname(
-                        userID: userID, nickname: nickname
+                        userID: userID, nicknameDTO: NicknameDTO(nickname: nickname)
                     ),
                     interceptor: AuthManager()
                 )
-                .responseData(completionHandler: { response in
+                .response(completionHandler: { response in
+                    
+                    print("* REQUEST URL: \(String(describing: response.request))")
+                    
+                    // reponse data 출력하기
+                    if let data = response.data,
+                       let utf8Text = String(data: data, encoding: .utf8) {
+                        print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                    }
+                    
                     switch response.result {
                     case .success:
                         observer.onNext(true)
@@ -55,7 +74,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                         }
                     }
                 })
-            } else {  
+            } else {
                 observer.onError(RepositoryError.noUserID)
             }
             
@@ -63,28 +82,167 @@ final class DefaultSignUpRepository: SignUpRepository {
         }
     }
     
-    func setGrade(grade: String) -> Observable<Void> {
+    func setGrade(grade: Double) -> Observable<Void> {
         return Observable<Void>.create { observer -> Disposable in
-            if let userID = KeyChainManager.read(storeElement: .userID) {
+            self.session.request(
+                RankInAPI.setGrade(
+                    gradeDTO: GradeDTO(grade: grade)
+                ),
+                interceptor: AuthManager()
+            )
+            .response(completionHandler: { response in
+                
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if let data = response.data,
+                   let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                
+                switch response.result {
+                case .success:
+                    observer.onNext(())
+                case .failure(let error):
+                    if let underlyingError = error.underlyingError as? NSError,
+                       underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                        observer.onError(ErrorToastCase.internetError)
+                    } else if let underlyingError = error.underlyingError as? NSError,
+                              underlyingError.code == 13 {
+                        observer.onError(ErrorToastCase.serverError)
+                    } else {
+                        observer.onError(ErrorToastCase.clientError)
+                    }
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func gitHubAuthorization(code: String) -> Observable<String> {
+        return Observable<String>.create { observer -> Disposable in
+            
+            if let clientID = Bundle.main.object(forInfoDictionaryKey: "GITHUB_CLIENT_ID") as? String,
+               let clientSecret = Bundle.main.object(forInfoDictionaryKey: "GITHUB_CLIENT_SECRET") as? String {
                 self.session.request(
-                    RankInAPI.setGrade(
-                        userID: userID, grade: grade
-                    ),
-                    interceptor: AuthManager()
+                    RankInAPI.gitHubAuthorization(clientIdentifierDTO: ClientIdentifierDTO(
+                        clientID: clientID,
+                        clientSecret: clientSecret,
+                        code: code
+                    ))
                 )
-                .responseData(completionHandler: { response in
+                .response(completionHandler: { response in
+                    
+                    print("* REQUEST URL: \(String(describing: response.request))")
+                    
+                    // reponse data 출력하기
+                    if let data = response.data,
+                       let utf8Text = String(data: data, encoding: .utf8) {
+                        print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                    }
+                    
                     switch response.result {
-                    case .success:
-                        observer.onNext(())
+                    case .success(let data):
+                        guard let data = data,
+                              let stringData = String(data: data, encoding: .utf8),
+                              let gitHubAccessTokenDTO = self.decodeQueryString(
+                                stringData, to: GitHubAccessTokenDTO.self
+                              ) else {
+                            observer.onError(RepositoryError.gitHubAccessTokenWrongParsing)
+                            return
+                        }
+                        KeyChainManager.create(
+                            storeElement: .gitHubAccessToken,
+                            content: gitHubAccessTokenDTO.accessToken
+                        )
+                        observer.onNext(gitHubAccessTokenDTO.accessToken)
                     case .failure(let error):
-                        observer.onError(error)
+                        if let underlyingError = error.underlyingError as? NSError,
+                           underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                            observer.onError(ErrorToastCase.internetError)
+                        } else if let underlyingError = error.underlyingError as? NSError,
+                                  underlyingError.code == 13 {
+                            observer.onError(ErrorToastCase.serverError)
+                        } else {
+                            observer.onError(ErrorToastCase.clientError)
+                        }
                     }
                 })
             } else {
-                observer.onError(RepositoryError.noUserID)
+                observer.onError(RepositoryError.noGitHubClientInformation)
             }
             
             return Disposables.create()
+        }
+    }
+    
+    func registerGitHubAuthorization(code: String) -> Observable<Bool> {
+        return Observable<Bool>.create { observer in
+            self.session.request(
+                RankInAPI.registerGitHubAuthorization(
+                    gitHubAuthorizationDTO: GitHubAuthorizationDTO(
+                        accessToken: code
+                    )
+                ),
+                interceptor: AuthManager()
+            )
+            .response { response in
+                
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if let data = response.data,
+                   let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                
+                switch response.result {
+                case .success:
+                    observer.onNext(true)
+                case .failure(let error):
+                    if let underlyingError = error.underlyingError as? NSError,
+                       underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                        observer.onError(ErrorToastCase.internetError)
+                    } else if let underlyingError = error.underlyingError as? NSError,
+                              underlyingError.code == 13 {
+                        observer.onError(ErrorToastCase.serverError)
+                    } else {
+                        observer.onError(ErrorToastCase.clientError)
+                    }
+                    
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+}
+
+private extension DefaultSignUpRepository {
+    
+    func decodeQueryString<T: Decodable>(_ queryString: String, to type: T.Type) -> T? {
+        var components = URLComponents()
+        components.query = queryString
+        
+        guard let queryItems = components.queryItems else {
+            return nil
+        }
+        
+        var values: [String: String] = [:]
+        
+        for item in queryItems {
+            values[item.name] = item.value
+        }
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: values, options: [])
+            let decoder = JSONDecoder()
+            return try decoder.decode(T.self, from: jsonData)
+        } catch {
+            print("Error decoding: \(error)")
+            return nil
         }
     }
     

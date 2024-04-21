@@ -11,37 +11,55 @@ import Alamofire
 enum RankInAPI {
     
     case appleLogin(appleLoginDTO: AppleLoginDTO)
-    case requestAccessToken(refreshToken: String)
+    case requestAccessToken(refreshTokenDTO: RefreshTokenDTO)
     case sejongLogin(SejongLoginInfoDTO: SejongLoginInfoDTO)
-    case setNickname(userID: String, nickname: String)
-    case setGrade(userID: String, grade: String)
+    case setNickname(userID: String, nicknameDTO: NicknameDTO)
+    case setGrade(gradeDTO: GradeDTO)
+    case gitHubAuthorization(clientIdentifierDTO: ClientIdentifierDTO)
+    case registerGitHubAuthorization(gitHubAuthorizationDTO: GitHubAuthorizationDTO)
     
 }
 
 extension RankInAPI: Router, URLRequestConvertible {
     
     var baseURL: String? {
-        return getURL()
+        switch self {
+        case .gitHubAuthorization:
+            return "https://github.com"
+        default:
+            return getURL()
+        }
     }
     
     var path: String {
         switch self {
         case .appleLogin:
-            return "auth/apple"
+            return "/auth/apple"
         case .requestAccessToken:
-            return "auth/refresh"
+            return "/auth/refresh"
         case .sejongLogin:
-            return "auth/sejong"
-        case .setNickname(let userID, _), .setGrade(let userID, _):
-            return "users/\(userID)"
+            return "/auth/sejong"
+        case .setNickname(let userID, _):
+            return "/users/\(userID)"
+        case .setGrade:
+            return "/stat/grade"
+        case .gitHubAuthorization:
+            return "/login/oauth/access_token"
+        case .registerGitHubAuthorization:
+            return "/stat/github"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin:
+        case .appleLogin, 
+                .requestAccessToken,
+                .sejongLogin,
+                .setGrade,
+                .gitHubAuthorization,
+                .registerGitHubAuthorization:
             return .post
-        case .setNickname, .setGrade:
+        case .setNickname:
             return .put
         }
     }
@@ -63,16 +81,26 @@ extension RankInAPI: Router, URLRequestConvertible {
             return refreshToken.asDictionary()
         case .sejongLogin(let sejongLoginInfoDTO):
             return sejongLoginInfoDTO.asDictionary()
-        case .setNickname(_, let nickname):
-            return nickname.asDictionary()
-        case .setGrade(_, let grade):
-            return grade.asDictionary()
+        case .setNickname(_, let nicknameDTO):
+            return nicknameDTO.asDictionary()
+        case .setGrade(let gradeDTO):
+            return gradeDTO.asDictionary()
+        case .gitHubAuthorization(let clientIdentifierDTO):
+            return clientIdentifierDTO.asDictionary()
+        case .registerGitHubAuthorization(let gitHubAuthorizationDTO):
+            return gitHubAuthorizationDTO.asDictionary()
         }
     }
     
     var encoding: ParameterEncoding? {
         switch self {
-        case .appleLogin, .requestAccessToken, .sejongLogin, .setNickname, .setGrade:
+        case .appleLogin,
+                .requestAccessToken,
+                .sejongLogin,
+                .setNickname,
+                .setGrade,
+                .gitHubAuthorization,
+                .registerGitHubAuthorization:
             return JSONEncoding.default
         }
     }

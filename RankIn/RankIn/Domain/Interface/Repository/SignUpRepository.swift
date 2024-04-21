@@ -11,6 +11,8 @@ protocol SignUpRepository {
     
     func sejongLogin(loginInfo: SejongLoginInfo) -> Observable<Bool>
     func setNickname(nickname: String) -> Observable<Bool>
-    func setGrade(grade: String) -> Observable<Void>
+    func setGrade(grade: Double) -> Observable<Void>
+    func gitHubAuthorization(code: String) -> Observable<String>
+    func registerGitHubAuthorization(code: String) -> Observable<Bool>
     
 }

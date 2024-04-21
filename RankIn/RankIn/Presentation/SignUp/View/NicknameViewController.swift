@@ -125,17 +125,23 @@ private extension NicknameViewController {
             }
             .disposed(by: disposeBag)
         
+        output.errorPublisher
+            .bind { error in
+                self.presentErrorToast(error: error)
+            }
+            .disposed(by: disposeBag)
     }
     
     func react() {
         nextButton.rx
             .tap
             .bind(onNext: { _ in
-                guard let nicknameText = self.nickname.text else {
+                if let nicknameText = self.nickname.text,
+                   !nicknameText.isEmpty {            self.nextButtonTapped.accept(nicknameText)
+                } else {
                     self.presentToast(toastCase: .noNicknameInput)
                     return
                 }
-                self.nextButtonTapped.accept(nicknameText)
             })
             .disposed(by: disposeBag)
     }

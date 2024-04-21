@@ -14,10 +14,9 @@ final class KeyChainManager {
         case accessToken
         case refreshToken
         case userID
+        case gitHubAccessToken
         
     }
-    
-    static let serviceName = "RankIn"
     
     static func create(storeElement: StoreElement, content: String) {
         let query: NSDictionary = [
