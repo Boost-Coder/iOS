@@ -65,11 +65,14 @@ final class GradeViewController: UIViewController {
     }()
     
     private let viewModel: GradeViewModel
+    private let gitHubViewController: GitHubViewController
     
     init(
-        gradeViewModel: GradeViewModel
+        gradeViewModel: GradeViewModel,
+        gitHubViewController: GitHubViewController
     ) {
         self.viewModel = gradeViewModel
+        self.gitHubViewController = gitHubViewController
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -129,7 +132,9 @@ private extension GradeViewController {
         
         output.gradeSuccess
             .subscribe { _ in
-                // TODO: 다음 VC 띄우기
+                self.navigationController?.pushViewController(
+                    self.gitHubViewController, animated: true
+                )
             } onError: { error in
                 dump(error)
             }
@@ -165,7 +170,9 @@ private extension GradeViewController {
         skipButton.rx
             .tap
             .bind { _ in
-                // TODO: 다음 VC 띄우기
+                self.navigationController?.pushViewController(
+                    self.gitHubViewController, animated: true
+                )
             }
             .disposed(by: disposeBag)
     }
