@@ -10,5 +10,7 @@ import Foundation
 enum RepositoryError: Error {
     
     case noUserID
+    case noGitHubClientInformation
+    case gitHubAccessTokenWrongParsing
     
 }
