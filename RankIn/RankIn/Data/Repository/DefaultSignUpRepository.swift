@@ -53,20 +53,23 @@ final class DefaultSignUpRepository: SignUpRepository {
                     ),
                     interceptor: AuthManager()
                 )
-                .response(completionHandler: { response in
+                .responseDecodable(of: ResponseDTO.self, completionHandler: { response in
                     
                     print("* REQUEST URL: \(String(describing: response.request))")
                     
                     // reponse data 출력하기
-                    if
-                        let data = response.data,
-                        let utf8Text = String(data: data, encoding: .utf8) {
+                    if let data = response.data,
+                       let utf8Text = String(data: data, encoding: .utf8) {
                         print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                     }
                     
                     switch response.result {
-                    case .success:
-                        observer.onNext(true)
+                    case .success(let result):
+                        if result.statusCode == 200 {
+                            observer.onNext(true)
+                        } else {
+                            observer.onNext(false)
+                        }
                     case .failure(let error):
                         if error.responseCode == 409 {
                             observer.onNext(false)
@@ -91,20 +94,24 @@ final class DefaultSignUpRepository: SignUpRepository {
                 ),
                 interceptor: AuthManager()
             )
-            .response(completionHandler: { response in
+            .responseDecodable(of: ResponseDTO.self, completionHandler: { response in
                 
                 print("* REQUEST URL: \(String(describing: response.request))")
                 
                 // reponse data 출력하기
-                if
-                    let data = response.data,
+                if let data = response.data,
                     let utf8Text = String(data: data, encoding: .utf8) {
                     print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                 }
                 
                 switch response.result {
-                case .success:
-                    observer.onNext(())
+                case .success(let result):
+                    if result.statusCode == 200 {
+                        observer.onNext(())
+                    } else {
+                        print("오류오류")
+                        // TODO: statusCode 처리
+                    }
                 case .failure(let error):
                     if let underlyingError = error.underlyingError as? NSError,
                        underlyingError.code == URLError.notConnectedToInternet.rawValue {
@@ -122,8 +129,8 @@ final class DefaultSignUpRepository: SignUpRepository {
         }
     }
     
-    func gitHubAuthorization(code: String) -> Observable<Bool> {
-        return Observable<Bool>.create { observer -> Disposable in
+    func gitHubAuthorization(code: String) -> Observable<String> {
+        return Observable<String>.create { observer -> Disposable in
             
             if let clientID = Bundle.main.object(forInfoDictionaryKey: "GITHUB_CLIENT_ID") as? String,
                let clientSecret = Bundle.main.object(forInfoDictionaryKey: "GITHUB_CLIENT_SECRET") as? String {
@@ -134,21 +141,31 @@ final class DefaultSignUpRepository: SignUpRepository {
                         code: code
                     ))
                 )
-                .responseDecodable(of: GitHubAccessTokenDTO.self, completionHandler: { response in
+                .response(completionHandler: { response in
                     
                     print("* REQUEST URL: \(String(describing: response.request))")
                     
                     // reponse data 출력하기
-                    if
-                        let data = response.data,
-                        let utf8Text = String(data: data, encoding: .utf8) {
+                    if let data = response.data,
+                       let utf8Text = String(data: data, encoding: .utf8) {
                         print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                     }
                     
                     switch response.result {
                     case .success(let data):
-                        KeyChainManager.create(storeElement: .gitHubAccessToken, content: data.accessToken)
-                        observer.onNext(true)
+                        guard let data = data,
+                              let stringData = String(data: data, encoding: .utf8),
+                              let gitHubAccessTokenDTO = self.decodeQueryString(
+                                stringData, to: GitHubAccessTokenDTO.self
+                              ) else {
+                            observer.onError(RepositoryError.gitHubAccessTokenWrongParsing)
+                            return
+                        }
+                        KeyChainManager.create(
+                            storeElement: .gitHubAccessToken,
+                            content: gitHubAccessTokenDTO.accessToken
+                        )
+                        observer.onNext(gitHubAccessTokenDTO.accessToken)
                     case .failure(let error):
                         if let underlyingError = error.underlyingError as? NSError,
                            underlyingError.code == URLError.notConnectedToInternet.rawValue {
@@ -166,6 +183,80 @@ final class DefaultSignUpRepository: SignUpRepository {
             }
             
             return Disposables.create()
+        }
+    }
+    
+    func registerGitHubAuthorization(code: String) -> Observable<Bool> {
+        return Observable<Bool>.create { observer in
+            self.session.request(
+                RankInAPI.registerGitHubAuthorization(
+                    gitHubAuthorizationDTO: GitHubAuthorizationDTO(
+                        accessToken: code
+                    )
+                ),
+                interceptor: AuthManager()
+            )
+            .responseDecodable(of: ResponseDTO.self) { response in
+                
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if let data = response.data,
+                   let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                
+                switch response.result {
+                case .success(let result):
+                    if result.statusCode == 200 {
+                        observer.onNext(true)
+                    } else {
+                        // TODO: statusCode 처리
+                        observer.onNext(false)
+                    }
+                case .failure(let error):
+                    if let underlyingError = error.underlyingError as? NSError,
+                       underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                        observer.onError(ErrorToastCase.internetError)
+                    } else if let underlyingError = error.underlyingError as? NSError,
+                              underlyingError.code == 13 {
+                        observer.onError(ErrorToastCase.serverError)
+                    } else {
+                        observer.onError(ErrorToastCase.clientError)
+                    }
+                    
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+}
+
+private extension DefaultSignUpRepository {
+    
+    func decodeQueryString<T: Decodable>(_ queryString: String, to type: T.Type) -> T? {
+        var components = URLComponents()
+        components.query = queryString
+        
+        guard let queryItems = components.queryItems else {
+            return nil
+        }
+        
+        var values: [String: String] = [:]
+        
+        for item in queryItems {
+            values[item.name] = item.value
+        }
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: values, options: [])
+            let decoder = JSONDecoder()
+            return try decoder.decode(T.self, from: jsonData)
+        } catch {
+            print("Error decoding: \(error)")
+            return nil
         }
     }
     
