@@ -27,7 +27,7 @@ final class BaekjoonViewController: UIViewController {
         textField.backgroundColor = .white
         textField.textColor = .black
         textField.attributedPlaceholder = NSAttributedString(
-            string: "학점",
+            string: "백준 아이디",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         )
         
