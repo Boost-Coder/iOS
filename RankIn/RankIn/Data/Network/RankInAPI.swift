@@ -17,6 +17,7 @@ enum RankInAPI {
     case setGrade(gradeDTO: GradeDTO)
     case gitHubAuthorization(clientIdentifierDTO: ClientIdentifierDTO)
     case registerGitHubAuthorization(gitHubAuthorizationDTO: GitHubAuthorizationDTO)
+    case setBaekjoonID(baekjoonDTO: BaekjoonDTO)
     
 }
 
@@ -47,6 +48,8 @@ extension RankInAPI: Router, URLRequestConvertible {
             return "/login/oauth/access_token"
         case .registerGitHubAuthorization:
             return "/stat/github"
+        case .setBaekjoonID:
+            return "/stat/algorithm"
         }
     }
     
@@ -57,7 +60,8 @@ extension RankInAPI: Router, URLRequestConvertible {
                 .sejongLogin,
                 .setGrade,
                 .gitHubAuthorization,
-                .registerGitHubAuthorization:
+                .registerGitHubAuthorization,
+                .setBaekjoonID:
             return .post
         case .setNickname:
             return .put
@@ -89,6 +93,8 @@ extension RankInAPI: Router, URLRequestConvertible {
             return clientIdentifierDTO.asDictionary()
         case .registerGitHubAuthorization(let gitHubAuthorizationDTO):
             return gitHubAuthorizationDTO.asDictionary()
+        case .setBaekjoonID(let baekjoonDTO):
+            return baekjoonDTO.asDictionary()
         }
     }
     
@@ -100,7 +106,8 @@ extension RankInAPI: Router, URLRequestConvertible {
                 .setNickname,
                 .setGrade,
                 .gitHubAuthorization,
-                .registerGitHubAuthorization:
+                .registerGitHubAuthorization,
+                .setBaekjoonID:
             return JSONEncoding.default
         }
     }
