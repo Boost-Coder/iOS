@@ -26,6 +26,8 @@ extension UIViewController {
         case invalidGradeInput
         case sejongLoginFailed
         case gitHubAuthorizationFailed
+        case noBaekjoonIDInput
+        case invalidBaekjoonIDInput
         
     }
     
@@ -43,6 +45,10 @@ extension UIViewController {
             self.view.makeToast("로그인에 실패했습니다\n아이디와 비밀번호를 확인해주세요")
         case .gitHubAuthorizationFailed:
             self.view.makeToast("GitHub 인증에 실패했습니다")
+        case .noBaekjoonIDInput:
+            self.view.makeToast("백준 ID를 입력해주세요")
+        case .invalidBaekjoonIDInput:
+            self.view.makeToast("백준 ID 인증에 실패했습니다")
         }
     }
     
