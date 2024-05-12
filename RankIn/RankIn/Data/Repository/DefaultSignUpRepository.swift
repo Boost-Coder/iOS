@@ -218,6 +218,44 @@ final class DefaultSignUpRepository: SignUpRepository {
         }
     }
     
+    func setBaekjoonID(id: String) -> Observable<Void> {
+        return Observable<Void>.create { observer -> Disposable in
+            self.session.request(
+                RankInAPI.setBaekjoonID(
+                    baekjoonDTO: BaekjoonDTO(bojID: id)
+                ),
+                interceptor: AuthManager()
+            )
+            .response(completionHandler: { response in
+                
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if let data = response.data,
+                   let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                
+                switch response.result {
+                case .success:
+                    observer.onNext(())
+                case .failure(let error):
+                    if let underlyingError = error.underlyingError as? NSError,
+                       underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                        observer.onError(ErrorToastCase.internetError)
+                    } else if let underlyingError = error.underlyingError as? NSError,
+                              underlyingError.code == 13 {
+                        observer.onError(ErrorToastCase.serverError)
+                    } else {
+                        observer.onError(ErrorToastCase.clientError)
+                    }
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
 }
 
 private extension DefaultSignUpRepository {
