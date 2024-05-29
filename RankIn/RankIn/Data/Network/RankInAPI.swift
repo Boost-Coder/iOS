@@ -18,6 +18,7 @@ enum RankInAPI {
     case gitHubAuthorization(clientIdentifierDTO: ClientIdentifierDTO)
     case registerGitHubAuthorization(gitHubAuthorizationDTO: GitHubAuthorizationDTO)
     case setBaekjoonID(baekjoonDTO: BaekjoonDTO)
+    case fetchRankList(fetchRankComponentsDTO: FetchRankComponentsDTO?)
     
 }
 
@@ -50,6 +51,8 @@ extension RankInAPI: Router, URLRequestConvertible {
             return "/stat/github"
         case .setBaekjoonID:
             return "/stat/algorithm"
+        case .fetchRankList:
+            return "/rank/total"
         }
     }
     
@@ -65,6 +68,8 @@ extension RankInAPI: Router, URLRequestConvertible {
             return .post
         case .setNickname:
             return .put
+        case .fetchRankList:
+            return .get
         }
     }
     
@@ -77,7 +82,7 @@ extension RankInAPI: Router, URLRequestConvertible {
         }
     }
     
-    var parameters: [String: Any]? {
+    var parameters: [String: Any] {
         switch self {
         case .appleLogin(let appleLoginDTO):
             return appleLoginDTO.asDictionary()
@@ -95,6 +100,10 @@ extension RankInAPI: Router, URLRequestConvertible {
             return gitHubAuthorizationDTO.asDictionary()
         case .setBaekjoonID(let baekjoonDTO):
             return baekjoonDTO.asDictionary()
+        case .fetchRankList(let fetchRankComponentsDTO):
+            return fetchRankComponentsDTO.asDictionary()
+        default:
+            return [:]
         }
     }
     
@@ -109,6 +118,8 @@ extension RankInAPI: Router, URLRequestConvertible {
                 .registerGitHubAuthorization,
                 .setBaekjoonID:
             return JSONEncoding.default
+        case .fetchRankList:
+            return URLEncoding.default
         }
     }
     
@@ -123,11 +134,7 @@ extension RankInAPI: Router, URLRequestConvertible {
         request.headers = HTTPHeaders(headers)
         
         if let encoding = encoding {
-            if let parameters = parameters {
-                return try encoding.encode(request, with: parameters)
-            } else {
-                throw NetworkError.wrongParameters
-            }
+            return try encoding.encode(request, with: parameters)
         }
         
         return request
