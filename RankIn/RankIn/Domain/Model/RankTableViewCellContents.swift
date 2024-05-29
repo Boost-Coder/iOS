@@ -11,6 +11,6 @@ struct RankTableViewCellContents: Hashable {
     
     let rank: Int
     let nickName: String
-    let score: Int
+    let score: Double
     
 }

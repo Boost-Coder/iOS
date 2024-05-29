@@ -12,6 +12,8 @@ final class RankTableViewCell: UITableViewCell {
     private let rankLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = .pretendard(type: .semiBold, size: 24)
         
         return label
     }()
@@ -19,6 +21,8 @@ final class RankTableViewCell: UITableViewCell {
     private let nickNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = .pretendard(type: .bold, size: 15)
         
         return label
     }()
@@ -26,6 +30,8 @@ final class RankTableViewCell: UITableViewCell {
     private let scoreLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = .pretendard(type: .regular, size: 13)
         
         return label
     }()
@@ -33,8 +39,7 @@ final class RankTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        
-        selectionStyle = .none
+        setUI()
     }
     
     required init?(coder: NSCoder) {
@@ -52,7 +57,13 @@ final class RankTableViewCell: UITableViewCell {
     func setContents(contents: RankTableViewCellContents) {
         self.rankLabel.text = String(contents.rank)
         self.nickNameLabel.text = contents.nickName
-        self.scoreLabel.text = String(contents.score)
+        self.scoreLabel.text = String(format: "%.2f", contents.score)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 52, bottom: 4, right: 52))
+        contentView.layer.masksToBounds = true
     }
     
 }
@@ -60,7 +71,10 @@ final class RankTableViewCell: UITableViewCell {
 private extension RankTableViewCell {
     
     func setUI() {
-        // TODO: indexpath 홀수 짝수에 맞게 배경 변경
+        self.backgroundColor = .systemGray6
+        self.contentView.backgroundColor = .white
+        self.contentView.layer.cornerRadius = 10
+        selectionStyle = .none
         
         setHierarchy()
         setConstraints()
@@ -75,20 +89,20 @@ private extension RankTableViewCell {
     func setConstraints() {
         NSLayoutConstraint.activate([
             rankLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            rankLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            rankLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
             rankLabel.widthAnchor.constraint(equalToConstant: 50)
         ])
         
         NSLayoutConstraint.activate([
             nickNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            nickNameLabel.leadingAnchor.constraint(equalTo: rankLabel.trailingAnchor, constant: 10),
+            nickNameLabel.leadingAnchor.constraint(equalTo: rankLabel.trailingAnchor, constant: 22),
             nickNameLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
         
         NSLayoutConstraint.activate([
             scoreLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            scoreLabel.leadingAnchor.constraint(equalTo: nickNameLabel.trailingAnchor, constant: 10),
-            scoreLabel.widthAnchor.constraint(equalToConstant: 100)
+            scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            scoreLabel.widthAnchor.constraint(equalToConstant: 70)
         ])
     }
     
