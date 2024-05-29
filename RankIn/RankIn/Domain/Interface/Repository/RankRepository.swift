@@ -9,7 +9,6 @@ import RxSwift
 
 protocol RankRepository {
     
-    func fetchRankList() -> Observable<Void>
-    func getRankCellContents() -> Observable<[RankTableViewCellContents]>
+    func fetchRankList(fetchRankComponents: FetchRankComponents?) -> Observable<[RankTableViewCellContents]>
     
 }
