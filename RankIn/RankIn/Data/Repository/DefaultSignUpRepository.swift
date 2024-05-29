@@ -23,6 +23,7 @@ final class DefaultSignUpRepository: SignUpRepository {
             )), interceptor: AuthManager())
             .responseDecodable(of: SejongLoginResultDTO.self) { response in
                 
+                print("--------------------------------------------------------------------------------")
                 print("* REQUEST URL: \(String(describing: response.request))")
                 
                 // reponse data 출력하기
@@ -31,6 +32,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                     let utf8Text = String(data: data, encoding: .utf8) {
                     print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                 }
+                print("--------------------------------------------------------------------------------")
                 
                 switch response.result {
                 case .success(let data):
@@ -55,6 +57,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                 )
                 .response(completionHandler: { response in
                     
+                    print("--------------------------------------------------------------------------------")
                     print("* REQUEST URL: \(String(describing: response.request))")
                     
                     // reponse data 출력하기
@@ -62,6 +65,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                        let utf8Text = String(data: data, encoding: .utf8) {
                         print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                     }
+                    print("--------------------------------------------------------------------------------")
                     
                     switch response.result {
                     case .success:
@@ -92,6 +96,7 @@ final class DefaultSignUpRepository: SignUpRepository {
             )
             .response(completionHandler: { response in
                 
+                print("--------------------------------------------------------------------------------")
                 print("* REQUEST URL: \(String(describing: response.request))")
                 
                 // reponse data 출력하기
@@ -99,6 +104,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                    let utf8Text = String(data: data, encoding: .utf8) {
                     print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                 }
+                print("--------------------------------------------------------------------------------")
                 
                 switch response.result {
                 case .success:
@@ -134,6 +140,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                 )
                 .response(completionHandler: { response in
                     
+                    print("--------------------------------------------------------------------------------")
                     print("* REQUEST URL: \(String(describing: response.request))")
                     
                     // reponse data 출력하기
@@ -141,6 +148,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                        let utf8Text = String(data: data, encoding: .utf8) {
                         print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                     }
+                    print("--------------------------------------------------------------------------------")
                     
                     switch response.result {
                     case .success(let data):
@@ -189,6 +197,7 @@ final class DefaultSignUpRepository: SignUpRepository {
             )
             .response { response in
                 
+                print("--------------------------------------------------------------------------------")
                 print("* REQUEST URL: \(String(describing: response.request))")
                 
                 // reponse data 출력하기
@@ -196,6 +205,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                    let utf8Text = String(data: data, encoding: .utf8) {
                     print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                 }
+                print("--------------------------------------------------------------------------------")
                 
                 switch response.result {
                 case .success:
@@ -228,6 +238,7 @@ final class DefaultSignUpRepository: SignUpRepository {
             )
             .response(completionHandler: { response in
                 
+                print("--------------------------------------------------------------------------------")
                 print("* REQUEST URL: \(String(describing: response.request))")
                 
                 // reponse data 출력하기
@@ -235,6 +246,7 @@ final class DefaultSignUpRepository: SignUpRepository {
                    let utf8Text = String(data: data, encoding: .utf8) {
                     print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                 }
+                print("--------------------------------------------------------------------------------")
                 
                 switch response.result {
                 case .success:
