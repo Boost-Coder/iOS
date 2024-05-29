@@ -12,13 +12,13 @@ struct RankDTO: Decodable {
     let nickName: String
     let userID: String
     let rank: Int
-    let score: Int
+    let score: Double
     
     enum CodingKeys: String, CodingKey {
         case nickName = "nickname"
         case userID = "userId"
         case rank
-        case score = "point"// TODO: 수정
+        case score
     }
     
     func toEntity() -> RankTableViewCellContents {
