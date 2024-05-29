@@ -26,6 +26,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             session: AF
         )
         let signUpRepository = DefaultSignUpRepository(session: AF)
+        let rankRepository = DefaultRankRepository(session: AF)
         
         let appleLoginUseCase = DefaultAppleLoginUseCase(
             repository: loginRepository
@@ -45,6 +46,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let setBaekjoonIDUseCase = DefaultSetBaekjoonIDUseCase(
             repository: signUpRepository
         )
+        let fetchRankListUseCase = DefaultFetchRankListUseCase(repository: rankRepository)
         
         let loginViewModelDependency = LoginViewModelDependency(
             appleLoginUseCase: appleLoginUseCase
@@ -78,12 +80,16 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let baekjoonViewModel = DefaultBaekjoonViewModel(
             dependency: baekjoonViewModelDependency
         )
+        let homeViewModel = DefaultHomeViewModel(dependency: HomeViewModelDependency(
+            fetchRankListUseCase: fetchRankListUseCase
+        )
+        )
         
         let myPageViewController = MyPageViewController()
         let myPageNavigationController = UINavigationController(
             rootViewController: myPageViewController
         )
-        let homeViewController = HomeViewController()
+        let homeViewController = HomeViewController(viewModel: homeViewModel)
         let homeNavigationController = UINavigationController(
             rootViewController: homeViewController
         )
