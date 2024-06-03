@@ -18,8 +18,7 @@ protocol HomeViewModel {
 
 struct HomeViewModelInput {
     
-    let viewDidLoad: PublishRelay<Void>
-    let getRankTableCellContent: PublishRelay<FetchRankComponents>
+    let getRankTableCellContent: PublishRelay<Void>
     
 }
 

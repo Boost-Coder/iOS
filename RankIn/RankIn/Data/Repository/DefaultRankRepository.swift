@@ -13,20 +13,26 @@ final class DefaultRankRepository: RankRepository {
     let session: Session
     
     private var rankList: [RankTableViewCellContents] = []
+    private var paginationFlag = true
     
     init(session: Session) {
         self.session = session
     }
     
-    func fetchRankList(fetchRankComponents: FetchRankComponents? = nil) -> Observable<[RankTableViewCellContents]> {
+    func fetchRankList() -> Observable<[RankTableViewCellContents]> {
         return Observable<[RankTableViewCellContents]>.create { observer -> Disposable in
-
-            if let fetchRankComponents = fetchRankComponents {
+            if !self.paginationFlag {
+                observer.onNext(self.rankList)
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            
+            if let lastRank = self.rankList.last {
                 self.session.request(RankInAPI.fetchRankList(
                     fetchRankComponentsDTO: FetchRankComponentsDTO(
-                        major: fetchRankComponents.major,
-                        cursorPoint: fetchRankComponents.cursorPoint,
-                        cursorUserID: fetchRankComponents.cursorUserID
+                        major: nil,
+                        cursorPoint: lastRank.score,
+                        cursorUserID: lastRank.userID
                     )), interceptor: AuthManager())
                 .responseDecodable(of: [RankDTO].self) { response in
                     
@@ -34,50 +40,54 @@ final class DefaultRankRepository: RankRepository {
                     print("* REQUEST URL: \(String(describing: response.request))")
                     
                     // reponse data 출력하기
-                    if
-                        let data = response.data,
-                        let utf8Text = String(data: data, encoding: .utf8) {
+                    if let data = response.data,
+                       let utf8Text = String(data: data, encoding: .utf8) {
                         print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
                     }
                     print("--------------------------------------------------------------------------------")
                     
                     switch response.result {
                     case .success(let data):
-                        self.rankList.append(contentsOf: data.map{ $0.toEntity() })
-                        observer.onNext(self.rankList)
+                        //                            self.rankList.append(contentsOf: data.map{ $0.toEntity() })
+                        var ranks = data.map{ $0.toEntity() }
+                        if !ranks.isEmpty {
+                            ranks.removeFirst()
+                        }
+                        if !ranks.isEmpty {
+                            self.rankList.append(contentsOf: ranks)
+                            observer.onNext(self.rankList)
+                        } else {
+                            self.paginationFlag = false
+                        }
                     case .failure(let error):
                         dump(error)
                         observer.onError(error)
                     }
                 }
             } else {
-                self.session.request(RankInAPI.fetchRankList(
-                    fetchRankComponentsDTO: nil
-                ), interceptor: AuthManager())
-                .responseDecodable(of: [RankDTO].self) { response in
-                    
-                    print("--------------------------------------------------------------------------------")
-                    print("* REQUEST URL: \(String(describing: response.request))")
-                    
-                    // reponse data 출력하기
-                    if
-                        let data = response.data,
-                        let utf8Text = String(data: data, encoding: .utf8) {
-                        print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                self.session.request(RankInAPI.fetchRankList(fetchRankComponentsDTO: nil), interceptor: AuthManager())
+                    .responseDecodable(of: [RankDTO].self) { response in
+                        
+                        print("--------------------------------------------------------------------------------")
+                        print("* REQUEST URL: \(String(describing: response.request))")
+                        
+                        // reponse data 출력하기
+                        if let data = response.data,
+                           let utf8Text = String(data: data, encoding: .utf8) {
+                            print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                        }
+                        print("--------------------------------------------------------------------------------")
+                        
+                        switch response.result {
+                        case .success(let data):
+                            self.rankList.append(contentsOf: data.map{ $0.toEntity() })
+                            observer.onNext(self.rankList)
+                        case .failure(let error):
+                            dump(error)
+                            observer.onError(error)
+                        }
                     }
-                    print("--------------------------------------------------------------------------------")
-                    
-                    switch response.result {
-                    case .success(let data):
-                        self.rankList.append(contentsOf: data.map{ $0.toEntity() })
-                        observer.onNext(self.rankList)
-                    case .failure(let error):
-                        dump(error)
-                        observer.onError(error)
-                    }
-                }
             }
-            
             return Disposables.create()
         }
     }

@@ -12,20 +12,41 @@ import RxSwift
 final class HomeViewController: UIViewController {
     
     // MARK: Input
-    private let viewDidLoadPublish = PublishRelay<Void>()
-    private let getRankTableCellContent = PublishRelay<FetchRankComponents>()
+    private let getRankTableCellContent = PublishRelay<Void>()
     
     private let disposeBag = DisposeBag()
     
-    private let rankTableView: UITableView = {
-        let tableView = UITableView()
+    private lazy var rankTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .systemCyan
         tableView.register(RankTableViewCell.self, forCellReuseIdentifier: RankTableViewCell.identifier)
         tableView.rowHeight = 56
         tableView.backgroundColor = .systemGray6
+        tableView.delegate = self
+        tableView.separatorStyle = .none
         
         return tableView
+    }()
+    
+    private let myRankLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private let myNicknameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private let myScoreLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
     }()
     
     enum Section {
@@ -78,6 +99,7 @@ private extension HomeViewController {
         view.backgroundColor = .systemGray6
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.backgroundColor = .systemGray6
+        navigationController?.navigationBar.barTintColor = .systemGray6
         
         setHierarchy()
         setConstraints()
@@ -99,7 +121,6 @@ private extension HomeViewController {
     func bind() {
         let output = viewModel.transform(
             input: HomeViewModelInput(
-                viewDidLoad: viewDidLoadPublish,
                 getRankTableCellContent: getRankTableCellContent
             )
         )
@@ -120,14 +141,34 @@ private extension HomeViewController {
     }
 
     func loadTableView() {
-        viewDidLoadPublish.accept(())
+        var snapshot = NSDiffableDataSourceSnapshot<Section, RankTableViewCellContents>()
+        snapshot.appendSections([.rank])
+        dataSource.apply(snapshot)
+        
+        getRankTableCellContent.accept(())
     }
     
     func generateData(contents: [RankTableViewCellContents]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, RankTableViewCellContents>()
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
         snapshot.appendSections([.rank])
         snapshot.appendItems(contents)
         dataSource.apply(snapshot)
+    }
+    
+}
+
+extension HomeViewController: UITableViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentHeight = scrollView.contentSize.height
+        let yOffset = scrollView.contentOffset.y
+        let heightRemainBottomHeight = contentHeight - yOffset
+
+        let frameHeight = scrollView.frame.size.height
+        if heightRemainBottomHeight < frameHeight + 300 {
+            self.getRankTableCellContent.accept(())
+        }
     }
     
 }
