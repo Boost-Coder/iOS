@@ -10,7 +10,7 @@ import Foundation
 struct FetchRankComponents {
     
     let major: String?
-    let cursorPoint: Int
+    let cursorPoint: Double
     let cursorUserID: String
     
 }

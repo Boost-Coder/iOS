@@ -11,6 +11,6 @@ protocol FetchRankListUseCase {
     
     var repository: RankRepository { get }
     
-    func execute(fetchRankComponents: FetchRankComponents?) -> Observable<[RankTableViewCellContents]>
+    func execute() -> Observable<[RankTableViewCellContents]>
     
 }

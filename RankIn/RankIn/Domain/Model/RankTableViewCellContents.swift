@@ -9,6 +9,7 @@ import Foundation
 
 struct RankTableViewCellContents: Hashable {
     
+    let userID: String
     let rank: Int
     let nickName: String
     let score: Double
