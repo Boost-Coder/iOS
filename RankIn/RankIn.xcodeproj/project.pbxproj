@@ -38,8 +38,8 @@
 		591C468D2BB8749E00D3BF14 /* JWTDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C468C2BB8749E00D3BF14 /* JWTDTO.swift */; };
 		591C468F2BB8750F00D3BF14 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C468E2BB8750F00D3BF14 /* JWT.swift */; };
 		591C46922BB8777400D3BF14 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46912BB8777400D3BF14 /* LoginViewModel.swift */; };
-		591C46972BB87BA300D3BF14 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46962BB87BA300D3BF14 /* LoginRepository.swift */; };
-		591C46992BB87C6E00D3BF14 /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46982BB87C6E00D3BF14 /* DefaultLoginRepository.swift */; };
+		591C46972BB87BA300D3BF14 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46962BB87BA300D3BF14 /* UserRepository.swift */; };
+		591C46992BB87C6E00D3BF14 /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46982BB87C6E00D3BF14 /* DefaultUserRepository.swift */; };
 		591C469C2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */; };
 		591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */; };
 		591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A32BBEF60400D3BF14 /* AuthManager.swift */; };
@@ -71,6 +71,8 @@
 		596A58D52BCAD66B006C3108 /* SetNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D42BCAD66B006C3108 /* SetNicknameUseCase.swift */; };
 		596A58D72BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D62BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift */; };
 		596A58D92BCADAC3006C3108 /* DefaultNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */; };
+		59828B812C0E2A46007AA3E1 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B802C0E2A46007AA3E1 /* MyPageViewModel.swift */; };
+		59828B842C0E2CC3007AA3E1 /* LogOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B832C0E2CC3007AA3E1 /* LogOutUseCase.swift */; };
 		59A2BADE2BCECD80003CFCAA /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */; };
 		59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */; };
 		59A2BAE42BCED616003CFCAA /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAE32BCED616003CFCAA /* GradeViewController.swift */; };
@@ -137,8 +139,8 @@
 		591C468C2BB8749E00D3BF14 /* JWTDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTDTO.swift; sourceTree = "<group>"; };
 		591C468E2BB8750F00D3BF14 /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		591C46912BB8777400D3BF14 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		591C46962BB87BA300D3BF14 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
-		591C46982BB87C6E00D3BF14 /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
+		591C46962BB87BA300D3BF14 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		591C46982BB87C6E00D3BF14 /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
 		591C469B2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+AsDictionary.swift"; sourceTree = "<group>"; };
 		591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		591C46A32BBEF60400D3BF14 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -171,6 +173,8 @@
 		596A58D42BCAD66B006C3108 /* SetNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNicknameUseCase.swift; sourceTree = "<group>"; };
 		596A58D62BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSetNicknameUseCase.swift; sourceTree = "<group>"; };
 		596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNicknameViewModel.swift; sourceTree = "<group>"; };
+		59828B802C0E2A46007AA3E1 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		59828B832C0E2CC3007AA3E1 /* LogOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutUseCase.swift; sourceTree = "<group>"; };
 		59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
 		59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toast.swift"; sourceTree = "<group>"; };
 		59A2BAE32BCED616003CFCAA /* GradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
@@ -453,6 +457,7 @@
 				59A2BB052BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift */,
 				59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */,
 				593892282BFE355C00315CD3 /* FetchRankListUseCase.swift */,
+				59828B832C0E2CC3007AA3E1 /* LogOutUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -468,7 +473,7 @@
 		591C46932BB87B3D00D3BF14 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				591C46982BB87C6E00D3BF14 /* DefaultLoginRepository.swift */,
+				591C46982BB87C6E00D3BF14 /* DefaultUserRepository.swift */,
 				596A58CA2BC9BC5A006C3108 /* DefaultSignUpRepository.swift */,
 				5938922C2BFE35D600315CD3 /* DefaultRankRepository.swift */,
 			);
@@ -478,7 +483,7 @@
 		591C46952BB87B6F00D3BF14 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				591C46962BB87BA300D3BF14 /* LoginRepository.swift */,
+				591C46962BB87BA300D3BF14 /* UserRepository.swift */,
 				596A58C22BC9B60C006C3108 /* SignUpRepository.swift */,
 				5938922A2BFE35A100315CD3 /* RankRepository.swift */,
 			);
@@ -504,6 +509,7 @@
 		591C46A72BC136A500D3BF14 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				59828B7F2C0E2A39007AA3E1 /* ViewModel */,
 				591C46A82BC136B100D3BF14 /* View */,
 			);
 			path = MyPage;
@@ -585,6 +591,22 @@
 				59A2BAE52BCED70B003CFCAA /* GradeViewModel.swift */,
 				59A2BAF52BD15878003CFCAA /* GitHubViewModel.swift */,
 				59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		59828B7F2C0E2A39007AA3E1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				59828B822C0E2A4C007AA3E1 /* Protocol */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		59828B822C0E2A4C007AA3E1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				59828B802C0E2A46007AA3E1 /* MyPageViewModel.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -784,7 +806,7 @@
 				59A2BB062BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift in Sources */,
 				591C46852BB8701A00D3BF14 /* AppleLoginModel.swift in Sources */,
 				591C469C2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift in Sources */,
-				591C46972BB87BA300D3BF14 /* LoginRepository.swift in Sources */,
+				591C46972BB87BA300D3BF14 /* UserRepository.swift in Sources */,
 				593892292BFE355C00315CD3 /* FetchRankListUseCase.swift in Sources */,
 				596A58D32BCAD616006C3108 /* NicknameViewModel.swift in Sources */,
 				596A58D72BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift in Sources */,
@@ -795,6 +817,7 @@
 				596A58CD2BC9BCC8006C3108 /* SejongLoginInfoDTO.swift in Sources */,
 				5938922F2BFE3A5E00315CD3 /* RankDTO.swift in Sources */,
 				593892312BFE3E7600315CD3 /* DefaultHomeViewModel.swift in Sources */,
+				59828B812C0E2A46007AA3E1 /* MyPageViewModel.swift in Sources */,
 				59A2BAE42BCED616003CFCAA /* GradeViewController.swift in Sources */,
 				593892222BFE297F00315CD3 /* UITableViewCell+Identifier.swift in Sources */,
 				59A2BAEC2BCED8DA003CFCAA /* DefaultGradeViewModel.swift in Sources */,
@@ -821,10 +844,11 @@
 				590E9D3B2BAB3D0C006CC09E /* SceneDelegate.swift in Sources */,
 				59A2BAFE2BD16668003CFCAA /* DefaultGitHubViewModel.swift in Sources */,
 				590E9D502BAB4018006CC09E /* SplashViewController.swift in Sources */,
-				591C46992BB87C6E00D3BF14 /* DefaultLoginRepository.swift in Sources */,
+				591C46992BB87C6E00D3BF14 /* DefaultUserRepository.swift in Sources */,
 				591C467C2BB85F2800D3BF14 /* NetworkError.swift in Sources */,
 				591C468F2BB8750F00D3BF14 /* JWT.swift in Sources */,
 				591C46702BB470DA00D3BF14 /* DefaultLoginViewModel.swift in Sources */,
+				59828B842C0E2CC3007AA3E1 /* LogOutUseCase.swift in Sources */,
 				59C273682BF105C000CAAC08 /* DefaultSetBaekjoonIDUseCase.swift in Sources */,
 				591C467A2BB85E8C00D3BF14 /* RankInAPI.swift in Sources */,
 			);

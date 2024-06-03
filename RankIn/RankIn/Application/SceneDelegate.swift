@@ -22,7 +22,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let loginRepository = DefaultLoginRepository(
+        let loginRepository = DefaultUserRepository(
             session: AF
         )
         let signUpRepository = DefaultSignUpRepository(session: AF)

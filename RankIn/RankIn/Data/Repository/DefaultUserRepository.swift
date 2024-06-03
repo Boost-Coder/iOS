@@ -1,5 +1,5 @@
 //
-//  DefaultLoginRepository.swift
+//  DefaultUserRepository.swift
 //  RankIn
 //
 //  Created by 조성민 on 3/31/24.
@@ -8,7 +8,7 @@
 import Alamofire
 import RxSwift
 
-final class DefaultLoginRepository: LoginRepository {
+final class DefaultUserRepository: UserRepository {
     
     let session: Session
     
