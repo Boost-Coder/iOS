@@ -23,6 +23,7 @@ struct RankDTO: Decodable {
     
     func toEntity() -> RankTableViewCellContents {
         return RankTableViewCellContents(
+            userID: userID,
             rank: rank, 
             nickName: nickName,
             score: score

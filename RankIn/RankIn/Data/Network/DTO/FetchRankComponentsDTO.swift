@@ -10,7 +10,7 @@ import Foundation
 struct FetchRankComponentsDTO: Encodable {
     
     let major: String?
-    let cursorPoint: Int
+    let cursorPoint: Double
     let cursorUserID: String
     
     enum CodingKeys: String, CodingKey {
