@@ -23,17 +23,13 @@ final class DefaultHomeViewModel: HomeViewModel {
     }
     
     func transform(input: HomeViewModelInput) -> HomeViewModelOutput {
-        input.viewDidLoad
-            .bind { _ in
-                self.viewDidLoad()
-            }
-            .disposed(by: disposeBag)
         input.getRankTableCellContent
-            .bind { components in
-                self.loadRankCellContents(fetchRankComponents: components)
+            .debounce(.milliseconds(50), scheduler: MainScheduler())
+            .bind { _ in
+                self.loadRankCellContents()
             }
             .disposed(by: disposeBag)
-        
+
         return HomeViewModelOutput(
             fetchRankListComplete: fetchRankListComplete,
             errorPublisher: errorPublisher
@@ -44,24 +40,14 @@ final class DefaultHomeViewModel: HomeViewModel {
 
 private extension DefaultHomeViewModel {
     
-    func viewDidLoad() {
+    func loadRankCellContents() {
         dependency.fetchRankListUseCase
-            .execute(fetchRankComponents: nil)
+            .execute()
+            .debounce(.milliseconds(5), scheduler: MainScheduler())
             .subscribe { [weak self] contentsList in
                 self?.fetchRankListComplete.accept(contentsList)
             } onError: { [weak self] error in
                 self?.errorPublisher.accept(.clientError)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    func loadRankCellContents(fetchRankComponents: FetchRankComponents) {
-        dependency.fetchRankListUseCase
-            .execute(fetchRankComponents: fetchRankComponents)
-            .subscribe { [weak self] contents in
-                
-            } onError: { [weak self] error in
-                
             }
             .disposed(by: disposeBag)
     }
