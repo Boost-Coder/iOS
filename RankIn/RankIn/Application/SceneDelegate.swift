@@ -26,6 +26,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             session: AF
         )
         let signUpRepository = DefaultSignUpRepository(session: AF)
+        let rankRepository = DefaultRankRepository(session: AF)
         
         let appleLoginUseCase = DefaultAppleLoginUseCase(
             repository: loginRepository
@@ -42,6 +43,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let gitHubAuthorizationRegisterUseCase = DefaultGitHubAuthorizationRegisterUseCase(
             repository: signUpRepository
         )
+        let setBaekjoonIDUseCase = DefaultSetBaekjoonIDUseCase(
+            repository: signUpRepository
+        )
+        let fetchRankListUseCase = DefaultFetchRankListUseCase(repository: rankRepository)
         
         let loginViewModelDependency = LoginViewModelDependency(
             appleLoginUseCase: appleLoginUseCase
@@ -56,6 +61,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             gitHubAuthorizationUseCase: gitHubAuthorizationUseCase, 
             gitHubAuthorizationRegisterUseCase: gitHubAuthorizationRegisterUseCase
         )
+        let baekjoonViewModelDependency = BaekjoonViewModelDependency(
+            setBaekjoonIDUseCase: setBaekjoonIDUseCase
+        )
         
         let loginViewModel = DefaultLoginViewModel(
             dependency: loginViewModelDependency
@@ -69,12 +77,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let gitHubViewModel = DefaultGitHubViewModel(
             dependency: gitHubViewModelDependency
         )
+        let baekjoonViewModel = DefaultBaekjoonViewModel(
+            dependency: baekjoonViewModelDependency
+        )
+        let homeViewModel = DefaultHomeViewModel(dependency: HomeViewModelDependency(
+            fetchRankListUseCase: fetchRankListUseCase
+        )
+        )
         
         let myPageViewController = MyPageViewController()
         let myPageNavigationController = UINavigationController(
             rootViewController: myPageViewController
         )
-        let homeViewController = HomeViewController()
+        let homeViewController = HomeViewController(viewModel: homeViewModel)
         let homeNavigationController = UINavigationController(
             rootViewController: homeViewController
         )
@@ -88,10 +103,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ],
             animated: true
         )
+        let baekjoonViewController = BaekjoonViewController(
+            baekjoonViewModel: baekjoonViewModel,
+            mainTabBarController: mainTabBarController
+        )
         let gitHubViewController = GitHubViewController(
             gitHubViewModel: gitHubViewModel,
             gitHubAuthorizationSuccess: gitHubAuthorizationSuccess,
-            mainTabBarController: mainTabBarController
+            baekjoonViewController: baekjoonViewController
         )
         let gradeViewController = GradeViewController(
             gradeViewModel: gradeViewModel, 

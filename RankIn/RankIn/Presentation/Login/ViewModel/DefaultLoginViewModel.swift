@@ -23,7 +23,6 @@ final class DefaultLoginViewModel: LoginViewModel {
     }
     
     func transform(input: LoginViewModelInput) -> LoginViewModelOutput {
-        
         input
             .appleLoginSuccess
             .bind(onNext: { appleLoginModel in

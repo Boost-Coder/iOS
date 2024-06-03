@@ -52,16 +52,16 @@ final class GitHubViewController: UIViewController {
     }()
     
     private let viewModel: GitHubViewModel
-    private let mainTabBarController: UITabBarController
+    private let baekjoonViewController: BaekjoonViewController
     
     init(
         gitHubViewModel: GitHubViewModel,
         gitHubAuthorizationSuccess: PublishRelay<String>,
-        mainTabBarController: UITabBarController
+        baekjoonViewController: BaekjoonViewController
     ) {
         self.viewModel = gitHubViewModel
         self.gitHubAuthorizationSuccess = gitHubAuthorizationSuccess
-        self.mainTabBarController = mainTabBarController
+        self.baekjoonViewController = baekjoonViewController
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -130,7 +130,7 @@ private extension GitHubViewController {
         output.gitHubAuthorizationRegisterSuccess
             .bind { _ in
                 self.navigationController?.pushViewController(
-                    self.mainTabBarController, animated: true
+                    self.baekjoonViewController, animated: true
                 )
             }
             .disposed(by: disposeBag)
@@ -159,7 +159,7 @@ private extension GitHubViewController {
             .tap
             .bind { _ in
                 self.navigationController?.pushViewController(
-                    self.mainTabBarController, animated: true
+                    self.baekjoonViewController, animated: true
                 )
             }
             .disposed(by: disposeBag)

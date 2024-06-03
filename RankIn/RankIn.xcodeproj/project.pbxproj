@@ -44,6 +44,17 @@
 		591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */; };
 		591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A32BBEF60400D3BF14 /* AuthManager.swift */; };
 		591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C46A92BC136C600D3BF14 /* MyPageViewController.swift */; };
+		5938921E2BFE26F600315CD3 /* RankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938921D2BFE26F600315CD3 /* RankTableViewCell.swift */; };
+		593892202BFE292500315CD3 /* RankTableViewCellContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938921F2BFE292500315CD3 /* RankTableViewCellContents.swift */; };
+		593892222BFE297F00315CD3 /* UITableViewCell+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892212BFE297F00315CD3 /* UITableViewCell+Identifier.swift */; };
+		593892272BFE324F00315CD3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892262BFE324F00315CD3 /* HomeViewModel.swift */; };
+		593892292BFE355C00315CD3 /* FetchRankListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892282BFE355C00315CD3 /* FetchRankListUseCase.swift */; };
+		5938922B2BFE35A100315CD3 /* RankRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938922A2BFE35A100315CD3 /* RankRepository.swift */; };
+		5938922D2BFE35D600315CD3 /* DefaultRankRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938922C2BFE35D600315CD3 /* DefaultRankRepository.swift */; };
+		5938922F2BFE3A5E00315CD3 /* RankDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938922E2BFE3A5E00315CD3 /* RankDTO.swift */; };
+		593892312BFE3E7600315CD3 /* DefaultHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892302BFE3E7600315CD3 /* DefaultHomeViewModel.swift */; };
+		593892332BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892322BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift */; };
+		593892392C05FF5C00315CD3 /* FetchRankComponentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892382C05FF5C00315CD3 /* FetchRankComponentsDTO.swift */; };
 		596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58B42BC9A210006C3108 /* LoginResultDTO.swift */; };
 		596A58B92BC9A3A2006C3108 /* SejongLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58B82BC9A3A2006C3108 /* SejongLoginViewController.swift */; };
 		596A58BC2BC9B2BF006C3108 /* SejongLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58BB2BC9B2BF006C3108 /* SejongLoginViewModel.swift */; };
@@ -80,6 +91,13 @@
 		59A2BB062BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BB052BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift */; };
 		59A2BB082BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BB072BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift */; };
 		59A2BB0A2BD51E20003CFCAA /* GitHubAuthorizationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BB092BD51E20003CFCAA /* GitHubAuthorizationDTO.swift */; };
+		59C273602BF0FF6100CAAC08 /* BaekjoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */; };
+		59C273622BF103ED00CAAC08 /* BaekjoonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */; };
+		59C273642BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */; };
+		59C273662BF1051400CAAC08 /* BaekjoonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273652BF1051300CAAC08 /* BaekjoonDTO.swift */; };
+		59C273682BF105C000CAAC08 /* DefaultSetBaekjoonIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273672BF105C000CAAC08 /* DefaultSetBaekjoonIDUseCase.swift */; };
+		59C2736A2BF10B8000CAAC08 /* DefaultBaekjoonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273692BF10B8000CAAC08 /* DefaultBaekjoonViewModel.swift */; };
+		59F4A1222C06C7B6000E17AD /* FetchRankComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F4A1212C06C7B6000E17AD /* FetchRankComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +143,17 @@
 		591C46A12BBDB99700D3BF14 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		591C46A32BBEF60400D3BF14 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		591C46A92BC136C600D3BF14 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		5938921D2BFE26F600315CD3 /* RankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankTableViewCell.swift; sourceTree = "<group>"; };
+		5938921F2BFE292500315CD3 /* RankTableViewCellContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankTableViewCellContents.swift; sourceTree = "<group>"; };
+		593892212BFE297F00315CD3 /* UITableViewCell+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Identifier.swift"; sourceTree = "<group>"; };
+		593892262BFE324F00315CD3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		593892282BFE355C00315CD3 /* FetchRankListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRankListUseCase.swift; sourceTree = "<group>"; };
+		5938922A2BFE35A100315CD3 /* RankRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankRepository.swift; sourceTree = "<group>"; };
+		5938922C2BFE35D600315CD3 /* DefaultRankRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRankRepository.swift; sourceTree = "<group>"; };
+		5938922E2BFE3A5E00315CD3 /* RankDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankDTO.swift; sourceTree = "<group>"; };
+		593892302BFE3E7600315CD3 /* DefaultHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeViewModel.swift; sourceTree = "<group>"; };
+		593892322BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchRankListUseCase.swift; sourceTree = "<group>"; };
+		593892382C05FF5C00315CD3 /* FetchRankComponentsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRankComponentsDTO.swift; sourceTree = "<group>"; };
 		596A58B32BC83704006C3108 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		596A58B42BC9A210006C3108 /* LoginResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResultDTO.swift; sourceTree = "<group>"; };
 		596A58B82BC9A3A2006C3108 /* SejongLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SejongLoginViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +191,13 @@
 		59A2BB052BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthorizationRegisterUseCase.swift; sourceTree = "<group>"; };
 		59A2BB072BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGitHubAuthorizationRegisterUseCase.swift; sourceTree = "<group>"; };
 		59A2BB092BD51E20003CFCAA /* GitHubAuthorizationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthorizationDTO.swift; sourceTree = "<group>"; };
+		59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonViewController.swift; sourceTree = "<group>"; };
+		59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonViewModel.swift; sourceTree = "<group>"; };
+		59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBaekjoonIDUseCase.swift; sourceTree = "<group>"; };
+		59C273652BF1051300CAAC08 /* BaekjoonDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonDTO.swift; sourceTree = "<group>"; };
+		59C273672BF105C000CAAC08 /* DefaultSetBaekjoonIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSetBaekjoonIDUseCase.swift; sourceTree = "<group>"; };
+		59C273692BF10B8000CAAC08 /* DefaultBaekjoonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBaekjoonViewModel.swift; sourceTree = "<group>"; };
+		59F4A1212C06C7B6000E17AD /* FetchRankComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRankComponents.swift; sourceTree = "<group>"; };
 		639A6E866D0594E693CF81EA /* Pods-RankIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankIn.debug.xcconfig"; path = "Target Support Files/Pods-RankIn/Pods-RankIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,6 +310,7 @@
 				590E9D652BAB46CC006CC09E /* UIFont+Pretendard.swift */,
 				591C46732BB4815600D3BF14 /* UIImage+SystemImage.swift */,
 				59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */,
+				593892212BFE297F00315CD3 /* UITableViewCell+Identifier.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -290,7 +327,8 @@
 		590E9D6C2BAC86E8006CC09E /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				590E9D3C2BAB3D0C006CC09E /* HomeViewController.swift */,
+				593892232BFE322C00315CD3 /* View */,
+				593892242BFE323200315CD3 /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -361,6 +399,8 @@
 				591C46842BB8701A00D3BF14 /* AppleLoginModel.swift */,
 				591C468E2BB8750F00D3BF14 /* JWT.swift */,
 				596A58C62BC9B700006C3108 /* SejongLoginInfo.swift */,
+				5938921F2BFE292500315CD3 /* RankTableViewCellContents.swift */,
+				59F4A1212C06C7B6000E17AD /* FetchRankComponents.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -379,6 +419,9 @@
 				59A2BAFB2BD15F1D003CFCAA /* ClientIdentifierDTO.swift */,
 				59A2BB032BD43951003CFCAA /* GitHubAccessTokenDTO.swift */,
 				59A2BB092BD51E20003CFCAA /* GitHubAuthorizationDTO.swift */,
+				59C273652BF1051300CAAC08 /* BaekjoonDTO.swift */,
+				5938922E2BFE3A5E00315CD3 /* RankDTO.swift */,
+				593892382C05FF5C00315CD3 /* FetchRankComponentsDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -392,6 +435,8 @@
 				59A2BAE92BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift */,
 				59A2BAF92BD15916003CFCAA /* DefaultGitHubAuthorizationUseCase.swift */,
 				59A2BB072BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift */,
+				59C273672BF105C000CAAC08 /* DefaultSetBaekjoonIDUseCase.swift */,
+				593892322BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -406,6 +451,8 @@
 				59A2BAE72BCED764003CFCAA /* SetGradeUseCase.swift */,
 				59A2BAF72BD158EA003CFCAA /* GitHubAuthorizationUseCase.swift */,
 				59A2BB052BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift */,
+				59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */,
+				593892282BFE355C00315CD3 /* FetchRankListUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -423,6 +470,7 @@
 			children = (
 				591C46982BB87C6E00D3BF14 /* DefaultLoginRepository.swift */,
 				596A58CA2BC9BC5A006C3108 /* DefaultSignUpRepository.swift */,
+				5938922C2BFE35D600315CD3 /* DefaultRankRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -432,6 +480,7 @@
 			children = (
 				591C46962BB87BA300D3BF14 /* LoginRepository.swift */,
 				596A58C22BC9B60C006C3108 /* SignUpRepository.swift */,
+				5938922A2BFE35A100315CD3 /* RankRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -468,6 +517,32 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		593892232BFE322C00315CD3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				590E9D3C2BAB3D0C006CC09E /* HomeViewController.swift */,
+				5938921D2BFE26F600315CD3 /* RankTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		593892242BFE323200315CD3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				593892252BFE324500315CD3 /* Protocol */,
+				593892302BFE3E7600315CD3 /* DefaultHomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		593892252BFE324500315CD3 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				593892262BFE324F00315CD3 /* HomeViewModel.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		596A58B62BC9A38C006C3108 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +559,7 @@
 				596A58D02BCAD51D006C3108 /* NicknameViewController.swift */,
 				59A2BAE32BCED616003CFCAA /* GradeViewController.swift */,
 				59A2BAF32BD150EE003CFCAA /* GitHubViewController.swift */,
+				59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -496,6 +572,7 @@
 				596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */,
 				59A2BAEB2BCED8DA003CFCAA /* DefaultGradeViewModel.swift */,
 				59A2BAFD2BD16668003CFCAA /* DefaultGitHubViewModel.swift */,
+				59C273692BF10B8000CAAC08 /* DefaultBaekjoonViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -507,6 +584,7 @@
 				596A58D22BCAD615006C3108 /* NicknameViewModel.swift */,
 				59A2BAE52BCED70B003CFCAA /* GradeViewModel.swift */,
 				59A2BAF52BD15878003CFCAA /* GitHubViewModel.swift */,
+				59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -670,9 +748,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59C273642BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift in Sources */,
+				5938922B2BFE35A100315CD3 /* RankRepository.swift in Sources */,
+				59C2736A2BF10B8000CAAC08 /* DefaultBaekjoonViewModel.swift in Sources */,
 				59A2BAEA2BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift in Sources */,
 				59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */,
+				593892392C05FF5C00315CD3 /* FetchRankComponentsDTO.swift in Sources */,
 				591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */,
+				593892332BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift in Sources */,
+				59C273602BF0FF6100CAAC08 /* BaekjoonViewController.swift in Sources */,
 				59A2BAF62BD15878003CFCAA /* GitHubViewModel.swift in Sources */,
 				59A2BAF02BD011F3003CFCAA /* NicknameDTO.swift in Sources */,
 				596A58C92BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift in Sources */,
@@ -681,6 +765,7 @@
 				596A58D52BCAD66B006C3108 /* SetNicknameUseCase.swift in Sources */,
 				591C46922BB8777400D3BF14 /* LoginViewModel.swift in Sources */,
 				596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */,
+				593892202BFE292500315CD3 /* RankTableViewCellContents.swift in Sources */,
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
 				596A58CB2BC9BC5A006C3108 /* DefaultSignUpRepository.swift in Sources */,
 				59A2BAEE2BD011C5003CFCAA /* RefreshTokenDTO.swift in Sources */,
@@ -690,29 +775,38 @@
 				596A58C72BC9B700006C3108 /* SejongLoginInfo.swift in Sources */,
 				596A58D12BCAD51D006C3108 /* NicknameViewController.swift in Sources */,
 				596A58B92BC9A3A2006C3108 /* SejongLoginViewController.swift in Sources */,
+				5938922D2BFE35D600315CD3 /* DefaultRankRepository.swift in Sources */,
 				59A2BAF82BD158EA003CFCAA /* GitHubAuthorizationUseCase.swift in Sources */,
 				59A2BB082BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift in Sources */,
 				59A2BAFC2BD15F1D003CFCAA /* ClientIdentifierDTO.swift in Sources */,
+				59F4A1222C06C7B6000E17AD /* FetchRankComponents.swift in Sources */,
 				591C46832BB86AC500D3BF14 /* AppleLoginDTO.swift in Sources */,
 				59A2BB062BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift in Sources */,
 				591C46852BB8701A00D3BF14 /* AppleLoginModel.swift in Sources */,
 				591C469C2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift in Sources */,
 				591C46972BB87BA300D3BF14 /* LoginRepository.swift in Sources */,
+				593892292BFE355C00315CD3 /* FetchRankListUseCase.swift in Sources */,
 				596A58D32BCAD616006C3108 /* NicknameViewModel.swift in Sources */,
 				596A58D72BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift in Sources */,
 				596A58C12BC9B5C7006C3108 /* SejongLoginUseCase.swift in Sources */,
 				59A2BAE62BCED70B003CFCAA /* GradeViewModel.swift in Sources */,
+				59C273622BF103ED00CAAC08 /* BaekjoonViewModel.swift in Sources */,
 				59A2BAFA2BD15916003CFCAA /* DefaultGitHubAuthorizationUseCase.swift in Sources */,
 				596A58CD2BC9BCC8006C3108 /* SejongLoginInfoDTO.swift in Sources */,
+				5938922F2BFE3A5E00315CD3 /* RankDTO.swift in Sources */,
+				593892312BFE3E7600315CD3 /* DefaultHomeViewModel.swift in Sources */,
 				59A2BAE42BCED616003CFCAA /* GradeViewController.swift in Sources */,
+				593892222BFE297F00315CD3 /* UITableViewCell+Identifier.swift in Sources */,
 				59A2BAEC2BCED8DA003CFCAA /* DefaultGradeViewModel.swift in Sources */,
 				590E9D662BAB46CC006CC09E /* UIFont+Pretendard.swift in Sources */,
+				5938921E2BFE26F600315CD3 /* RankTableViewCell.swift in Sources */,
 				596A58BF2BC9B37C006C3108 /* DefaultSejongLoginViewModel.swift in Sources */,
 				596A58CF2BC9BDD3006C3108 /* SejongLoginResultDTO.swift in Sources */,
 				591C46742BB4815600D3BF14 /* UIImage+SystemImage.swift in Sources */,
 				591C46892BB8732C00D3BF14 /* DefaultAppleLoginUseCase.swift in Sources */,
 				59A2BADE2BCECD80003CFCAA /* RepositoryError.swift in Sources */,
 				59A2BB0A2BD51E20003CFCAA /* GitHubAuthorizationDTO.swift in Sources */,
+				59C273662BF1051400CAAC08 /* BaekjoonDTO.swift in Sources */,
 				591C468B2BB8738200D3BF14 /* AppleLoginUseCase.swift in Sources */,
 				591C46A22BBDB99700D3BF14 /* KeyChainManager.swift in Sources */,
 				59A2BB042BD43951003CFCAA /* GitHubAccessTokenDTO.swift in Sources */,
@@ -723,6 +817,7 @@
 				590E9D392BAB3D0C006CC09E /* AppDelegate.swift in Sources */,
 				596A58BC2BC9B2BF006C3108 /* SejongLoginViewModel.swift in Sources */,
 				59A2BAF22BD01234003CFCAA /* GradeDTO.swift in Sources */,
+				593892272BFE324F00315CD3 /* HomeViewModel.swift in Sources */,
 				590E9D3B2BAB3D0C006CC09E /* SceneDelegate.swift in Sources */,
 				59A2BAFE2BD16668003CFCAA /* DefaultGitHubViewModel.swift in Sources */,
 				590E9D502BAB4018006CC09E /* SplashViewController.swift in Sources */,
@@ -730,6 +825,7 @@
 				591C467C2BB85F2800D3BF14 /* NetworkError.swift in Sources */,
 				591C468F2BB8750F00D3BF14 /* JWT.swift in Sources */,
 				591C46702BB470DA00D3BF14 /* DefaultLoginViewModel.swift in Sources */,
+				59C273682BF105C000CAAC08 /* DefaultSetBaekjoonIDUseCase.swift in Sources */,
 				591C467A2BB85E8C00D3BF14 /* RankInAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

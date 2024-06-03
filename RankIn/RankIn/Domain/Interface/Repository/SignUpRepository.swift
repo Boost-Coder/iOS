@@ -14,5 +14,6 @@ protocol SignUpRepository {
     func setGrade(grade: Double) -> Observable<Void>
     func gitHubAuthorization(code: String) -> Observable<String>
     func registerGitHubAuthorization(code: String) -> Observable<Bool>
+    func setBaekjoonID(id: String) -> Observable<Void>
     
 }
