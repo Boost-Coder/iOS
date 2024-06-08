@@ -102,8 +102,10 @@ private extension LoginViewController {
             .bind { [weak self] isMember in
                 guard let self = self else { return }
                 if isMember {
+                    mainTabBarController.selectedIndex = 0
                     self.present(mainTabBarController, animated: true)
                 } else {
+                    signUpNavigationController.popToRootViewController(animated: false)
                     self.present(signUpNavigationController, animated: true)
                 }
             }

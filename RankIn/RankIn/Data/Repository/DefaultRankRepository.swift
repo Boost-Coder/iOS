@@ -48,16 +48,12 @@ final class DefaultRankRepository: RankRepository {
                     
                     switch response.result {
                     case .success(let data):
-                        //                            self.rankList.append(contentsOf: data.map{ $0.toEntity() })
                         var ranks = data.map{ $0.toEntity() }
-                        if !ranks.isEmpty {
-                            ranks.removeFirst()
-                        }
-                        if !ranks.isEmpty {
+                        if ranks.isEmpty {
+                            self.paginationFlag = false
+                        } else {
                             self.rankList.append(contentsOf: ranks)
                             observer.onNext(self.rankList)
-                        } else {
-                            self.paginationFlag = false
                         }
                     case .failure(let error):
                         dump(error)
