@@ -73,6 +73,11 @@
 		596A58D92BCADAC3006C3108 /* DefaultNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */; };
 		59828B812C0E2A46007AA3E1 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B802C0E2A46007AA3E1 /* MyPageViewModel.swift */; };
 		59828B842C0E2CC3007AA3E1 /* LogOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B832C0E2CC3007AA3E1 /* LogOutUseCase.swift */; };
+		59828B862C0E2D9A007AA3E1 /* ResignUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B852C0E2D9A007AA3E1 /* ResignUseCase.swift */; };
+		59828B882C0E2E6A007AA3E1 /* ResignDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B872C0E2E6A007AA3E1 /* ResignDTO.swift */; };
+		59828B8A2C0E2FA8007AA3E1 /* DefaultLogOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B892C0E2FA8007AA3E1 /* DefaultLogOutUseCase.swift */; };
+		59828B8C2C0E2FD7007AA3E1 /* DefaultResignUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B8B2C0E2FD7007AA3E1 /* DefaultResignUseCase.swift */; };
+		59828B8E2C0E30F0007AA3E1 /* DefaultMyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59828B8D2C0E30F0007AA3E1 /* DefaultMyPageViewModel.swift */; };
 		59A2BADE2BCECD80003CFCAA /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */; };
 		59A2BAE02BCED306003CFCAA /* UIViewController+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */; };
 		59A2BAE42BCED616003CFCAA /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BAE32BCED616003CFCAA /* GradeViewController.swift */; };
@@ -175,6 +180,11 @@
 		596A58D82BCADAC2006C3108 /* DefaultNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNicknameViewModel.swift; sourceTree = "<group>"; };
 		59828B802C0E2A46007AA3E1 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		59828B832C0E2CC3007AA3E1 /* LogOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutUseCase.swift; sourceTree = "<group>"; };
+		59828B852C0E2D9A007AA3E1 /* ResignUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignUseCase.swift; sourceTree = "<group>"; };
+		59828B872C0E2E6A007AA3E1 /* ResignDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignDTO.swift; sourceTree = "<group>"; };
+		59828B892C0E2FA8007AA3E1 /* DefaultLogOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLogOutUseCase.swift; sourceTree = "<group>"; };
+		59828B8B2C0E2FD7007AA3E1 /* DefaultResignUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultResignUseCase.swift; sourceTree = "<group>"; };
+		59828B8D2C0E30F0007AA3E1 /* DefaultMyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageViewModel.swift; sourceTree = "<group>"; };
 		59A2BADD2BCECD80003CFCAA /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
 		59A2BADF2BCED306003CFCAA /* UIViewController+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toast.swift"; sourceTree = "<group>"; };
 		59A2BAE32BCED616003CFCAA /* GradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
@@ -426,6 +436,7 @@
 				59C273652BF1051300CAAC08 /* BaekjoonDTO.swift */,
 				5938922E2BFE3A5E00315CD3 /* RankDTO.swift */,
 				593892382C05FF5C00315CD3 /* FetchRankComponentsDTO.swift */,
+				59828B872C0E2E6A007AA3E1 /* ResignDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -441,6 +452,8 @@
 				59A2BB072BD51D51003CFCAA /* DefaultGitHubAuthorizationRegisterUseCase.swift */,
 				59C273672BF105C000CAAC08 /* DefaultSetBaekjoonIDUseCase.swift */,
 				593892322BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift */,
+				59828B892C0E2FA8007AA3E1 /* DefaultLogOutUseCase.swift */,
+				59828B8B2C0E2FD7007AA3E1 /* DefaultResignUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -458,6 +471,7 @@
 				59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */,
 				593892282BFE355C00315CD3 /* FetchRankListUseCase.swift */,
 				59828B832C0E2CC3007AA3E1 /* LogOutUseCase.swift */,
+				59828B852C0E2D9A007AA3E1 /* ResignUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -599,6 +613,7 @@
 			isa = PBXGroup;
 			children = (
 				59828B822C0E2A4C007AA3E1 /* Protocol */,
+				59828B8D2C0E30F0007AA3E1 /* DefaultMyPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -771,6 +786,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59C273642BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift in Sources */,
+				59828B882C0E2E6A007AA3E1 /* ResignDTO.swift in Sources */,
 				5938922B2BFE35A100315CD3 /* RankRepository.swift in Sources */,
 				59C2736A2BF10B8000CAAC08 /* DefaultBaekjoonViewModel.swift in Sources */,
 				59A2BAEA2BCED7A8003CFCAA /* DefaultSetGradeUseCase.swift in Sources */,
@@ -780,6 +796,7 @@
 				593892332BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift in Sources */,
 				59C273602BF0FF6100CAAC08 /* BaekjoonViewController.swift in Sources */,
 				59A2BAF62BD15878003CFCAA /* GitHubViewModel.swift in Sources */,
+				59828B8C2C0E2FD7007AA3E1 /* DefaultResignUseCase.swift in Sources */,
 				59A2BAF02BD011F3003CFCAA /* NicknameDTO.swift in Sources */,
 				596A58C92BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift in Sources */,
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,
@@ -790,6 +807,7 @@
 				593892202BFE292500315CD3 /* RankTableViewCellContents.swift in Sources */,
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
 				596A58CB2BC9BC5A006C3108 /* DefaultSignUpRepository.swift in Sources */,
+				59828B8A2C0E2FA8007AA3E1 /* DefaultLogOutUseCase.swift in Sources */,
 				59A2BAEE2BD011C5003CFCAA /* RefreshTokenDTO.swift in Sources */,
 				59A2BAE82BCED764003CFCAA /* SetGradeUseCase.swift in Sources */,
 				596A58C32BC9B60C006C3108 /* SignUpRepository.swift in Sources */,
@@ -805,6 +823,7 @@
 				591C46832BB86AC500D3BF14 /* AppleLoginDTO.swift in Sources */,
 				59A2BB062BD51D09003CFCAA /* GitHubAuthorizationRegisterUseCase.swift in Sources */,
 				591C46852BB8701A00D3BF14 /* AppleLoginModel.swift in Sources */,
+				59828B862C0E2D9A007AA3E1 /* ResignUseCase.swift in Sources */,
 				591C469C2BB9AEAE00D3BF14 /* Encodable+AsDictionary.swift in Sources */,
 				591C46972BB87BA300D3BF14 /* UserRepository.swift in Sources */,
 				593892292BFE355C00315CD3 /* FetchRankListUseCase.swift in Sources */,
@@ -819,6 +838,7 @@
 				593892312BFE3E7600315CD3 /* DefaultHomeViewModel.swift in Sources */,
 				59828B812C0E2A46007AA3E1 /* MyPageViewModel.swift in Sources */,
 				59A2BAE42BCED616003CFCAA /* GradeViewController.swift in Sources */,
+				59828B8E2C0E30F0007AA3E1 /* DefaultMyPageViewModel.swift in Sources */,
 				593892222BFE297F00315CD3 /* UITableViewCell+Identifier.swift in Sources */,
 				59A2BAEC2BCED8DA003CFCAA /* DefaultGradeViewModel.swift in Sources */,
 				590E9D662BAB46CC006CC09E /* UIFont+Pretendard.swift in Sources */,

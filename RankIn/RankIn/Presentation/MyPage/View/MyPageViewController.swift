@@ -6,9 +6,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxRelay
 
 final class MyPageViewController: UIViewController {
 
+    private let disposeBag = DisposeBag()
+    
+    // MARK: Input
+    private let logoutPublish = PublishRelay<Void>()
+    private let resignPublish = PublishRelay<Void>()
+    
     private lazy var logOutButton: UIButton = {
         var attributedString = AttributedString("로그아웃")
         attributedString.font = UIFont.pretendard(type: .bold, size: 16)
@@ -20,6 +29,13 @@ final class MyPageViewController: UIViewController {
         
         let button = UIButton(configuration: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.rx
+            .tap
+            .bind { _ in
+                self.present(self.logOutAlert, animated: true)
+            }
+            .disposed(by: disposeBag)
         
         return button
     }()
@@ -36,12 +52,56 @@ final class MyPageViewController: UIViewController {
         let button = UIButton(configuration: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
         
+        button.rx
+            .tap
+            .bind { _ in
+                self.present(self.resignAlert, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         return button
     }()
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    private lazy var logOutAlert: UIAlertController = {
+        let alert = UIAlertController(
+            title: "로그아웃",
+            message: "정말 로그아웃 하시겠습니까?",
+            preferredStyle: .alert
+        )
+        let logout = UIAlertAction(title: "확인", style: .default) { action in
+            self.logoutPublish.accept(())
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
         
+        alert.addAction(logout)
+        alert.addAction(cancel)
+        
+        return alert
+    }()
+    
+    private lazy var resignAlert: UIAlertController = {
+        let alert = UIAlertController(
+            title: "회원탈퇴",
+            message: "정말 회원탈퇴 하시겠습니까?",
+            preferredStyle: .alert
+        )
+        let logout = UIAlertAction(title: "탈퇴", style: .destructive) { action in
+            self.resignPublish.accept(())
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(logout)
+        alert.addAction(cancel)
+        
+        return alert
+    }()
+    
+    private let viewModel: MyPageViewModel
+    
+    init(viewModel: MyPageViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -90,6 +150,21 @@ private extension MyPageViewController {
     }
     
     func bind() {
+        let output = viewModel.transform(
+            input: MyPageViewModelInput(
+                logout: logoutPublish,
+                resign: resignPublish
+            )
+        )
+        
+        output.toLogin
+            .subscribe { _ in
+                // TODO: login 페이지로 보내버려야 함
+                self.dismiss(animated: true)
+            } onError: { error in
+                dump(error) // TODO: 에러처리
+            }
+            .disposed(by: disposeBag)
     }
     
 }
