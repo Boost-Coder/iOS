@@ -100,6 +100,8 @@
 		59A2BB0A2BD51E20003CFCAA /* GitHubAuthorizationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2BB092BD51E20003CFCAA /* GitHubAuthorizationDTO.swift */; };
 		59A4CEB12C1467DF00722052 /* UserInformationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEB02C1467DF00722052 /* UserInformationDTO.swift */; };
 		59A4CEB32C14683500722052 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEB22C14683500722052 /* UserInformation.swift */; };
+		59A4CEB52C146A0F00722052 /* FetchMyInformationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEB42C146A0F00722052 /* FetchMyInformationUseCase.swift */; };
+		59A4CEB72C146A5100722052 /* DefaultFetchMyInformationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEB62C146A5100722052 /* DefaultFetchMyInformationUseCase.swift */; };
 		59C273602BF0FF6100CAAC08 /* BaekjoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */; };
 		59C273622BF103ED00CAAC08 /* BaekjoonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */; };
 		59C273642BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */; };
@@ -209,6 +211,8 @@
 		59A2BB092BD51E20003CFCAA /* GitHubAuthorizationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthorizationDTO.swift; sourceTree = "<group>"; };
 		59A4CEB02C1467DF00722052 /* UserInformationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationDTO.swift; sourceTree = "<group>"; };
 		59A4CEB22C14683500722052 /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
+		59A4CEB42C146A0F00722052 /* FetchMyInformationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyInformationUseCase.swift; sourceTree = "<group>"; };
+		59A4CEB62C146A5100722052 /* DefaultFetchMyInformationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchMyInformationUseCase.swift; sourceTree = "<group>"; };
 		59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonViewController.swift; sourceTree = "<group>"; };
 		59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonViewModel.swift; sourceTree = "<group>"; };
 		59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBaekjoonIDUseCase.swift; sourceTree = "<group>"; };
@@ -460,6 +464,7 @@
 				593892322BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift */,
 				59828B892C0E2FA8007AA3E1 /* DefaultLogOutUseCase.swift */,
 				59828B8B2C0E2FD7007AA3E1 /* DefaultResignUseCase.swift */,
+				59A4CEB62C146A5100722052 /* DefaultFetchMyInformationUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 				593892282BFE355C00315CD3 /* FetchRankListUseCase.swift */,
 				59828B832C0E2CC3007AA3E1 /* LogOutUseCase.swift */,
 				59828B852C0E2D9A007AA3E1 /* ResignUseCase.swift */,
+				59A4CEB42C146A0F00722052 /* FetchMyInformationUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -806,6 +812,7 @@
 				59A2BAF02BD011F3003CFCAA /* NicknameDTO.swift in Sources */,
 				596A58C92BC9BBEF006C3108 /* DefaultSejongLoginUseCase.swift in Sources */,
 				591C46782BB859E300D3BF14 /* Router.swift in Sources */,
+				59A4CEB72C146A5100722052 /* DefaultFetchMyInformationUseCase.swift in Sources */,
 				591C46A42BBEF60400D3BF14 /* AuthManager.swift in Sources */,
 				596A58D52BCAD66B006C3108 /* SetNicknameUseCase.swift in Sources */,
 				59A4CEB32C14683500722052 /* UserInformation.swift in Sources */,
@@ -871,6 +878,7 @@
 				593892272BFE324F00315CD3 /* HomeViewModel.swift in Sources */,
 				590E9D3B2BAB3D0C006CC09E /* SceneDelegate.swift in Sources */,
 				59A2BAFE2BD16668003CFCAA /* DefaultGitHubViewModel.swift in Sources */,
+				59A4CEB52C146A0F00722052 /* FetchMyInformationUseCase.swift in Sources */,
 				590E9D502BAB4018006CC09E /* SplashViewController.swift in Sources */,
 				591C46992BB87C6E00D3BF14 /* DefaultUserRepository.swift in Sources */,
 				591C467C2BB85F2800D3BF14 /* NetworkError.swift in Sources */,

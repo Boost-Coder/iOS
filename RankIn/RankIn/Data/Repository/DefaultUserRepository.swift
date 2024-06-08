@@ -83,7 +83,6 @@ final class DefaultUserRepository: UserRepository {
                 observer.onError(ErrorToastCase.clientError)
                 return Disposables.create()
             }
-            print("userID : : : : : : : \(userID)")
             self.session.request(
                 RankInAPI.resign(
                     resignDTO: UserDTO(userID: userID)
@@ -133,7 +132,8 @@ final class DefaultUserRepository: UserRepository {
                 return Disposables.create()
             }
             self.session.request(
-                RankInAPI.fetchUserInformation(userDTO: UserDTO(userID: userID))
+                RankInAPI.fetchUserInformation(userDTO: UserDTO(userID: userID)),
+                interceptor: AuthManager()
             ).responseDecodable(of: UserInformationDTO.self) { response in
                 print("--------------------------------------------------------------------------------")
                 print("* REQUEST URL: \(String(describing: response.request))")
@@ -151,6 +151,7 @@ final class DefaultUserRepository: UserRepository {
                     observer.onNext(data.toEntity())
                     observer.onCompleted()
                 case .failure(let error):
+                    dump(error)
                     if let underlyingError = error.underlyingError as? NSError,
                        underlyingError.code == URLError.notConnectedToInternet.rawValue {
                         observer.onError(ErrorToastCase.internetError)

@@ -47,6 +47,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             repository: signUpRepository
         )
         let fetchRankListUseCase = DefaultFetchRankListUseCase(repository: rankRepository)
+        let fetchMyInfromationUseCase = DefaultFetchMyInformationUseCase(repository: userRepository)
         let logOutUseCase = DefaultLogOutUseCase(repository: userRepository)
         let resignUseCase = DefaultResignUseCase(repository: userRepository)
         
@@ -67,6 +68,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             setBaekjoonIDUseCase: setBaekjoonIDUseCase
         )
         let myPageViewModelDependency = MyPageViewModelDependency(
+            fetchMyInfromationUseCase: fetchMyInfromationUseCase,
             logOutUseCase: logOutUseCase,
             resignUseCase: resignUseCase
         )

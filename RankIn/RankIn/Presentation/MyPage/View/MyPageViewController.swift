@@ -15,6 +15,7 @@ final class MyPageViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     // MARK: Input
+    private let viewDidLoadPublish = PublishRelay<Void>()
     private let logoutPublish = PublishRelay<Void>()
     private let resignPublish = PublishRelay<Void>()
     
@@ -113,6 +114,7 @@ final class MyPageViewController: UIViewController {
         
         setUI()
         bind()
+        viewDidLoadPublish.accept(())
     }
 
 }
@@ -152,6 +154,7 @@ private extension MyPageViewController {
     func bind() {
         let output = viewModel.transform(
             input: MyPageViewModelInput(
+                viewDidLoad: viewDidLoadPublish,
                 logout: logoutPublish,
                 resign: resignPublish
             )
@@ -162,6 +165,12 @@ private extension MyPageViewController {
                 self.dismiss(animated: true)
             } onError: { error in
                 dump(error)
+            }
+            .disposed(by: disposeBag)
+        
+        output.myInformation
+            .subscribe { information in
+                dump(information)
             }
             .disposed(by: disposeBag)
     }

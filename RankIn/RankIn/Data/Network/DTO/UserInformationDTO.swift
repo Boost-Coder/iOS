@@ -13,7 +13,7 @@ struct UserInformationDTO: Decodable {
     let nickname: String
     let major: String
     let name: String
-    let studentID: String
+    let studentID: Int
     
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
@@ -29,7 +29,7 @@ struct UserInformationDTO: Decodable {
             nickname: self.nickname,
             major: self.major,
             name: self.name,
-            studentID: self.studentID
+            studentID: String(self.studentID)
         )
     }
     

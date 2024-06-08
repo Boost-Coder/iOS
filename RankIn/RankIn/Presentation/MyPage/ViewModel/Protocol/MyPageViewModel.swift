@@ -18,6 +18,7 @@ protocol MyPageViewModel {
 
 struct MyPageViewModelInput {
     
+    let viewDidLoad: PublishRelay<Void>
     let logout: PublishRelay<Void>
     let resign: PublishRelay<Void>
     
@@ -26,11 +27,13 @@ struct MyPageViewModelInput {
 struct MyPageViewModelOutput {
     
     let toLogin: PublishRelay<Void>
+    let myInformation: PublishRelay<UserInformation>
     
 }
 
 struct MyPageViewModelDependency {
     
+    let fetchMyInfromationUseCase: FetchMyInformationUseCase
     let logOutUseCase: LogOutUseCase
     let resignUseCase: ResignUseCase
     
