@@ -20,4 +20,6 @@ protocol UserRepository {
     
     func resign() -> Observable<Void>
     
+    func fetchMyInformation() -> Observable<UserInformation> 
+    
 }

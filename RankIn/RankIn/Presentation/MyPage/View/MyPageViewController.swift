@@ -159,10 +159,9 @@ private extension MyPageViewController {
         
         output.toLogin
             .subscribe { _ in
-                // TODO: login 페이지로 보내버려야 함
                 self.dismiss(animated: true)
             } onError: { error in
-                dump(error) // TODO: 에러처리
+                dump(error)
             }
             .disposed(by: disposeBag)
     }

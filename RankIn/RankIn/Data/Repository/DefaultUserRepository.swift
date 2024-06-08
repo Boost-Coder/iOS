@@ -86,7 +86,7 @@ final class DefaultUserRepository: UserRepository {
             print("userID : : : : : : : \(userID)")
             self.session.request(
                 RankInAPI.resign(
-                    resignDTO: ResignDTO(userID: userID)
+                    resignDTO: UserDTO(userID: userID)
                 ),
                 interceptor: AuthManager()
             )
@@ -122,6 +122,47 @@ final class DefaultUserRepository: UserRepository {
                         }
                     }
                 }
+            return Disposables.create()
+        }
+    }
+    
+    func fetchMyInformation() -> Observable<UserInformation> {
+        return Observable<UserInformation>.create { observer -> Disposable in
+            guard let userID = KeyChainManager.read(storeElement: .userID) else {
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            self.session.request(
+                RankInAPI.fetchUserInformation(userDTO: UserDTO(userID: userID))
+            ).responseDecodable(of: UserInformationDTO.self) { response in
+                print("--------------------------------------------------------------------------------")
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if
+                    let data = response.data,
+                    let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                print("--------------------------------------------------------------------------------")
+                
+                switch response.result {
+                case .success(let data):
+                    observer.onNext(data.toEntity())
+                    observer.onCompleted()
+                case .failure(let error):
+                    if let underlyingError = error.underlyingError as? NSError,
+                       underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                        observer.onError(ErrorToastCase.internetError)
+                    } else if let underlyingError = error.underlyingError as? NSError,
+                              underlyingError.code == 13 {
+                        observer.onError(ErrorToastCase.serverError)
+                    } else {
+                        observer.onError(ErrorToastCase.clientError)
+                    }
+                }
+            }
+            
             return Disposables.create()
         }
     }
