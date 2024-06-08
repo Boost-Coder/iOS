@@ -16,4 +16,8 @@ protocol UserRepository {
         appleLoginModel: AppleLoginModel
     ) -> Observable<Bool>
     
+    func logout() -> Observable<Void>
+    
+    func resign() -> Observable<Void>
+    
 }

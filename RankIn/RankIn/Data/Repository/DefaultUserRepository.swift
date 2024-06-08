@@ -61,4 +61,69 @@ final class DefaultUserRepository: UserRepository {
         }
     }
     
+    func logout() -> Observable<Void> {
+        return Observable<Void>.create { observer in
+            if KeyChainManager.read(storeElement: .accessToken) != nil,
+               KeyChainManager.read(storeElement: .refreshToken) != nil,
+               KeyChainManager.read(storeElement: .userID) != nil {
+                KeyChainManager.delete(storeElement: .accessToken)
+                KeyChainManager.delete(storeElement: .refreshToken)
+                KeyChainManager.delete(storeElement: .userID)
+            }
+            observer.onNext(())
+            observer.onCompleted()
+            
+            return Disposables.create()
+        }
+    }
+    
+    func resign() -> Observable<Void> {
+        return Observable<Void>.create { observer in
+            guard let userID = KeyChainManager.read(storeElement: .userID) else {
+                observer.onError(ErrorToastCase.clientError)
+                return Disposables.create()
+            }
+            print("userID : : : : : : : \(userID)")
+            self.session.request(
+                RankInAPI.resign(
+                    resignDTO: ResignDTO(userID: userID)
+                ),
+                interceptor: AuthManager()
+            )
+            .response { response in
+                
+                        print("--------------------------------------------------------------------------------")
+                        print("* REQUEST URL: \(String(describing: response.request))")
+                        
+                        // reponse data 출력하기
+                        if
+                            let data = response.data,
+                            let utf8Text = String(data: data, encoding: .utf8) {
+                            print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                        }
+                        print("--------------------------------------------------------------------------------")
+                        
+                    switch response.result {
+                    case .success:
+                        KeyChainManager.delete(storeElement: .accessToken)
+                        KeyChainManager.delete(storeElement: .refreshToken)
+                        KeyChainManager.delete(storeElement: .userID)
+                        observer.onNext(())
+                        observer.onCompleted()
+                    case .failure(let error):
+                        if let underlyingError = error.underlyingError as? NSError,
+                           underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                            observer.onError(ErrorToastCase.internetError)
+                        } else if let underlyingError = error.underlyingError as? NSError,
+                                  underlyingError.code == 13 {
+                            observer.onError(ErrorToastCase.serverError)
+                        } else {
+                            observer.onError(ErrorToastCase.clientError)
+                        }
+                    }
+                }
+            return Disposables.create()
+        }
+    }
+    
 }
