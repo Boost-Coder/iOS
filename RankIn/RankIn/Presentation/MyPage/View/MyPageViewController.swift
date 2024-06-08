@@ -97,6 +97,47 @@ final class MyPageViewController: UIViewController {
         return alert
     }()
     
+    private let informationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray4
+        view.layer.cornerRadius = 20
+        
+        return view
+    }()
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .bold, size: 20)
+        
+        return label
+    }()
+    
+    private let nicknameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .bold, size: 20)
+        
+        return label
+    }()
+    
+    private let majorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 18)
+        
+        return label
+    }()
+    
+    private let studentNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 14)
+        
+        return label
+    }()
+    
     private let viewModel: MyPageViewModel
     
     init(viewModel: MyPageViewModel) {
@@ -131,21 +172,53 @@ private extension MyPageViewController {
     }
     
     func setHierarchy() {
-        view.addSubview(logOutButton)
-        view.addSubview(resignButton)
+        view.addSubview(informationView)
+        informationView.addSubview(nameLabel)
+        informationView.addSubview(nicknameLabel)
+        informationView.addSubview(majorLabel)
+        informationView.addSubview(studentNumberLabel)
+        informationView.addSubview(logOutButton)
+        informationView.addSubview(resignButton)
     }
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            logOutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            logOutButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -10),
+            informationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            informationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            informationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            informationView.heightAnchor.constraint(equalToConstant: 215)
+        ])
+
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: informationView.topAnchor, constant: 34),
+            nameLabel.leadingAnchor.constraint(equalTo: informationView.leadingAnchor, constant: 47)
+        ])
+        
+        NSLayoutConstraint.activate([
+            nicknameLabel.topAnchor.constraint(equalTo: informationView.topAnchor, constant: 34),
+            nicknameLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            majorLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
+            majorLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor, constant: 0)
+        ])
+        
+        NSLayoutConstraint.activate([
+            studentNumberLabel.topAnchor.constraint(equalTo: majorLabel.bottomAnchor, constant: 10),
+            studentNumberLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor, constant: 0)
+        ])
+        
+        NSLayoutConstraint.activate([
+            logOutButton.bottomAnchor.constraint(equalTo: informationView.bottomAnchor, constant: -20),
+            logOutButton.trailingAnchor.constraint(equalTo: informationView.centerXAnchor, constant: -20),
             logOutButton.widthAnchor.constraint(equalToConstant: 100),
             logOutButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
-            resignButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            resignButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 10),
+            resignButton.bottomAnchor.constraint(equalTo: informationView.bottomAnchor, constant: -20),
+            resignButton.leadingAnchor.constraint(equalTo: informationView.centerXAnchor, constant: 20),
             resignButton.widthAnchor.constraint(equalToConstant: 100),
             resignButton.heightAnchor.constraint(equalToConstant: 40)
         ])
@@ -169,9 +242,12 @@ private extension MyPageViewController {
             .disposed(by: disposeBag)
         
         output.myInformation
-            .subscribe { information in
-                dump(information)
-            }
+            .subscribe(onNext: { information in
+                self.nameLabel.text = information.name
+                self.majorLabel.text = information.major
+                self.studentNumberLabel.text = information.studentID
+                self.nicknameLabel.text = "(\(information.nickname))"
+            })
             .disposed(by: disposeBag)
     }
     
