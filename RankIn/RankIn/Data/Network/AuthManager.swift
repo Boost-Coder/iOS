@@ -24,7 +24,7 @@ final class AuthManager: RequestInterceptor {
             completion(.failure(AuthError.noToken))
             return
         }
-        
+        print("access Token : \(accessToken)")
         var urlRequest = urlRequest
         urlRequest.headers.add(.authorization(bearerToken: accessToken))
         completion(.success(urlRequest))
