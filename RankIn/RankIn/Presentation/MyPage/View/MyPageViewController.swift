@@ -138,6 +138,66 @@ final class MyPageViewController: UIViewController {
         return label
     }()
     
+    private let statView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray4
+        view.layer.cornerRadius = 20
+        
+        return view
+    }()
+    
+    private let gitHubStatHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 18)
+        label.text = "GitHub"
+        
+        return label
+    }()
+    
+    private let algorithmStatHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 18)
+        label.text = "알고리즘"
+        
+        return label
+    }()
+    
+    private let gradeStatHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 18)
+        label.text = "학점"
+        
+        return label
+    }()
+    
+    private let gitHubStatLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 18)
+        
+        return label
+    }()
+    
+    private let algorithmStatLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 18)
+        
+        return label
+    }()
+    
+    private let gradeStatLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 18)
+        
+        return label
+    }()
+    
     private let viewModel: MyPageViewModel
     
     init(viewModel: MyPageViewModel) {
@@ -179,9 +239,22 @@ private extension MyPageViewController {
         informationView.addSubview(studentNumberLabel)
         informationView.addSubview(logOutButton)
         informationView.addSubview(resignButton)
+        
+        view.addSubview(statView)
+        statView.addSubview(gitHubStatHeader)
+        statView.addSubview(gradeStatHeader)
+        statView.addSubview(algorithmStatHeader)
+        statView.addSubview(gitHubStatLabel)
+        statView.addSubview(gradeStatLabel)
+        statView.addSubview(algorithmStatLabel)
     }
     
     func setConstraints() {
+        setInformationView()
+        setStatView()
+    }
+    
+    func setInformationView() {
         NSLayoutConstraint.activate([
             informationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             informationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
@@ -221,6 +294,45 @@ private extension MyPageViewController {
             resignButton.leadingAnchor.constraint(equalTo: informationView.centerXAnchor, constant: 20),
             resignButton.widthAnchor.constraint(equalToConstant: 100),
             resignButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    func setStatView() {
+        NSLayoutConstraint.activate([
+            statView.topAnchor.constraint(equalTo: informationView.bottomAnchor, constant: 20),
+            statView.leadingAnchor.constraint(equalTo: informationView.leadingAnchor),
+            statView.trailingAnchor.constraint(equalTo: informationView.trailingAnchor),
+            statView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            algorithmStatHeader.topAnchor.constraint(equalTo: statView.topAnchor, constant: 10),
+            algorithmStatHeader.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 25)
+        ])
+        
+        NSLayoutConstraint.activate([
+            algorithmStatLabel.topAnchor.constraint(equalTo: algorithmStatHeader.topAnchor, constant: 0),
+            algorithmStatLabel.leadingAnchor.constraint(equalTo: algorithmStatHeader.trailingAnchor, constant: 10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            gitHubStatHeader.topAnchor.constraint(equalTo: algorithmStatHeader.bottomAnchor, constant: 10),
+            gitHubStatHeader.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 25)
+        ])
+        
+        NSLayoutConstraint.activate([
+            gitHubStatLabel.topAnchor.constraint(equalTo: gitHubStatHeader.topAnchor, constant: 0),
+            gitHubStatLabel.leadingAnchor.constraint(equalTo: gitHubStatHeader.trailingAnchor, constant: 10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            gradeStatHeader.topAnchor.constraint(equalTo: gitHubStatHeader.bottomAnchor, constant: 10),
+            gradeStatHeader.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 25)
+        ])
+        
+        NSLayoutConstraint.activate([
+            gradeStatLabel.topAnchor.constraint(equalTo: gradeStatHeader.topAnchor, constant: 0),
+            gradeStatLabel.leadingAnchor.constraint(equalTo: gradeStatHeader.trailingAnchor, constant: 10)
         ])
     }
     

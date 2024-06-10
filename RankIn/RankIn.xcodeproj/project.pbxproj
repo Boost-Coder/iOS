@@ -102,6 +102,7 @@
 		59A4CEB32C14683500722052 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEB22C14683500722052 /* UserInformation.swift */; };
 		59A4CEB52C146A0F00722052 /* FetchMyInformationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEB42C146A0F00722052 /* FetchMyInformationUseCase.swift */; };
 		59A4CEB72C146A5100722052 /* DefaultFetchMyInformationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEB62C146A5100722052 /* DefaultFetchMyInformationUseCase.swift */; };
+		59A4CEB92C1762A900722052 /* ScoreAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEB82C1762A900722052 /* ScoreAnimationView.swift */; };
 		59C273602BF0FF6100CAAC08 /* BaekjoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */; };
 		59C273622BF103ED00CAAC08 /* BaekjoonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */; };
 		59C273642BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */; };
@@ -213,6 +214,7 @@
 		59A4CEB22C14683500722052 /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
 		59A4CEB42C146A0F00722052 /* FetchMyInformationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyInformationUseCase.swift; sourceTree = "<group>"; };
 		59A4CEB62C146A5100722052 /* DefaultFetchMyInformationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchMyInformationUseCase.swift; sourceTree = "<group>"; };
+		59A4CEB82C1762A900722052 /* ScoreAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreAnimationView.swift; sourceTree = "<group>"; };
 		59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonViewController.swift; sourceTree = "<group>"; };
 		59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonViewModel.swift; sourceTree = "<group>"; };
 		59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBaekjoonIDUseCase.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				591C46A92BC136C600D3BF14 /* MyPageViewController.swift */,
+				59A4CEB82C1762A900722052 /* ScoreAnimationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -879,6 +882,7 @@
 				590E9D3B2BAB3D0C006CC09E /* SceneDelegate.swift in Sources */,
 				59A2BAFE2BD16668003CFCAA /* DefaultGitHubViewModel.swift in Sources */,
 				59A4CEB52C146A0F00722052 /* FetchMyInformationUseCase.swift in Sources */,
+				59A4CEB92C1762A900722052 /* ScoreAnimationView.swift in Sources */,
 				590E9D502BAB4018006CC09E /* SplashViewController.swift in Sources */,
 				591C46992BB87C6E00D3BF14 /* DefaultUserRepository.swift in Sources */,
 				591C467C2BB85F2800D3BF14 /* NetworkError.swift in Sources */,
