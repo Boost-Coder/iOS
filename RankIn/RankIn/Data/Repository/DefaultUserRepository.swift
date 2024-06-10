@@ -168,4 +168,48 @@ final class DefaultUserRepository: UserRepository {
         }
     }
     
+    func fetchMyStat() -> Observable<UserStat> {
+        Observable<UserStat>.create { observer -> Disposable in
+            guard let userID = KeyChainManager.read(storeElement: .userID) else {
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            self.session.request(
+                RankInAPI.fetchUserStat(
+                    userDTO: UserDTO(userID: userID)),
+                interceptor: AuthManager()
+            )
+            .responseDecodable(of: UserStatDTO.self) { response in
+                print("--------------------------------------------------------------------------------")
+                print("* REQUEST URL: \(String(describing: response.request))")
+                
+                // reponse data 출력하기
+                if
+                    let data = response.data,
+                    let utf8Text = String(data: data, encoding: .utf8) {
+                    print("* RESPONSE DATA: \(utf8Text)") // encode data to UTF8
+                }
+                print("--------------------------------------------------------------------------------")
+                
+                switch response.result {
+                case .success(let dto):
+                    observer.onNext(dto.toEntity())
+                case .failure(let error):
+                    dump(error)
+                    if let underlyingError = error.underlyingError as? NSError,
+                       underlyingError.code == URLError.notConnectedToInternet.rawValue {
+                        observer.onError(ErrorToastCase.internetError)
+                    } else if let underlyingError = error.underlyingError as? NSError,
+                              underlyingError.code == 13 {
+                        observer.onError(ErrorToastCase.serverError)
+                    } else {
+                        observer.onError(ErrorToastCase.clientError)
+                    }
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
 }

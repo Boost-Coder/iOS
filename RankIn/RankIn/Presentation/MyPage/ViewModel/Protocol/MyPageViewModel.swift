@@ -28,12 +28,14 @@ struct MyPageViewModelOutput {
     
     let toLogin: PublishRelay<Void>
     let myInformation: PublishRelay<UserInformation>
+    let myStat: PublishRelay<UserStat>
     
 }
 
 struct MyPageViewModelDependency {
     
     let fetchMyInfromationUseCase: FetchMyInformationUseCase
+    let fetchMyStatUseCase: FetchMyStatUseCase
     let logOutUseCase: LogOutUseCase
     let resignUseCase: ResignUseCase
     

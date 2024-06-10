@@ -14,6 +14,7 @@ final class DefaultMyPageViewModel: MyPageViewModel {
     
     private let toLogin = PublishRelay<Void>()
     private let myInformation = PublishRelay<UserInformation>()
+    private let myStat = PublishRelay<UserStat>()
     
     let dependency: MyPageViewModelDependency
     
@@ -25,6 +26,7 @@ final class DefaultMyPageViewModel: MyPageViewModel {
         input.viewDidLoad
             .bind { _ in
                 self.fetchMyInformation()
+                self.fetchMyStat()
             }
             .disposed(by: disposeBag)
         
@@ -42,7 +44,8 @@ final class DefaultMyPageViewModel: MyPageViewModel {
         
         return MyPageViewModelOutput(
             toLogin: toLogin,
-            myInformation: myInformation
+            myInformation: myInformation,
+            myStat: myStat
         )
     }
     
@@ -77,6 +80,17 @@ private extension DefaultMyPageViewModel {
             .execute()
             .subscribe { information in
                 self.myInformation.accept(information)
+            } onError: { error in
+                dump(error)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func fetchMyStat() {
+        dependency.fetchMyStatUseCase
+            .execute()
+            .subscribe { stat in
+                self.myStat.accept(stat)
             } onError: { error in
                 dump(error)
             }

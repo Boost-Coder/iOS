@@ -361,6 +361,14 @@ private extension MyPageViewController {
                 self.nicknameLabel.text = "(\(information.nickname))"
             })
             .disposed(by: disposeBag)
+        
+        output.myStat
+            .subscribe(onNext: { stat in
+                self.gradeStatLabel.text = String(stat.grade)
+                self.algorithmStatLabel.text = String(stat.algorithmPoint)
+                self.gitHubStatLabel.text = String(stat.githubPoint)
+            })
+            .disposed(by: disposeBag)
     }
     
 }

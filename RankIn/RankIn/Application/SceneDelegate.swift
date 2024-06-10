@@ -50,6 +50,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let fetchMyInfromationUseCase = DefaultFetchMyInformationUseCase(repository: userRepository)
         let logOutUseCase = DefaultLogOutUseCase(repository: userRepository)
         let resignUseCase = DefaultResignUseCase(repository: userRepository)
+        let fetchMyStatUseCase = DefaultFetchMyStatUseCase(repository: userRepository)
         
         let loginViewModelDependency = LoginViewModelDependency(
             appleLoginUseCase: appleLoginUseCase
@@ -69,6 +70,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         let myPageViewModelDependency = MyPageViewModelDependency(
             fetchMyInfromationUseCase: fetchMyInfromationUseCase,
+            fetchMyStatUseCase: fetchMyStatUseCase,
             logOutUseCase: logOutUseCase,
             resignUseCase: resignUseCase
         )
