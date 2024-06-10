@@ -177,7 +177,7 @@ final class MyPageViewController: UIViewController {
     private let gitHubStatLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .pretendard(type: .regular, size: 18)
+        label.font = .pretendard(type: .bold, size: 18)
         
         return label
     }()
@@ -185,7 +185,7 @@ final class MyPageViewController: UIViewController {
     private let algorithmStatLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .pretendard(type: .regular, size: 18)
+        label.font = .pretendard(type: .bold, size: 18)
         
         return label
     }()
@@ -193,7 +193,7 @@ final class MyPageViewController: UIViewController {
     private let gradeStatLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .pretendard(type: .regular, size: 18)
+        label.font = .pretendard(type: .bold, size: 18)
         
         return label
     }()
@@ -215,6 +215,9 @@ final class MyPageViewController: UIViewController {
         
         setUI()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         viewDidLoadPublish.accept(())
     }
 
@@ -316,7 +319,7 @@ private extension MyPageViewController {
         ])
         
         NSLayoutConstraint.activate([
-            gitHubStatHeader.topAnchor.constraint(equalTo: algorithmStatHeader.bottomAnchor, constant: 10),
+            gitHubStatHeader.topAnchor.constraint(equalTo: algorithmStatHeader.bottomAnchor, constant: 60),
             gitHubStatHeader.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 25)
         ])
         
@@ -326,7 +329,7 @@ private extension MyPageViewController {
         ])
         
         NSLayoutConstraint.activate([
-            gradeStatHeader.topAnchor.constraint(equalTo: gitHubStatHeader.bottomAnchor, constant: 10),
+            gradeStatHeader.topAnchor.constraint(equalTo: gitHubStatHeader.bottomAnchor, constant: 60),
             gradeStatHeader.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 25)
         ])
         
@@ -367,8 +370,51 @@ private extension MyPageViewController {
                 self.gradeStatLabel.text = String(stat.grade)
                 self.algorithmStatLabel.text = String(stat.algorithmPoint)
                 self.gitHubStatLabel.text = String(stat.githubPoint)
+                self.drawStat(stat: stat)
             })
             .disposed(by: disposeBag)
+    }
+    
+}
+
+private extension MyPageViewController {
+    
+    func drawStat(stat: UserStat) {
+//        self.statView.subviews.last?.removeFromSuperview()
+//        self.statView.subviews.last?.removeFromSuperview()
+//        self.statView.subviews.last?.removeFromSuperview()
+        
+        let gradeView = ScoreAnimationView(grade: stat.grade)
+        let algorithmView = ScoreAnimationView(score: stat.algorithmPoint)
+        let gitHubView = ScoreAnimationView(score: stat.githubPoint)
+        gradeView.translatesAutoresizingMaskIntoConstraints = false
+        algorithmView.translatesAutoresizingMaskIntoConstraints = false
+        gitHubView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.statView.addSubview(gradeView)
+        self.statView.addSubview(algorithmView)
+        self.statView.addSubview(gitHubView)
+        
+        NSLayoutConstraint.activate([
+            gradeView.topAnchor.constraint(equalTo: gradeStatHeader.bottomAnchor, constant: 20),
+            gradeView.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 47),
+            gradeView.trailingAnchor.constraint(equalTo: statView.trailingAnchor, constant: -47),
+            gradeView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            algorithmView.topAnchor.constraint(equalTo: algorithmStatHeader.bottomAnchor, constant: 20),
+            algorithmView.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 47),
+            algorithmView.trailingAnchor.constraint(equalTo: statView.trailingAnchor, constant: -47),
+            algorithmView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            gitHubView.topAnchor.constraint(equalTo: gitHubStatHeader.bottomAnchor, constant: 20),
+            gitHubView.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 47),
+            gitHubView.trailingAnchor.constraint(equalTo: statView.trailingAnchor, constant: -47),
+            gitHubView.heightAnchor.constraint(equalToConstant: 30)
+        ])
     }
     
 }
