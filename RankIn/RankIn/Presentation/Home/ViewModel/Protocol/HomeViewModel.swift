@@ -20,6 +20,7 @@ struct HomeViewModelInput {
     
     let getRankTableCellContent: PublishRelay<Void>
     let getMyInformation: PublishRelay<Void>
+    let cellSelected: PublishRelay<Int>
     
 }
 
@@ -28,6 +29,7 @@ struct HomeViewModelOutput {
     let fetchRankListComplete: PublishRelay<[RankTableViewCellContents]>
     let errorPublisher: PublishRelay<ErrorToastCase>
     let getMyRank: PublishRelay<UserRank>
+    let versusRank: PublishRelay<Versus>
     
 }
 
@@ -35,5 +37,6 @@ struct HomeViewModelDependency {
     
     let fetchRankListUseCase: FetchRankListUseCase
     let fetchMyRankUseCase: FetchMyRankUseCase
+    let versusUseCase: VersueUseCase
     
 }

@@ -121,4 +121,36 @@ final class DefaultRankRepository: RankRepository {
         }
     }
     
+    func versus(row: Int) -> Observable<Versus> {
+        
+        return Observable<Versus>.create { observer -> Disposable in
+            guard let user1 = KeyChainManager.read(storeElement: .userID), let user2 = self.rankList[safe: row]?.userID
+            else {
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            
+            self.session.request(
+                RankInAPI.versus(
+                    compareDTO: CompareDTO(
+                        user1: user1, user2: user2
+                    )
+                ),
+                interceptor: AuthManager()
+            )
+            .responseDecodable(of: VersusDTO.self) { response in
+                switch response.result {
+                case .success(let dto):
+                    observer.onNext(dto.toEntity())
+                    observer.onCompleted()
+                case .failure(let error):
+                    dump(error)
+                    observer.onError(error)
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
 }

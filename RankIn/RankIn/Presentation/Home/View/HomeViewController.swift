@@ -14,6 +14,7 @@ final class HomeViewController: UIViewController {
     // MARK: Input
     private let getRankTableCellContent = PublishRelay<Void>()
     private let getMyInformation = PublishRelay<Void>()
+    private let cellSelected = PublishRelay<Int>()
     
     private let disposeBag = DisposeBag()
     
@@ -186,7 +187,8 @@ private extension HomeViewController {
         let output = viewModel.transform(
             input: HomeViewModelInput(
                 getRankTableCellContent: getRankTableCellContent,
-                getMyInformation: getMyInformation
+                getMyInformation: getMyInformation, 
+                cellSelected: cellSelected
             )
         )
         
@@ -205,6 +207,14 @@ private extension HomeViewController {
                 self.myScoreLabel.text = rank.totalScore
             } onError: { error in
                 self.presentErrorToast(error: .clientError)
+            }
+            .disposed(by: disposeBag)
+        
+        output.versusRank
+            .subscribe { versus in
+                dump(versus)
+            } onError: { error in
+                dump(error)
             }
             .disposed(by: disposeBag)
         
@@ -245,6 +255,10 @@ extension HomeViewController: UITableViewDelegate {
         if heightRemainBottomHeight < frameHeight + 300 {
             self.getRankTableCellContent.accept(())
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.cellSelected.accept(indexPath.row)
     }
     
 }

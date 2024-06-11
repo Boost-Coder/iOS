@@ -52,6 +52,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let resignUseCase = DefaultResignUseCase(repository: userRepository)
         let fetchMyStatUseCase = DefaultFetchMyStatUseCase(repository: userRepository)
         let fetchMyRankUseCase = DefaultFetchMyRankUseCase(repository: rankRepository)
+        let versusUseCase = DefaultVersusUseCase(repository: rankRepository)
         
         let loginViewModelDependency = LoginViewModelDependency(
             appleLoginUseCase: appleLoginUseCase
@@ -94,7 +95,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let homeViewModel = DefaultHomeViewModel(
             dependency: HomeViewModelDependency(
                 fetchRankListUseCase: fetchRankListUseCase,
-                fetchMyRankUseCase: fetchMyRankUseCase
+                fetchMyRankUseCase: fetchMyRankUseCase,
+                versusUseCase: versusUseCase
             )
         )
         let myPageViewModel = DefaultMyPageViewModel(dependency: myPageViewModelDependency)
