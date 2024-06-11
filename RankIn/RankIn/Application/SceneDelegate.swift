@@ -51,6 +51,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let logOutUseCase = DefaultLogOutUseCase(repository: userRepository)
         let resignUseCase = DefaultResignUseCase(repository: userRepository)
         let fetchMyStatUseCase = DefaultFetchMyStatUseCase(repository: userRepository)
+        let fetchMyRankUseCase = DefaultFetchMyRankUseCase(repository: rankRepository)
         
         let loginViewModelDependency = LoginViewModelDependency(
             appleLoginUseCase: appleLoginUseCase
@@ -92,7 +93,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         let homeViewModel = DefaultHomeViewModel(
             dependency: HomeViewModelDependency(
-                fetchRankListUseCase: fetchRankListUseCase
+                fetchRankListUseCase: fetchRankListUseCase,
+                fetchMyRankUseCase: fetchMyRankUseCase
             )
         )
         let myPageViewModel = DefaultMyPageViewModel(dependency: myPageViewModelDependency)
@@ -105,9 +107,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let homeNavigationController = UINavigationController(
             rootViewController: homeViewController
         )
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = .systemGray4
         let mainTabBarController = UITabBarController()
         mainTabBarController.modalPresentationStyle = .fullScreen
         mainTabBarController.modalTransitionStyle = .crossDissolve
+        mainTabBarController.tabBar.tintColor = .sejongPrimary
+        mainTabBarController.tabBar.isTranslucent = false
+        mainTabBarController.tabBar.backgroundColor = .systemGray4
+        mainTabBarController.tabBar.standardAppearance = tabBarAppearance
         mainTabBarController.setViewControllers(
             [
                 homeNavigationController,

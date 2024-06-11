@@ -22,6 +22,7 @@ enum RankInAPI {
     case resign(resignDTO: UserDTO)
     case fetchUserInformation(userDTO: UserDTO)
     case fetchUserStat(userDTO: UserDTO)
+    case fetchUserRank(userDTO: UserDTO)
     
 }
 
@@ -61,6 +62,8 @@ extension RankInAPI: Router, URLRequestConvertible {
             return "/users/\(dto.userID)"
         case .fetchUserStat(let dto):
             return "/stat/\(dto.userID)"
+        case .fetchUserRank(let dto):
+            return "/rank/users/\(dto.userID)"
         }
     }
     
@@ -78,7 +81,8 @@ extension RankInAPI: Router, URLRequestConvertible {
             return .put
         case .fetchRankList,
                 .fetchUserInformation,
-                .fetchUserStat:
+                .fetchUserStat,
+                .fetchUserRank:
             return .get
         case .resign:
             return .delete

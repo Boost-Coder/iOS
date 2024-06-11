@@ -107,6 +107,10 @@
 		59A4CEBD2C17668100722052 /* UserStatDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEBC2C17668100722052 /* UserStatDTO.swift */; };
 		59A4CEBF2C1767F000722052 /* FetchMyStatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEBE2C1767F000722052 /* FetchMyStatUseCase.swift */; };
 		59A4CEC12C17681B00722052 /* DefaultFetchMyStatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEC02C17681B00722052 /* DefaultFetchMyStatUseCase.swift */; };
+		59A4CEC72C18A26E00722052 /* UserRankDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEC62C18A26E00722052 /* UserRankDTO.swift */; };
+		59A4CEC92C18A2C000722052 /* UserRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CEC82C18A2C000722052 /* UserRank.swift */; };
+		59A4CECB2C18A30700722052 /* FetchMyRankUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CECA2C18A30700722052 /* FetchMyRankUseCase.swift */; };
+		59A4CECD2C18A32C00722052 /* DefaultFetchMyRankUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A4CECC2C18A32C00722052 /* DefaultFetchMyRankUseCase.swift */; };
 		59C273602BF0FF6100CAAC08 /* BaekjoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */; };
 		59C273622BF103ED00CAAC08 /* BaekjoonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */; };
 		59C273642BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */; };
@@ -223,6 +227,10 @@
 		59A4CEBC2C17668100722052 /* UserStatDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatDTO.swift; sourceTree = "<group>"; };
 		59A4CEBE2C1767F000722052 /* FetchMyStatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyStatUseCase.swift; sourceTree = "<group>"; };
 		59A4CEC02C17681B00722052 /* DefaultFetchMyStatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchMyStatUseCase.swift; sourceTree = "<group>"; };
+		59A4CEC62C18A26E00722052 /* UserRankDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRankDTO.swift; sourceTree = "<group>"; };
+		59A4CEC82C18A2C000722052 /* UserRank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRank.swift; sourceTree = "<group>"; };
+		59A4CECA2C18A30700722052 /* FetchMyRankUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyRankUseCase.swift; sourceTree = "<group>"; };
+		59A4CECC2C18A32C00722052 /* DefaultFetchMyRankUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchMyRankUseCase.swift; sourceTree = "<group>"; };
 		59C2735F2BF0FF6100CAAC08 /* BaekjoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonViewController.swift; sourceTree = "<group>"; };
 		59C273612BF103ED00CAAC08 /* BaekjoonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaekjoonViewModel.swift; sourceTree = "<group>"; };
 		59C273632BF104A000CAAC08 /* SetBaekjoonIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBaekjoonIDUseCase.swift; sourceTree = "<group>"; };
@@ -435,6 +443,7 @@
 				59F4A1212C06C7B6000E17AD /* FetchRankComponents.swift */,
 				59A4CEB22C14683500722052 /* UserInformation.swift */,
 				59A4CEBA2C17664200722052 /* UserStat.swift */,
+				59A4CEC82C18A2C000722052 /* UserRank.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -459,6 +468,7 @@
 				59828B872C0E2E6A007AA3E1 /* UserDTO.swift */,
 				59A4CEB02C1467DF00722052 /* UserInformationDTO.swift */,
 				59A4CEBC2C17668100722052 /* UserStatDTO.swift */,
+				59A4CEC62C18A26E00722052 /* UserRankDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -478,6 +488,7 @@
 				59828B8B2C0E2FD7007AA3E1 /* DefaultResignUseCase.swift */,
 				59A4CEB62C146A5100722052 /* DefaultFetchMyInformationUseCase.swift */,
 				59A4CEC02C17681B00722052 /* DefaultFetchMyStatUseCase.swift */,
+				59A4CECC2C18A32C00722052 /* DefaultFetchMyRankUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -498,6 +509,7 @@
 				59828B852C0E2D9A007AA3E1 /* ResignUseCase.swift */,
 				59A4CEB42C146A0F00722052 /* FetchMyInformationUseCase.swift */,
 				59A4CEBE2C1767F000722052 /* FetchMyStatUseCase.swift */,
+				59A4CECA2C18A30700722052 /* FetchMyRankUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -821,6 +833,7 @@
 				593892392C05FF5C00315CD3 /* FetchRankComponentsDTO.swift in Sources */,
 				591C46AA2BC136C600D3BF14 /* MyPageViewController.swift in Sources */,
 				593892332BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift in Sources */,
+				59A4CECD2C18A32C00722052 /* DefaultFetchMyRankUseCase.swift in Sources */,
 				59C273602BF0FF6100CAAC08 /* BaekjoonViewController.swift in Sources */,
 				59A2BAF62BD15878003CFCAA /* GitHubViewModel.swift in Sources */,
 				59828B8C2C0E2FD7007AA3E1 /* DefaultResignUseCase.swift in Sources */,
@@ -832,6 +845,7 @@
 				596A58D52BCAD66B006C3108 /* SetNicknameUseCase.swift in Sources */,
 				59A4CEB32C14683500722052 /* UserInformation.swift in Sources */,
 				591C46922BB8777400D3BF14 /* LoginViewModel.swift in Sources */,
+				59A4CEC92C18A2C000722052 /* UserRank.swift in Sources */,
 				596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */,
 				593892202BFE292500315CD3 /* RankTableViewCellContents.swift in Sources */,
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
@@ -842,6 +856,7 @@
 				596A58C32BC9B60C006C3108 /* SignUpRepository.swift in Sources */,
 				59A4CEC12C17681B00722052 /* DefaultFetchMyStatUseCase.swift in Sources */,
 				59A2BAF42BD150EE003CFCAA /* GitHubViewController.swift in Sources */,
+				59A4CEC72C18A26E00722052 /* UserRankDTO.swift in Sources */,
 				596A58C72BC9B700006C3108 /* SejongLoginInfo.swift in Sources */,
 				596A58D12BCAD51D006C3108 /* NicknameViewController.swift in Sources */,
 				596A58B92BC9A3A2006C3108 /* SejongLoginViewController.swift in Sources */,
@@ -874,6 +889,7 @@
 				59A2BAEC2BCED8DA003CFCAA /* DefaultGradeViewModel.swift in Sources */,
 				590E9D662BAB46CC006CC09E /* UIFont+Pretendard.swift in Sources */,
 				59A4CEBD2C17668100722052 /* UserStatDTO.swift in Sources */,
+				59A4CECB2C18A30700722052 /* FetchMyRankUseCase.swift in Sources */,
 				5938921E2BFE26F600315CD3 /* RankTableViewCell.swift in Sources */,
 				596A58BF2BC9B37C006C3108 /* DefaultSejongLoginViewModel.swift in Sources */,
 				596A58CF2BC9BDD3006C3108 /* SejongLoginResultDTO.swift in Sources */,
