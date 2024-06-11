@@ -22,7 +22,7 @@ final class RankTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = .pretendard(type: .bold, size: 15)
+        label.font = .pretendard(type: .semiBold, size: 15)
         
         return label
     }()
@@ -102,7 +102,7 @@ private extension RankTableViewCell {
         NSLayoutConstraint.activate([
             scoreLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            scoreLabel.widthAnchor.constraint(equalToConstant: 70)
+            scoreLabel.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
     

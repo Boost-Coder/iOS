@@ -11,4 +11,6 @@ protocol RankRepository {
     
     func fetchRankList() -> Observable<[RankTableViewCellContents]>
     
+    func fetchMyRank() -> Observable<UserRank>
+    
 }

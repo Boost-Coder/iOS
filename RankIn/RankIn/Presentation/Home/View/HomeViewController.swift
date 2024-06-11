@@ -13,8 +13,21 @@ final class HomeViewController: UIViewController {
     
     // MARK: Input
     private let getRankTableCellContent = PublishRelay<Void>()
+    private let getMyInformation = PublishRelay<Void>()
     
     private let disposeBag = DisposeBag()
+    
+    private lazy var myRankView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .white
+        view.layer.borderColor = UIColor.sejongPrimary.cgColor
+        view.layer.borderWidth = 1
+        
+        return view
+    }()
     
     private lazy var rankTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -31,6 +44,8 @@ final class HomeViewController: UIViewController {
     private let myRankLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = .pretendard(type: .semiBold, size: 24)
         
         return label
     }()
@@ -38,6 +53,8 @@ final class HomeViewController: UIViewController {
     private let myNicknameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = .pretendard(type: .bold, size: 15)
         
         return label
     }()
@@ -45,8 +62,18 @@ final class HomeViewController: UIViewController {
     private let myScoreLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = .pretendard(type: .regular, size: 13)
         
         return label
+    }()
+    
+    private let divideView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .gray
+        
+        return view
     }()
     
     enum Section {
@@ -106,11 +133,49 @@ private extension HomeViewController {
     
     func setHierarchy() {
         view.addSubview(rankTableView)
+        view.addSubview(myRankView)
+        view.addSubview(divideView)
+        myRankView.addSubview(myRankLabel)
+        myRankView.addSubview(myNicknameLabel)
+        myRankView.addSubview(myScoreLabel)
     }
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            rankTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            myRankView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            myRankView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myRankView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 52),
+            myRankView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -52),
+            myRankView.heightAnchor.constraint(equalToConstant: 48)
+        ])
+        
+        NSLayoutConstraint.activate([
+            myRankLabel.centerYAnchor.constraint(equalTo: myRankView.centerYAnchor),
+            myRankLabel.leadingAnchor.constraint(equalTo: myRankView.leadingAnchor, constant: 14),
+            myRankLabel.widthAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        NSLayoutConstraint.activate([
+            myNicknameLabel.centerYAnchor.constraint(equalTo: myRankView.centerYAnchor),
+            myNicknameLabel.leadingAnchor.constraint(equalTo: myRankLabel.trailingAnchor, constant: 22),
+            myNicknameLabel.widthAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        NSLayoutConstraint.activate([
+            myScoreLabel.centerYAnchor.constraint(equalTo: myRankView.centerYAnchor),
+            myScoreLabel.trailingAnchor.constraint(equalTo: myRankView.trailingAnchor),
+            myScoreLabel.widthAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        NSLayoutConstraint.activate([
+            divideView.topAnchor.constraint(equalTo: myRankView.bottomAnchor, constant: 20),
+            divideView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            divideView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            divideView.heightAnchor.constraint(equalToConstant: 0.5)
+        ])
+        
+        NSLayoutConstraint.activate([
+            rankTableView.topAnchor.constraint(equalTo: divideView.bottomAnchor),
             rankTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             rankTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             rankTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
@@ -120,13 +185,24 @@ private extension HomeViewController {
     func bind() {
         let output = viewModel.transform(
             input: HomeViewModelInput(
-                getRankTableCellContent: getRankTableCellContent
+                getRankTableCellContent: getRankTableCellContent,
+                getMyInformation: getMyInformation
             )
         )
         
         output.fetchRankListComplete
             .subscribe { contents in
                 self.generateData(contents: contents)
+            } onError: { error in
+                self.presentErrorToast(error: .clientError)
+            }
+            .disposed(by: disposeBag)
+        
+        output.getMyRank
+            .subscribe { rank in
+                self.myRankLabel.text = rank.total
+                self.myNicknameLabel.text = rank.nickname
+                self.myScoreLabel.text = rank.totalScore
             } onError: { error in
                 self.presentErrorToast(error: .clientError)
             }
@@ -145,6 +221,7 @@ private extension HomeViewController {
         dataSource.apply(snapshot)
         
         getRankTableCellContent.accept(())
+        getMyInformation.accept(())
     }
     
     func generateData(contents: [RankTableViewCellContents]) {
