@@ -22,14 +22,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let loginRepository = DefaultLoginRepository(
+        let userRepository = DefaultUserRepository(
             session: AF
         )
         let signUpRepository = DefaultSignUpRepository(session: AF)
         let rankRepository = DefaultRankRepository(session: AF)
         
         let appleLoginUseCase = DefaultAppleLoginUseCase(
-            repository: loginRepository
+            repository: userRepository
         )
         let sejongLoginUseCase = DefaultSejongLoginUseCase(
             repository: signUpRepository
@@ -47,6 +47,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             repository: signUpRepository
         )
         let fetchRankListUseCase = DefaultFetchRankListUseCase(repository: rankRepository)
+        let fetchMyInfromationUseCase = DefaultFetchMyInformationUseCase(repository: userRepository)
+        let logOutUseCase = DefaultLogOutUseCase(repository: userRepository)
+        let resignUseCase = DefaultResignUseCase(repository: userRepository)
+        let fetchMyStatUseCase = DefaultFetchMyStatUseCase(repository: userRepository)
         
         let loginViewModelDependency = LoginViewModelDependency(
             appleLoginUseCase: appleLoginUseCase
@@ -64,6 +68,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let baekjoonViewModelDependency = BaekjoonViewModelDependency(
             setBaekjoonIDUseCase: setBaekjoonIDUseCase
         )
+        let myPageViewModelDependency = MyPageViewModelDependency(
+            fetchMyInfromationUseCase: fetchMyInfromationUseCase,
+            fetchMyStatUseCase: fetchMyStatUseCase,
+            logOutUseCase: logOutUseCase,
+            resignUseCase: resignUseCase
+        )
         
         let loginViewModel = DefaultLoginViewModel(
             dependency: loginViewModelDependency
@@ -80,12 +90,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let baekjoonViewModel = DefaultBaekjoonViewModel(
             dependency: baekjoonViewModelDependency
         )
-        let homeViewModel = DefaultHomeViewModel(dependency: HomeViewModelDependency(
-            fetchRankListUseCase: fetchRankListUseCase
+        let homeViewModel = DefaultHomeViewModel(
+            dependency: HomeViewModelDependency(
+                fetchRankListUseCase: fetchRankListUseCase
+            )
         )
-        )
+        let myPageViewModel = DefaultMyPageViewModel(dependency: myPageViewModelDependency)
         
-        let myPageViewController = MyPageViewController()
+        let myPageViewController = MyPageViewController(viewModel: myPageViewModel)
         let myPageNavigationController = UINavigationController(
             rootViewController: myPageViewController
         )

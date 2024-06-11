@@ -19,6 +19,9 @@ enum RankInAPI {
     case registerGitHubAuthorization(gitHubAuthorizationDTO: GitHubAuthorizationDTO)
     case setBaekjoonID(baekjoonDTO: BaekjoonDTO)
     case fetchRankList(fetchRankComponentsDTO: FetchRankComponentsDTO?)
+    case resign(resignDTO: UserDTO)
+    case fetchUserInformation(userDTO: UserDTO)
+    case fetchUserStat(userDTO: UserDTO)
     
 }
 
@@ -53,6 +56,11 @@ extension RankInAPI: Router, URLRequestConvertible {
             return "/stat/algorithm"
         case .fetchRankList:
             return "/rank/total"
+        case .resign(let dto), 
+                .fetchUserInformation(let dto):
+            return "/users/\(dto.userID)"
+        case .fetchUserStat(let dto):
+            return "/stat/\(dto.userID)"
         }
     }
     
@@ -68,8 +76,12 @@ extension RankInAPI: Router, URLRequestConvertible {
             return .post
         case .setNickname:
             return .put
-        case .fetchRankList:
+        case .fetchRankList,
+                .fetchUserInformation,
+                .fetchUserStat:
             return .get
+        case .resign:
+            return .delete
         }
     }
     
@@ -120,6 +132,8 @@ extension RankInAPI: Router, URLRequestConvertible {
             return JSONEncoding.default
         case .fetchRankList:
             return URLEncoding.default
+        default:
+            return nil
         }
     }
     

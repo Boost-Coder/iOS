@@ -9,7 +9,7 @@ import RxSwift
 
 protocol AppleLoginUseCase {
     
-    var repository: LoginRepository { get }
+    var repository: UserRepository { get }
     
     func execute(
         requiredValue: AppleLoginModel

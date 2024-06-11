@@ -9,7 +9,7 @@ import RxSwift
 
 struct DefaultAppleLoginUseCase: AppleLoginUseCase {
     
-    let repository: LoginRepository
+    let repository: UserRepository
     
     func execute(
         requiredValue: AppleLoginModel

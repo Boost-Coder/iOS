@@ -132,9 +132,7 @@ private extension BaekjoonViewController {
         
         output.baekjoonSuccess
             .subscribe { _ in
-                self.navigationController?.pushViewController(
-                    self.mainTabBarController, animated: true
-                )
+                self.present(self.mainTabBarController, animated: true)
             } onError: { error in
                 dump(error)
             }
@@ -170,9 +168,7 @@ private extension BaekjoonViewController {
         skipButton.rx
             .tap
             .bind { _ in
-                self.navigationController?.pushViewController(
-                    self.mainTabBarController, animated: true
-                )
+                self.present(self.mainTabBarController, animated: true)
             }
             .disposed(by: disposeBag)
     }
