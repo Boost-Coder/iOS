@@ -69,7 +69,7 @@ final class MyPageViewController: UIViewController {
             message: "정말 로그아웃 하시겠습니까?",
             preferredStyle: .alert
         )
-        let logout = UIAlertAction(title: "확인", style: .default) { action in
+        let logout = UIAlertAction(title: "확인", style: .default) { _ in
             self.logoutPublish.accept(())
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -86,7 +86,7 @@ final class MyPageViewController: UIViewController {
             message: "정말 회원탈퇴 하시겠습니까?",
             preferredStyle: .alert
         )
-        let logout = UIAlertAction(title: "탈퇴", style: .destructive) { action in
+        let logout = UIAlertAction(title: "탈퇴", style: .destructive) { _ in
             self.resignPublish.accept(())
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -174,6 +174,15 @@ final class MyPageViewController: UIViewController {
         return label
     }()
     
+    private let totalStatHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 18)
+        label.text = "종합"
+        
+        return label
+    }()
+    
     private let gitHubStatLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -191,6 +200,14 @@ final class MyPageViewController: UIViewController {
     }()
     
     private let gradeStatLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .bold, size: 18)
+        
+        return label
+    }()
+    
+    private let totalStatLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .pretendard(type: .bold, size: 18)
@@ -218,7 +235,18 @@ final class MyPageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         viewDidLoadPublish.accept(())
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.statView.subviews.last?.removeFromSuperview()
+        self.statView.subviews.last?.removeFromSuperview()
+        self.statView.subviews.last?.removeFromSuperview()
+        self.statView.subviews.last?.removeFromSuperview()
     }
 
 }
@@ -227,8 +255,8 @@ private extension MyPageViewController {
     
     func setUI() {
         view.backgroundColor = .systemGray6
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.backgroundColor = .systemGray6
+        navigationController?.navigationBar.barTintColor = .systemGray6
+        navigationController?.navigationBar.isHidden = true
         
         setHierarchy()
         setConstraints()
@@ -250,6 +278,8 @@ private extension MyPageViewController {
         statView.addSubview(gitHubStatLabel)
         statView.addSubview(gradeStatLabel)
         statView.addSubview(algorithmStatLabel)
+        statView.addSubview(totalStatHeader)
+        statView.addSubview(totalStatLabel)
     }
     
     func setConstraints() {
@@ -309,7 +339,17 @@ private extension MyPageViewController {
         ])
         
         NSLayoutConstraint.activate([
-            algorithmStatHeader.topAnchor.constraint(equalTo: statView.topAnchor, constant: 10),
+            totalStatHeader.topAnchor.constraint(equalTo: statView.topAnchor, constant: 20),
+            totalStatHeader.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 25)
+        ])
+        
+        NSLayoutConstraint.activate([
+            totalStatLabel.topAnchor.constraint(equalTo: totalStatHeader.topAnchor, constant: 0),
+            totalStatLabel.leadingAnchor.constraint(equalTo: totalStatHeader.trailingAnchor, constant: 10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            algorithmStatHeader.topAnchor.constraint(equalTo: totalStatHeader.bottomAnchor, constant: 60),
             algorithmStatHeader.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 25)
         ])
         
@@ -337,6 +377,7 @@ private extension MyPageViewController {
             gradeStatLabel.topAnchor.constraint(equalTo: gradeStatHeader.topAnchor, constant: 0),
             gradeStatLabel.leadingAnchor.constraint(equalTo: gradeStatHeader.trailingAnchor, constant: 10)
         ])
+        
     }
     
     func bind() {
@@ -370,6 +411,7 @@ private extension MyPageViewController {
                 self.gradeStatLabel.text = String(stat.grade)
                 self.algorithmStatLabel.text = String(stat.algorithmPoint)
                 self.gitHubStatLabel.text = String(stat.githubPoint)
+                self.totalStatLabel.text = String(stat.totalPoint)
                 self.drawStat(stat: stat)
             })
             .disposed(by: disposeBag)
@@ -380,20 +422,21 @@ private extension MyPageViewController {
 private extension MyPageViewController {
     
     func drawStat(stat: UserStat) {
-//        self.statView.subviews.last?.removeFromSuperview()
-//        self.statView.subviews.last?.removeFromSuperview()
-//        self.statView.subviews.last?.removeFromSuperview()
         
         let gradeView = ScoreAnimationView(grade: stat.grade)
         let algorithmView = ScoreAnimationView(score: stat.algorithmPoint)
         let gitHubView = ScoreAnimationView(score: stat.githubPoint)
+        let totalView = ScoreAnimationView(score: stat.totalPoint)
+        
         gradeView.translatesAutoresizingMaskIntoConstraints = false
         algorithmView.translatesAutoresizingMaskIntoConstraints = false
         gitHubView.translatesAutoresizingMaskIntoConstraints = false
+        totalView.translatesAutoresizingMaskIntoConstraints = false
         
         self.statView.addSubview(gradeView)
         self.statView.addSubview(algorithmView)
         self.statView.addSubview(gitHubView)
+        self.statView.addSubview(totalView)
         
         NSLayoutConstraint.activate([
             gradeView.topAnchor.constraint(equalTo: gradeStatHeader.bottomAnchor, constant: 20),
@@ -414,6 +457,13 @@ private extension MyPageViewController {
             gitHubView.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 47),
             gitHubView.trailingAnchor.constraint(equalTo: statView.trailingAnchor, constant: -47),
             gitHubView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            totalView.topAnchor.constraint(equalTo: totalStatHeader.bottomAnchor, constant: 20),
+            totalView.leadingAnchor.constraint(equalTo: statView.leadingAnchor, constant: 47),
+            totalView.trailingAnchor.constraint(equalTo: statView.trailingAnchor, constant: -47),
+            totalView.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     

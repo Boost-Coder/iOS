@@ -97,9 +97,8 @@ private extension HomeViewController {
     
     func setUI() {
         view.backgroundColor = .systemGray6
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.backgroundColor = .systemGray6
         navigationController?.navigationBar.barTintColor = .systemGray6
+        navigationController?.navigationBar.isHidden = true
         
         setHierarchy()
         setConstraints()
@@ -139,7 +138,7 @@ private extension HomeViewController {
             }
             .disposed(by: disposeBag)
     }
-
+    
     func loadTableView() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, RankTableViewCellContents>()
         snapshot.appendSections([.rank])
