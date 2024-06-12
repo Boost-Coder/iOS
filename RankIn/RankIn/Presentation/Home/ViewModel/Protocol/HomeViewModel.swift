@@ -29,7 +29,7 @@ struct HomeViewModelOutput {
     let fetchRankListComplete: PublishRelay<[RankTableViewCellContents]>
     let errorPublisher: PublishRelay<ErrorToastCase>
     let getMyRank: PublishRelay<UserRank>
-    let versusRank: PublishRelay<Versus>
+    let versusRank: PublishRelay<CompareContents>
     
 }
 

@@ -55,6 +55,8 @@
 		593892312BFE3E7600315CD3 /* DefaultHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892302BFE3E7600315CD3 /* DefaultHomeViewModel.swift */; };
 		593892332BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892322BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift */; };
 		593892392C05FF5C00315CD3 /* FetchRankComponentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593892382C05FF5C00315CD3 /* FetchRankComponentsDTO.swift */; };
+		596909112C19DEB3008B3F06 /* CompareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596909102C19DEB3008B3F06 /* CompareViewController.swift */; };
+		596909132C19E50A008B3F06 /* CompareContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596909122C19E50A008B3F06 /* CompareContents.swift */; };
 		596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58B42BC9A210006C3108 /* LoginResultDTO.swift */; };
 		596A58B92BC9A3A2006C3108 /* SejongLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58B82BC9A3A2006C3108 /* SejongLoginViewController.swift */; };
 		596A58BC2BC9B2BF006C3108 /* SejongLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596A58BB2BC9B2BF006C3108 /* SejongLoginViewModel.swift */; };
@@ -180,6 +182,8 @@
 		593892302BFE3E7600315CD3 /* DefaultHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeViewModel.swift; sourceTree = "<group>"; };
 		593892322BFE3FB500315CD3 /* DefaultFetchRankListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchRankListUseCase.swift; sourceTree = "<group>"; };
 		593892382C05FF5C00315CD3 /* FetchRankComponentsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRankComponentsDTO.swift; sourceTree = "<group>"; };
+		596909102C19DEB3008B3F06 /* CompareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareViewController.swift; sourceTree = "<group>"; };
+		596909122C19E50A008B3F06 /* CompareContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareContents.swift; sourceTree = "<group>"; };
 		596A58B32BC83704006C3108 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		596A58B42BC9A210006C3108 /* LoginResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResultDTO.swift; sourceTree = "<group>"; };
 		596A58B82BC9A3A2006C3108 /* SejongLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SejongLoginViewController.swift; sourceTree = "<group>"; };
@@ -458,6 +462,7 @@
 				59A4CEBA2C17664200722052 /* UserStat.swift */,
 				59A4CEC82C18A2C000722052 /* UserRank.swift */,
 				59A4CED02C18B9AD00722052 /* Versus.swift */,
+				596909122C19E50A008B3F06 /* CompareContents.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -599,6 +604,7 @@
 			children = (
 				590E9D3C2BAB3D0C006CC09E /* HomeViewController.swift */,
 				5938921D2BFE26F600315CD3 /* RankTableViewCell.swift */,
+				596909102C19DEB3008B3F06 /* CompareViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -867,6 +873,7 @@
 				596A58B52BC9A210006C3108 /* LoginResultDTO.swift in Sources */,
 				593892202BFE292500315CD3 /* RankTableViewCellContents.swift in Sources */,
 				591C466A2BB4434200D3BF14 /* LoginViewController.swift in Sources */,
+				596909132C19E50A008B3F06 /* CompareContents.swift in Sources */,
 				596A58CB2BC9BC5A006C3108 /* DefaultSignUpRepository.swift in Sources */,
 				59828B8A2C0E2FA8007AA3E1 /* DefaultLogOutUseCase.swift in Sources */,
 				59A2BAEE2BD011C5003CFCAA /* RefreshTokenDTO.swift in Sources */,
@@ -894,6 +901,7 @@
 				593892292BFE355C00315CD3 /* FetchRankListUseCase.swift in Sources */,
 				59A4CEBB2C17664200722052 /* UserStat.swift in Sources */,
 				596A58D32BCAD616006C3108 /* NicknameViewModel.swift in Sources */,
+				596909112C19DEB3008B3F06 /* CompareViewController.swift in Sources */,
 				596A58D72BCAD6B8006C3108 /* DefaultSetNicknameUseCase.swift in Sources */,
 				596A58C12BC9B5C7006C3108 /* SejongLoginUseCase.swift in Sources */,
 				59A4CED92C18BBD400722052 /* CompareDTO.swift in Sources */,

@@ -211,8 +211,10 @@ private extension HomeViewController {
             .disposed(by: disposeBag)
         
         output.versusRank
-            .subscribe { versus in
-                dump(versus)
+            .subscribe { content in
+                let compareViewController = CompareViewController(content: content)
+                self.present(compareViewController, animated: false)
+                dump(content)
             } onError: { error in
                 dump(error)
             }

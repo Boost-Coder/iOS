@@ -11,7 +11,7 @@ struct DefaultVersusUseCase: VersueUseCase {
     
     let repository: RankRepository
     
-    func execute(row: Int) -> Observable<Versus> {
+    func execute(row: Int) -> Observable<CompareContents> {
         return repository.versus(row: row)
     }
     

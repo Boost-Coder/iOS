@@ -11,6 +11,6 @@ protocol VersueUseCase {
     
     var repository: RankRepository { get }
     
-    func execute(row: Int) -> Observable<Versus>
+    func execute(row: Int) -> Observable<CompareContents>
     
 }

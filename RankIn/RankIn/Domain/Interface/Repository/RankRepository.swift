@@ -13,6 +13,6 @@ protocol RankRepository {
     
     func fetchMyRank() -> Observable<UserRank>
     
-    func versus(row: Int) -> Observable<Versus>
+    func versus(row: Int) -> Observable<CompareContents>
     
 }

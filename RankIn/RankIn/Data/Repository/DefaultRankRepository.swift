@@ -121,14 +121,15 @@ final class DefaultRankRepository: RankRepository {
         }
     }
     
-    func versus(row: Int) -> Observable<Versus> {
+    func versus(row: Int) -> Observable<CompareContents> {
         
-        return Observable<Versus>.create { observer -> Disposable in
-            guard let user1 = KeyChainManager.read(storeElement: .userID), let user2 = self.rankList[safe: row]?.userID
+        return Observable<CompareContents>.create { observer -> Disposable in
+            guard let user1 = KeyChainManager.read(storeElement: .userID), let user = self.rankList[safe: row]
             else {
                 observer.onCompleted()
                 return Disposables.create()
             }
+            let user2 = user.userID
             
             self.session.request(
                 RankInAPI.versus(
@@ -141,7 +142,10 @@ final class DefaultRankRepository: RankRepository {
             .responseDecodable(of: VersusDTO.self) { response in
                 switch response.result {
                 case .success(let dto):
-                    observer.onNext(dto.toEntity())
+                    observer.onNext(CompareContents(
+                        content: user,
+                        versus: dto.toEntity()
+                    ))
                     observer.onCompleted()
                 case .failure(let error):
                     dump(error)

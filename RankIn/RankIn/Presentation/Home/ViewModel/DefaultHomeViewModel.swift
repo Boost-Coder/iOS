@@ -18,7 +18,7 @@ final class DefaultHomeViewModel: HomeViewModel {
     let errorPublisher = PublishRelay<ErrorToastCase>()
     let fetchRankListComplete = PublishRelay<[RankTableViewCellContents]>()
     let getMyRank = PublishRelay<UserRank>()
-    let versusRank = PublishRelay<Versus>()
+    let versusRank = PublishRelay<CompareContents>()
     
     init(dependency: HomeViewModelDependency) {
         self.dependency = dependency
