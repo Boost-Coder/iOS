@@ -75,6 +75,60 @@ final class CompareViewController: UIViewController {
         return label
     }()
     
+    private let divideView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .gray
+        
+        return view
+    }()
+    
+    private let compareHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = .pretendard(type: .semiBold, size: 18)
+        label.text = "나와의 비교"
+        
+        return label
+    }()
+    
+    private let gitHubStatHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 13)
+        label.text = "GitHub"
+        
+        return label
+    }()
+    
+    private let algorithmStatHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 15)
+        label.text = "알고리즘"
+        
+        return label
+    }()
+    
+    private let gradeStatHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 15)
+        label.text = "학점"
+        
+        return label
+    }()
+    
+    private let totalStatHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 15)
+        label.text = "종합"
+        
+        return label
+    }()
+    
     init(
         content: CompareContents
     ) {
@@ -108,10 +162,16 @@ private extension CompareViewController {
     func setHierarchy() {
         view.addSubview(containerView)
         view.addSubview(compareView)
+        compareView.addSubview(divideView)
         compareView.addSubview(closeButton)
         compareView.addSubview(rankLabel)
         compareView.addSubview(nickNameLabel)
         compareView.addSubview(scoreLabel)
+        compareView.addSubview(compareHeader)
+        compareView.addSubview(gradeStatHeader)
+        compareView.addSubview(totalStatHeader)
+        compareView.addSubview(algorithmStatHeader)
+        compareView.addSubview(gitHubStatHeader)
     }
     
     func setConstraints() {
@@ -149,6 +209,35 @@ private extension CompareViewController {
         NSLayoutConstraint.activate([
             scoreLabel.centerYAnchor.constraint(equalTo: rankLabel.centerYAnchor),
             scoreLabel.trailingAnchor.constraint(equalTo: compareView.safeAreaLayoutGuide.trailingAnchor, constant: -30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            divideView.topAnchor.constraint(equalTo: rankLabel.bottomAnchor, constant: 10),
+            divideView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            divideView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            divideView.heightAnchor.constraint(equalToConstant: 0.5)
+        ])
+        
+        NSLayoutConstraint.activate([
+            compareHeader.topAnchor.constraint(equalTo: divideView.bottomAnchor, constant: 10),
+            compareHeader.leadingAnchor.constraint(equalTo: compareView.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            totalStatHeader.topAnchor.constraint(equalTo: compareHeader.bottomAnchor, constant: 15),
+            totalStatHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
+        ])
+        NSLayoutConstraint.activate([
+            algorithmStatHeader.topAnchor.constraint(equalTo: totalStatHeader.bottomAnchor, constant: 35),
+            algorithmStatHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
+        ])
+        NSLayoutConstraint.activate([
+            gitHubStatHeader.topAnchor.constraint(equalTo: algorithmStatHeader.bottomAnchor, constant: 35),
+            gitHubStatHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
+        ])
+        NSLayoutConstraint.activate([
+            gradeStatHeader.topAnchor.constraint(equalTo: gitHubStatHeader.bottomAnchor, constant: 35),
+            gradeStatHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
         ])
     }
     
