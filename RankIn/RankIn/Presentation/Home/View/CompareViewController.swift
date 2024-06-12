@@ -129,9 +129,29 @@ final class CompareViewController: UIViewController {
         return label
     }()
     
+    private let totalBar: CompareBarView
+    
+    private let gradeBar: CompareBarView
+
+    private let algorithmBar: CompareBarView
+
+    private let gitHubBar: CompareBarView
+
+    let diff: Versus
+    
     init(
         content: CompareContents
     ) {
+        self.diff = content.versus
+        totalBar = CompareBarView(scoreDiff: content.versus.totalScoreDifference)
+        gradeBar = CompareBarView(gradeDiff: content.versus.gradeScoreDifference)
+        algorithmBar = CompareBarView(scoreDiff: content.versus.algorithmScoreDifference)
+        gitHubBar = CompareBarView(scoreDiff: content.versus.githubScoreDifference)
+        totalBar.translatesAutoresizingMaskIntoConstraints = false
+        gradeBar.translatesAutoresizingMaskIntoConstraints = false
+        algorithmBar.translatesAutoresizingMaskIntoConstraints = false
+        gitHubBar.translatesAutoresizingMaskIntoConstraints = false
+        
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
         
@@ -172,6 +192,10 @@ private extension CompareViewController {
         compareView.addSubview(totalStatHeader)
         compareView.addSubview(algorithmStatHeader)
         compareView.addSubview(gitHubStatHeader)
+        compareView.addSubview(gradeBar)
+        compareView.addSubview(totalBar)
+        compareView.addSubview(algorithmBar)
+        compareView.addSubview(gitHubBar)
     }
     
     func setConstraints() {
@@ -227,17 +251,48 @@ private extension CompareViewController {
             totalStatHeader.topAnchor.constraint(equalTo: compareHeader.bottomAnchor, constant: 15),
             totalStatHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
         ])
+        
         NSLayoutConstraint.activate([
-            algorithmStatHeader.topAnchor.constraint(equalTo: totalStatHeader.bottomAnchor, constant: 35),
+            totalBar.topAnchor.constraint(equalTo: totalStatHeader.bottomAnchor, constant: 10),
+            totalBar.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25),
+            totalBar.trailingAnchor.constraint(equalTo: compareView.trailingAnchor, constant: -25),
+            totalBar.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            algorithmStatHeader.topAnchor.constraint(equalTo: totalBar.bottomAnchor, constant: 10),
             algorithmStatHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
         ])
+        
         NSLayoutConstraint.activate([
-            gitHubStatHeader.topAnchor.constraint(equalTo: algorithmStatHeader.bottomAnchor, constant: 35),
+            algorithmBar.topAnchor.constraint(equalTo: algorithmStatHeader.bottomAnchor, constant: 10),
+            algorithmBar.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25),
+            algorithmBar.trailingAnchor.constraint(equalTo: compareView.trailingAnchor, constant: -25),
+            algorithmBar.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            gitHubStatHeader.topAnchor.constraint(equalTo: algorithmBar.bottomAnchor, constant: 15),
             gitHubStatHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
         ])
+        
         NSLayoutConstraint.activate([
-            gradeStatHeader.topAnchor.constraint(equalTo: gitHubStatHeader.bottomAnchor, constant: 35),
+            gitHubBar.topAnchor.constraint(equalTo: gitHubStatHeader.bottomAnchor, constant: 10),
+            gitHubBar.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25),
+            gitHubBar.trailingAnchor.constraint(equalTo: compareView.trailingAnchor, constant: -25),
+            gitHubBar.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            gradeStatHeader.topAnchor.constraint(equalTo: gitHubBar.bottomAnchor, constant: 15),
             gradeStatHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
+        ])
+        
+        NSLayoutConstraint.activate([
+            gradeBar.topAnchor.constraint(equalTo: gradeStatHeader.bottomAnchor, constant: 10),
+            gradeBar.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25),
+            gradeBar.trailingAnchor.constraint(equalTo: compareView.trailingAnchor, constant: -25),
+            gradeBar.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
@@ -247,6 +302,28 @@ private extension CompareViewController {
         self.nickNameLabel.text = content.content.nickName
         self.rankLabel.text = String(content.content.rank)
         self.scoreLabel.text = String(content.content.score)
+        
+        if let total = content.versus.totalScoreDifference {
+            totalStatHeader.text = totalStatHeader.text! + "  " + String(total)
+        } else {
+            totalStatHeader.text = totalStatHeader.text! + "  미등록"
+        }
+        if let grade = content.versus.gradeScoreDifference {
+            gradeStatHeader.text = gradeStatHeader.text! + "  " + String(grade)
+        } else {
+            gradeStatHeader.text = gradeStatHeader.text! + "  미등록"
+        }
+        if let github = content.versus.githubScoreDifference {
+            gitHubStatHeader.text = gitHubStatHeader.text! + "  " + String(github)
+        } else {
+            gitHubStatHeader.text = gitHubStatHeader.text! + "  미등록"
+        }
+        if let algorithm = content.versus.algorithmScoreDifference {
+            algorithmStatHeader.text = algorithmStatHeader.text! + "  " + String(algorithm)
+        } else {
+            algorithmStatHeader.text = algorithmStatHeader.text! + "  미등록"
+        }
+        
     }
     
 }
