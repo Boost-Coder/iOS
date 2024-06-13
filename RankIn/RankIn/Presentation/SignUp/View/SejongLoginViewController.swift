@@ -30,6 +30,7 @@ final class SejongLoginViewController: UIViewController {
             string: "학번",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         )
+        textField.autocapitalizationType = .none
 
         return textField
     }()
@@ -49,6 +50,7 @@ final class SejongLoginViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         )
         textField.isSecureTextEntry = true
+        textField.autocapitalizationType = .none
         
         return textField
     }()
@@ -59,13 +61,23 @@ final class SejongLoginViewController: UIViewController {
         
         var configuration = UIButton.Configuration.filled()
         configuration.attributedTitle = attributeTitle
-        configuration.baseBackgroundColor = .systemGray
+        configuration.baseBackgroundColor = .systemBlue
         
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.configuration = configuration
         
         return button
+    }()
+    
+    private lazy var indicatorView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView()
+        indicatorView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicatorView.center = view.center
+        indicatorView.style = .large
+        indicatorView.color = .sejongPrimary
+        
+        return indicatorView
     }()
     
     private let viewModel: SejongLoginViewModel
@@ -79,6 +91,8 @@ final class SejongLoginViewController: UIViewController {
         self.nicknameViewController = nicknameViewController
         
         super.init(nibName: nil, bundle: nil)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.navigationItem.hidesBackButton = true
     }
     
     required init?(coder: NSCoder) {
@@ -108,6 +122,7 @@ private extension SejongLoginViewController {
         view.addSubview(id)
         view.addSubview(password)
         view.addSubview(loginButton)
+        view.addSubview(indicatorView)
     }
     
     func setConstraints() {
@@ -141,20 +156,33 @@ private extension SejongLoginViewController {
         output.loginFailed
             .bind { _ in
                 self.presentToast(toastCase: .sejongLoginFailed)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
         
         output.loginSuccessed
             .bind { _ in
-                self.navigationController?.pushViewController(self.nicknameViewController, animated: true)
+                self.navigationController?.pushViewController(self.nicknameViewController, animated: false)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
         
         output.errorPublisher
             .bind { error in
                 self.presentErrorToast(error: error)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func controlIndicator(isEnable: Bool) {
+        if isEnable {
+            indicatorView.startAnimating()
+            view.isUserInteractionEnabled = false
+        } else {
+            indicatorView.stopAnimating()
+            view.isUserInteractionEnabled = true
+        }
     }
     
     func react() {
@@ -167,6 +195,7 @@ private extension SejongLoginViewController {
                         pw: self.password.text ?? ""
                     )
                 )
+                self.controlIndicator(isEnable: true)
             })
             .disposed(by: disposeBag)
     }

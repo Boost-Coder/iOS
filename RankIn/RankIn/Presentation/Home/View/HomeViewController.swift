@@ -116,6 +116,11 @@ final class HomeViewController: UIViewController {
         
         setUI()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         loadTableView()
     }
 
@@ -230,7 +235,7 @@ private extension HomeViewController {
     func loadTableView() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, RankTableViewCellContents>()
         snapshot.appendSections([.rank])
-        dataSource.apply(snapshot)
+        dataSource.apply(snapshot, animatingDifferences: false)
         
         getRankTableCellContent.accept(())
         getMyInformation.accept(())
@@ -241,7 +246,7 @@ private extension HomeViewController {
         snapshot.deleteAllItems()
         snapshot.appendSections([.rank])
         snapshot.appendItems(contents)
-        dataSource.apply(snapshot)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
 }
@@ -254,7 +259,7 @@ extension HomeViewController: UITableViewDelegate {
         let heightRemainBottomHeight = contentHeight - yOffset
 
         let frameHeight = scrollView.frame.size.height
-        if heightRemainBottomHeight < frameHeight + 300 {
+        if heightRemainBottomHeight < frameHeight + 500 {
             self.getRankTableCellContent.accept(())
         }
     }

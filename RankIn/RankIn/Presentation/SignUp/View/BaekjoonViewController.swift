@@ -30,6 +30,7 @@ final class BaekjoonViewController: UIViewController {
             string: "백준 아이디",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         )
+        textField.autocapitalizationType = .none
         
         return textField
     }()
@@ -64,6 +65,16 @@ final class BaekjoonViewController: UIViewController {
         return button
     }()
     
+    private lazy var indicatorView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView()
+        indicatorView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicatorView.center = view.center
+        indicatorView.style = .large
+        indicatorView.color = .sejongPrimary
+        
+        return indicatorView
+    }()
+    
     private let viewModel: BaekjoonViewModel
     private let mainTabBarController: UITabBarController
     
@@ -75,6 +86,8 @@ final class BaekjoonViewController: UIViewController {
         self.mainTabBarController = mainTabBarController
         
         super.init(nibName: nil, bundle: nil)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.navigationItem.hidesBackButton = true
     }
     
     required init?(coder: NSCoder) {
@@ -104,6 +117,7 @@ private extension BaekjoonViewController {
         view.addSubview(baekjoonID)
         view.addSubview(nextButton)
         view.addSubview(skipButton)
+        view.addSubview(indicatorView)
     }
     
     func setConstraints() {
@@ -132,25 +146,40 @@ private extension BaekjoonViewController {
         
         output.baekjoonSuccess
             .subscribe { _ in
-                self.present(self.mainTabBarController, animated: true)
+                self.present(self.mainTabBarController, animated: false)
+                self.controlIndicator(isEnable: false)
             } onError: { error in
                 dump(error)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
         
         output.baekjoonFailure
             .subscribe { _ in
                 self.presentToast(toastCase: .invalidGradeInput)
+                self.controlIndicator(isEnable: false)
             } onError: { error in
                 dump(error)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
         
         output.errorPublisher
             .bind { error in
                 self.presentErrorToast(error: error)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func controlIndicator(isEnable: Bool) {
+        if isEnable {
+            indicatorView.startAnimating()
+            view.isUserInteractionEnabled = false
+        } else {
+            indicatorView.stopAnimating()
+            view.isUserInteractionEnabled = true
+        }
     }
     
     func react() {
@@ -159,16 +188,19 @@ private extension BaekjoonViewController {
             .bind(onNext: { _ in
                 guard let baekjoonIDText = self.baekjoonID.text else {
                     self.presentToast(toastCase: .noGradeInput)
+                    self.controlIndicator(isEnable: false)
                     return
                 }
                 self.nextButtonTapped.accept(baekjoonIDText)
+                self.controlIndicator(isEnable: true)
             })
             .disposed(by: disposeBag)
         
         skipButton.rx
             .tap
             .bind { _ in
-                self.present(self.mainTabBarController, animated: true)
+                self.present(self.mainTabBarController, animated: false)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
     }

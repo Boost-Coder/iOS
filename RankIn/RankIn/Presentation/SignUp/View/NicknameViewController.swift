@@ -30,6 +30,7 @@ final class NicknameViewController: UIViewController {
             string: "닉네임",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         )
+        textField.autocapitalizationType = .none
         
         return textField
     }()
@@ -49,6 +50,16 @@ final class NicknameViewController: UIViewController {
         return button
     }()
     
+    private lazy var indicatorView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView()
+        indicatorView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicatorView.center = view.center
+        indicatorView.style = .large
+        indicatorView.color = .sejongPrimary
+        
+        return indicatorView
+    }()
+    
     private let viewModel: NicknameViewModel
     private let gradeViewController: GradeViewController
     
@@ -60,6 +71,8 @@ final class NicknameViewController: UIViewController {
         self.gradeViewController = gradeViewController
         
         super.init(nibName: nil, bundle: nil)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.navigationItem.hidesBackButton = true
     }
     
     required init?(coder: NSCoder) {
@@ -88,6 +101,7 @@ private extension NicknameViewController {
     func setHierarchy() {
         view.addSubview(nickname)
         view.addSubview(nextButton)
+        view.addSubview(indicatorView)
     }
     
     func setConstraints() {
@@ -111,25 +125,40 @@ private extension NicknameViewController {
         
         output.nicknameSuccess
             .subscribe { _ in
-                self.navigationController?.pushViewController(self.gradeViewController, animated: true)
+                self.navigationController?.pushViewController(self.gradeViewController, animated: false)
+                self.controlIndicator(isEnable: false)
             } onError: { error in
                 dump(error)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
         
         output.nicknameFailure
             .subscribe { _ in
                 self.presentToast(toastCase: .duplicatedNickname)
+                self.controlIndicator(isEnable: false)
             } onError: { error in
                 dump(error)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
         
         output.errorPublisher
             .bind { error in
                 self.presentErrorToast(error: error)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func controlIndicator(isEnable: Bool) {
+        if isEnable {
+            indicatorView.startAnimating()
+            view.isUserInteractionEnabled = false
+        } else {
+            indicatorView.stopAnimating()
+            view.isUserInteractionEnabled = true
+        }
     }
     
     func react() {
@@ -138,8 +167,10 @@ private extension NicknameViewController {
             .bind(onNext: { _ in
                 if let nicknameText = self.nickname.text,
                    !nicknameText.isEmpty {            self.nextButtonTapped.accept(nicknameText)
+                    self.controlIndicator(isEnable: true)
                 } else {
                     self.presentToast(toastCase: .noNicknameInput)
+                    self.controlIndicator(isEnable: false)
                     return
                 }
             })

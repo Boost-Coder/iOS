@@ -109,6 +109,8 @@ final class DefaultRankRepository: RankRepository {
                     
                     switch response.result {
                     case .success(let dto):
+                        self.rankList = []
+                        self.paginationFlag = true
                         observer.onNext(dto.toEntity())
                         observer.onCompleted()
                     case .failure(let error):

@@ -51,6 +51,16 @@ final class GitHubViewController: UIViewController {
         return button
     }()
     
+    private lazy var indicatorView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView()
+        indicatorView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicatorView.center = view.center
+        indicatorView.style = .large
+        indicatorView.color = .sejongPrimary
+        
+        return indicatorView
+    }()
+    
     private let viewModel: GitHubViewModel
     private let baekjoonViewController: BaekjoonViewController
     
@@ -64,6 +74,8 @@ final class GitHubViewController: UIViewController {
         self.baekjoonViewController = baekjoonViewController
         
         super.init(nibName: nil, bundle: nil)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.navigationItem.hidesBackButton = true
     }
     
     required init?(coder: NSCoder) {
@@ -92,6 +104,7 @@ private extension GitHubViewController {
     func setHierarchy() {
         view.addSubview(gitHubButton)
         view.addSubview(skipButton)
+        view.addSubview(indicatorView)
     }
     
     func setConstraints() {
@@ -118,22 +131,35 @@ private extension GitHubViewController {
         output.errorPublisher
             .bind { error in
                 self.presentErrorToast(error: error)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
         
         output.gitHubAuthorizationRegisterFailure
             .bind { _ in
                 self.presentToast(toastCase: .gitHubAuthorizationFailed)
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
         
         output.gitHubAuthorizationRegisterSuccess
             .bind { _ in
                 self.navigationController?.pushViewController(
-                    self.baekjoonViewController, animated: true
+                    self.baekjoonViewController, animated: false
                 )
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func controlIndicator(isEnable: Bool) {
+        if isEnable {
+            indicatorView.startAnimating()
+            view.isUserInteractionEnabled = false
+        } else {
+            indicatorView.stopAnimating()
+            view.isUserInteractionEnabled = true
+        }
     }
     
     func react() {
@@ -144,14 +170,17 @@ private extension GitHubViewController {
                     forInfoDictionaryKey: "GITHUB_CLIENT_ID"
                 ) as? String else {
                     self.presentToast(toastCase: .gitHubAuthorizationFailed)
+                    self.controlIndicator(isEnable: false)
                     return
                 }
                 let urlString = "https://github.com/login/oauth/authorize?client_id=\(clientID)"
                 guard let url = URL(string: urlString) else {
                     self.presentToast(toastCase: .gitHubAuthorizationFailed)
+                    self.controlIndicator(isEnable: false)
                     return
                 }
                 UIApplication.shared.open(url)
+                self.controlIndicator(isEnable: true)
             }
             .disposed(by: disposeBag)
         
@@ -159,8 +188,9 @@ private extension GitHubViewController {
             .tap
             .bind { _ in
                 self.navigationController?.pushViewController(
-                    self.baekjoonViewController, animated: true
+                    self.baekjoonViewController, animated: false
                 )
+                self.controlIndicator(isEnable: false)
             }
             .disposed(by: disposeBag)
     }
