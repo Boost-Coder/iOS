@@ -136,6 +136,23 @@ final class CompareViewController: UIViewController {
     private let algorithmBar: CompareBarView
 
     private let gitHubBar: CompareBarView
+    
+    private let tipHeader: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .semiBold, size: 16)
+        
+        return label
+    }()
+    
+    private let tipLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(type: .regular, size: 13)
+        label.numberOfLines = 5
+        
+        return label
+    }()
 
     let diff: Versus
     
@@ -196,6 +213,8 @@ private extension CompareViewController {
         compareView.addSubview(totalBar)
         compareView.addSubview(algorithmBar)
         compareView.addSubview(gitHubBar)
+        compareView.addSubview(tipHeader)
+        compareView.addSubview(tipLabel)
     }
     
     func setConstraints() {
@@ -210,7 +229,7 @@ private extension CompareViewController {
             compareView.centerXAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.centerXAnchor),
             compareView.centerYAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.centerYAnchor),
             compareView.widthAnchor.constraint(equalToConstant: 300),
-            compareView.heightAnchor.constraint(equalToConstant: 400)
+            compareView.heightAnchor.constraint(equalToConstant: 550)
         ])
         
         NSLayoutConstraint.activate([
@@ -294,6 +313,17 @@ private extension CompareViewController {
             gradeBar.trailingAnchor.constraint(equalTo: compareView.trailingAnchor, constant: -25),
             gradeBar.heightAnchor.constraint(equalToConstant: 20)
         ])
+        
+        NSLayoutConstraint.activate([
+            tipHeader.topAnchor.constraint(equalTo: gradeBar.bottomAnchor, constant: 20),
+            tipHeader.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25)
+        ])
+        
+        NSLayoutConstraint.activate([
+            tipLabel.topAnchor.constraint(equalTo: tipHeader.bottomAnchor, constant: 10),
+            tipLabel.leadingAnchor.constraint(equalTo: compareView.leadingAnchor, constant: 25),
+            tipLabel.trailingAnchor.constraint(equalTo: compareView.trailingAnchor, constant: -25)
+        ])
     }
     
     func setContents(
@@ -323,7 +353,32 @@ private extension CompareViewController {
         } else {
             algorithmStatHeader.text = algorithmStatHeader.text! + "  미등록"
         }
-        
+        if let total = content.versus.totalScoreDifference {
+            if total < 0 {
+                tipHeader.text = "상대보다 개발 역량이 부족합니다."
+                if let minValue = [
+                    content.versus.algorithmScoreDifference,
+                    content.versus.gradeScoreDifference,
+                    content.versus.githubScoreDifference
+                ].compactMap({ $0 }).min() {
+                    if minValue == content.versus.algorithmScoreDifference {
+                        tipLabel.text = "상대방과의 격차를 줄이기 위해서 가장 노력해야 하는 부분은 알고리즘 분야입니다. \n알고리즘 문제를 많이 풀어보는 것을 추천합니다."
+                    } else if minValue == content.versus.gradeScoreDifference {
+                        tipLabel.text = "상대방과의 격차를 줄이기 위해서 가장 노력해야 하는 부분은 학점 분야입니다. \n학점을 위해 학업에 정진하는 것을 추천합니다."
+                    } else if minValue == content.versus.githubScoreDifference {
+                        tipLabel.text = "상대방과의 격차를 줄이기 위해서 가장 노력해야 하는 부분은 GitHub 분야입니다. \n프로젝트를 진행하거나 오픈소스에 기여하는 것을 추천합니다."
+                    }
+                } else {
+                    tipLabel.text = "상대방과 등록된 분야가 다르지만 종합적으로 조금 뒤쳐집니다. \n전반적인 분야에서 노력해보세요."
+                }
+            } else if total == 0 {
+                tipHeader.text = "상대와 개발 역량 점수가 같습니다."
+                tipLabel.text = "상대방을 뛰어넘기 위해서 노력해보세요."
+            } else {
+                tipHeader.text = "상대보다 개발 역량이 우수합니다."
+                tipLabel.text = "상대방과의 격차를 더 벌리기 위해서 노력해보세요."
+            }
+        }
     }
     
 }
