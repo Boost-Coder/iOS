@@ -18,6 +18,9 @@ final class CompareBarView: UIView {
         return view
     }()
     
+    private lazy var animationLeadingConstraint: NSLayoutConstraint = bar.leadingAnchor.constraint(equalTo: centerXAnchor)
+    private lazy var animationTrailingConstraint: NSLayoutConstraint = bar.trailingAnchor.constraint(equalTo: centerXAnchor)
+    
     init(scoreDiff: Double?) {
         if let scoreDiff = scoreDiff {
             self.rate = scoreDiff / 100.0
@@ -43,26 +46,29 @@ final class CompareBarView: UIView {
     func setUp() {
         self.backgroundColor = .systemGray4
         addSubview(bar)
+        NSLayoutConstraint.activate([
+            bar.topAnchor.constraint(equalTo: topAnchor),
+            bar.bottomAnchor.constraint(equalTo: bottomAnchor),
+            animationLeadingConstraint,
+            animationTrailingConstraint
+        ])
+        
+    }
+    
+    override func draw(_ rect: CGRect) {
+        
         if let rate = rate {
             if rate < 0 {
-                bar.backgroundColor = .systemRed
-   
-                NSLayoutConstraint.activate([
-                    bar.topAnchor.constraint(equalTo: topAnchor),
-                    bar.bottomAnchor.constraint(equalTo: bottomAnchor),
-                    bar.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 125 * rate),
-                    bar.trailingAnchor.constraint(equalTo: centerXAnchor, constant: 0)
-                ])
+                self.bar.backgroundColor = .systemRed
+                
+                self.animationLeadingConstraint.constant = 125 * rate
             } else {
-                NSLayoutConstraint.activate([
-                    bar.topAnchor.constraint(equalTo: topAnchor),
-                    bar.bottomAnchor.constraint(equalTo: bottomAnchor),
-                    bar.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-                    bar.trailingAnchor.constraint(equalTo: centerXAnchor, constant: 125 * rate)
-                ])
+                self.animationTrailingConstraint.constant = 125 * rate
+            }
+            UIView.animate(withDuration: 1.5) {
+                self.layoutIfNeeded()
             }
         }
-        
     }
     
 }
