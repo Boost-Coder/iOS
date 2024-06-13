@@ -40,7 +40,7 @@ final class GradeViewController: UIViewController {
         
         var configuration = UIButton.Configuration.filled()
         configuration.attributedTitle = attributeTitle
-        configuration.baseBackgroundColor = .systemGray
+        configuration.baseBackgroundColor = .systemBlue
         
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false

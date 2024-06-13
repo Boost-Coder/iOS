@@ -210,6 +210,7 @@ private extension HomeViewController {
                 self.myRankLabel.text = rank.total
                 self.myNicknameLabel.text = rank.nickname
                 self.myScoreLabel.text = rank.totalScore
+                self.getRankTableCellContent.accept(())
             } onError: { error in
                 self.presentErrorToast(error: .clientError)
             }
@@ -237,7 +238,6 @@ private extension HomeViewController {
         snapshot.appendSections([.rank])
         dataSource.apply(snapshot, animatingDifferences: false)
         
-        getRankTableCellContent.accept(())
         getMyInformation.accept(())
     }
     
